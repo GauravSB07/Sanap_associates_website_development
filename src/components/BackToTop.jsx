@@ -39,14 +39,58 @@ export const BackToTop = () => {
       onClick={scrollToTop}
       title="Back to Top"
       aria-label="Back to Top"
+      style={{
+        position: 'fixed',
+        bottom: '30px',
+        right: '30px',
+        width: '48px',
+        height: '48px',
+        borderRadius: '50%',
+        backgroundColor: '#FFFFFF',
+        boxShadow: '0 4px 15px rgba(0, 37, 44, 0.15)',
+        cursor: 'pointer',
+        zIndex: 9999,
+        display: isVisible ? 'flex' : 'none',
+        alignItems: 'center',
+        justifyContent: 'center',
+        opacity: isVisible ? 1 : 0,
+        visibility: isVisible ? 'visible' : 'hidden',
+        transition: 'all 0.3s ease'
+      }}
     >
-      <i className="ri-arrow-up-line"></i>
-      <svg className="progress-circle svg-content" width="100%" height="100%" viewBox="-1 -1 102 102">
+      <i 
+        className="ri-arrow-up-line"
+        style={{
+          fontSize: '20px',
+          color: 'var(--color-primary, #00252C)',
+          position: 'absolute',
+          zIndex: 2,
+          pointerEvents: 'none'
+        }}
+      ></i>
+      <svg 
+        className="progress-circle svg-content" 
+        width="48" 
+        height="48" 
+        viewBox="-1 -1 102 102"
+        style={{
+          position: 'absolute',
+          top: 0,
+          left: 0,
+          width: '48px',
+          height: '48px',
+          pointerEvents: 'none'
+        }}
+      >
         <path 
           d="M50,1 a49,49 0 0,1 0,98 a49,49 0 0,1 0,-98"
+          fill="none"
+          stroke="var(--color-primary, #00252C)"
+          strokeWidth="5"
           style={{
             strokeDasharray: `${pathLength} ${pathLength}`,
-            strokeDashoffset: strokeDashoffset
+            strokeDashoffset: strokeDashoffset,
+            transition: 'stroke-dashoffset 100ms linear'
           }}
         />
       </svg>

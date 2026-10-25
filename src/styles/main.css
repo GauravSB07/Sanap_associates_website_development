@@ -1254,3 +1254,67 @@ input, select, textarea {
     scroll-behavior: auto !important;
   }
 }
+
+/* Back To Top Progress Wrap */
+.progress-wrap {
+  position: fixed;
+  right: 30px;
+  bottom: 30px;
+  height: 48px;
+  width: 48px;
+  cursor: pointer;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  border-radius: 50%;
+  box-shadow: 0 4px 15px rgba(0, 37, 44, 0.15);
+  z-index: 9999;
+  background-color: #FFFFFF;
+}
+
+.progress-wrap svg path {
+  fill: none !important;
+}
+
+/* Custom Cursor Follower */
+.custom-cursor {
+  position: fixed;
+  width: 36px;
+  height: 36px;
+  border: 1px solid var(--color-accent-dark);
+  border-radius: 50%;
+  pointer-events: none;
+  transform: translate(-50%, -50%);
+  z-index: 99999;
+  transition: width 0.2s, height 0.2s, background-color 0.2s;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.custom-cursor.active {
+  width: 64px;
+  height: 64px;
+  background-color: rgba(185, 248, 177, 0.2);
+  backdrop-filter: blur(2px);
+}
+
+.cursor-dot {
+  position: fixed;
+  width: 6px;
+  height: 6px;
+  background-color: var(--color-primary);
+  border-radius: 50%;
+  pointer-events: none;
+  transform: translate(-50%, -50%);
+  z-index: 99999;
+}
+
+.cursor-text-preview {
+  font-size: 10px;
+  font-weight: 700;
+  color: var(--color-primary);
+  text-transform: uppercase;
+  letter-spacing: 0.04em;
+}
+
