@@ -7,7 +7,7 @@ export const ConsultationModal = ({ isOpen, onClose, initialService }) => {
     trustName: '',
     email: '',
     phone: '',
-    service: initialService || 'Registration & Certification',
+    service: initialService || 'Trust Registration (BPT Act / Trust Deed Drafting / Online Filing)',
     message: ''
   });
   const [submitted, setSubmitted] = useState(false);
@@ -29,6 +29,9 @@ export const ConsultationModal = ({ isOpen, onClose, initialService }) => {
     }, 3000);
   };
 
+  // Flatten all services for dropdown selection
+  const allServicesList = siteData.services.categories.flatMap(c => c.items);
+
   return (
     <div className="modal-overlay" onClick={onClose}>
       <div className="modal-card" onClick={(e) => e.stopPropagation()}>
@@ -38,68 +41,67 @@ export const ConsultationModal = ({ isOpen, onClose, initialService }) => {
 
         {submitted ? (
           <div className="text-center py-40">
-            <div className="w-60 h-60 bg_secondary rounded-circle d-inline-flex align-items-center justify-content-center mb-20 text_primary fs-32">
+            <div style={{ width: '64px', height: '64px', borderRadius: '50%', backgroundColor: 'var(--color-accent-soft)', color: 'var(--color-primary)', display: 'inline-flex', alignItems: 'center', justifyContent: 'center', fontSize: '32px', marginBottom: '20px' }}>
               <i className="ri-checkbox-circle-fill"></i>
             </div>
-            <h3 className="fs-24 mb-10 text-title">Consultation Confirmed</h3>
-            <p className="text-para fs-16 mb-0">
-              Thank you, {formData.name}. Our senior NPO advisory consultant will connect with you via phone/email within 24 business hours.
+            <h3 style={{ fontSize: '1.4rem', color: 'var(--color-title)', marginBottom: '10px' }}>Consultation Scheduled</h3>
+            <p style={{ color: 'var(--color-body)', fontSize: '0.95rem', margin: 0 }}>
+              Thank you, {formData.name}. A Sanap & Associates LLP compliance advisor will reach out to you within 24 business hours.
             </p>
           </div>
         ) : (
           <div>
-            <div className="mb-25">
-              <span className="badge bg_secondary text_primary px-3 py-1 rounded-pill mb-10 d-inline-block font-secondary fw-bold" style={{ fontSize: '11px', letterSpacing: '0.08em' }}>
-                DIRECT STATUTORY ADVISORY
-              </span>
-              <h2 className="fs-28 text-title mb-8">Schedule A Free Consultation</h2>
-              <p className="text-para fs-15 mb-0">
-                Discuss 12A/80G approvals, Form 10B/10BB audits, FCRA compliances, or Charity Commissioner proceedings directly with our expert team.
+            <div className="mb-24">
+              <div className="section-tag section-tag-primary mb-12">
+                NPO Advisory & Statutory Support
+              </div>
+              <h2 style={{ fontSize: '1.65rem', color: 'var(--color-title)', marginBottom: '8px' }}>
+                Schedule a Consultation
+              </h2>
+              <p style={{ color: 'var(--color-muted)', fontSize: '0.95rem', margin: 0 }}>
+                Direct consultation for Public Trusts, Societies, Section-8 Companies, and CSR Foundations.
               </p>
             </div>
 
             <form onSubmit={handleSubmit}>
-              <div className="row">
-                <div className="col-md-6 mb-20">
-                  <label className="fs-13 fw-bold text-title mb-6 d-block">Your Name *</label>
-                  <input 
-                    type="text" 
-                    required
-                    className="form-control"
-                    placeholder="Enter full name"
-                    value={formData.name}
-                    onChange={(e) => setFormData({ ...formData, name: e.target.value })}
-                    style={{ width: '100%', padding: '10px 14px', borderRadius: '8px', border: '1px solid #D9D9D9' }}
-                  />
-                </div>
+              <div className="form-group">
+                <label>Your Name / Trustee Name *</label>
+                <input 
+                  type="text" 
+                  required
+                  className="form-control"
+                  placeholder="Enter full name"
+                  value={formData.name}
+                  onChange={(e) => setFormData({ ...formData, name: e.target.value })}
+                />
+              </div>
 
-                <div className="col-md-6 mb-20">
-                  <label className="fs-13 fw-bold text-title mb-6 d-block">Trust / Foundation Name</label>
-                  <input 
-                    type="text" 
-                    className="form-control"
-                    placeholder="e.g. Vidya Welfare Trust"
-                    value={formData.trustName}
-                    onChange={(e) => setFormData({ ...formData, trustName: e.target.value })}
-                    style={{ width: '100%', padding: '10px 14px', borderRadius: '8px', border: '1px solid #D9D9D9' }}
-                  />
-                </div>
+              <div className="form-group">
+                <label>Trust / Foundation Name</label>
+                <input 
+                  type="text" 
+                  className="form-control"
+                  placeholder="e.g. Charitable Trust Name"
+                  value={formData.trustName}
+                  onChange={(e) => setFormData({ ...formData, trustName: e.target.value })}
+                />
+              </div>
 
-                <div className="col-md-6 mb-20">
-                  <label className="fs-13 fw-bold text-title mb-6 d-block">Official Email *</label>
+              <div style={{ display: 'grid', gridTemplateColumns: 'repeat(auto-fit, minmax(200px, 1fr))', gap: '16px' }}>
+                <div className="form-group">
+                  <label>Official Email *</label>
                   <input 
                     type="email" 
                     required
                     className="form-control"
-                    placeholder="name@foundation.org"
+                    placeholder="name@trust.org"
                     value={formData.email}
                     onChange={(e) => setFormData({ ...formData, email: e.target.value })}
-                    style={{ width: '100%', padding: '10px 14px', borderRadius: '8px', border: '1px solid #D9D9D9' }}
                   />
                 </div>
 
-                <div className="col-md-6 mb-20">
-                  <label className="fs-13 fw-bold text-title mb-6 d-block">Phone Number *</label>
+                <div className="form-group">
+                  <label>Contact Phone Number *</label>
                   <input 
                     type="tel" 
                     required
@@ -107,47 +109,41 @@ export const ConsultationModal = ({ isOpen, onClose, initialService }) => {
                     placeholder="+91 98765 43210"
                     value={formData.phone}
                     onChange={(e) => setFormData({ ...formData, phone: e.target.value })}
-                    style={{ width: '100%', padding: '10px 14px', borderRadius: '8px', border: '1px solid #D9D9D9' }}
                   />
                 </div>
-
-                <div className="col-12 mb-20">
-                  <label className="fs-13 fw-bold text-title mb-6 d-block">Service Area of Interest</label>
-                  <select 
-                    className="form-control"
-                    value={formData.service}
-                    onChange={(e) => setFormData({ ...formData, service: e.target.value })}
-                    style={{ width: '100%', padding: '10px 14px', borderRadius: '8px', border: '1px solid #D9D9D9', cursor: 'pointer' }}
-                  >
-                    <option value="Registration & Certification">Registration & Certification (12A, 80G, FCRA, CSR-1)</option>
-                    <option value="Audit & Taxation">Audit & Taxation (Form 10B/10BB, ITR-7, Exemption)</option>
-                    <option value="Legal & Governance">Legal & Governance (Charity Comm. Schedule III, Sec 36)</option>
-                    <option value="Accounting & Advisory">Accounting & Advisory (Grants, Donor Reporting)</option>
-                    <option value="Compliance Retainers">Comprehensive NPO Compliance Retainer</option>
-                    <option value="Custom Advisory">Other Custom Regulatory Requirement</option>
-                  </select>
-                </div>
-
-                <div className="col-12 mb-25">
-                  <label className="fs-13 fw-bold text-title mb-6 d-block">Brief Query / Details</label>
-                  <textarea 
-                    rows="3"
-                    className="form-control"
-                    placeholder="Mention any specific filing deadline or statutory issue..."
-                    value={formData.message}
-                    onChange={(e) => setFormData({ ...formData, message: e.target.value })}
-                    style={{ width: '100%', padding: '10px 14px', borderRadius: '8px', border: '1px solid #D9D9D9', resize: 'none' }}
-                  ></textarea>
-                </div>
-
-                <div className="col-12">
-                  <button type="submit" className="btn style-one w-100 justify-content-between">
-                    <span className="btn-icon-one"><i className="ri-calendar-check-line"></i></span>
-                    <span className="btn-text">Confirm Consultation Request</span>
-                    <span className="btn-icon-two"><i className="ri-calendar-check-line"></i></span>
-                  </button>
-                </div>
               </div>
+
+              <div className="form-group">
+                <label>Select Statutory Service of Interest</label>
+                <select 
+                  className="form-control"
+                  value={formData.service}
+                  onChange={(e) => setFormData({ ...formData, service: e.target.value })}
+                  style={{ cursor: 'pointer' }}
+                >
+                  {allServicesList.map((srv, idx) => (
+                    <option key={idx} value={srv}>
+                      {srv}
+                    </option>
+                  ))}
+                </select>
+              </div>
+
+              <div className="form-group">
+                <label>Brief Query or Filing Deadline</label>
+                <textarea 
+                  rows="3"
+                  className="form-control"
+                  placeholder="Mention any pending audit, change report, 12A/80G status, or statutory urgency..."
+                  value={formData.message}
+                  onChange={(e) => setFormData({ ...formData, message: e.target.value })}
+                  style={{ resize: 'none' }}
+                ></textarea>
+              </div>
+
+              <button type="submit" className="btn btn-primary w-100 mt-16">
+                <span>Confirm Consultation Request</span>
+              </button>
             </form>
           </div>
         )}

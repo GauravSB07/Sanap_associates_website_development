@@ -1,97 +1,63 @@
 import React, { useState } from 'react';
 import { Header } from './components/Header';
 import { Hero } from './components/Hero';
-import { ClientShowcase } from './components/ClientShowcase';
 import { About } from './components/About';
 import { Services } from './components/Services';
-import { Industries } from './components/Industries';
-import { Funfact } from './components/Funfact';
-import { CaseStudies } from './components/CaseStudies';
 import { WhyChooseUs } from './components/WhyChooseUs';
-import { Leadership } from './components/Leadership';
-import { Testimonials } from './components/Testimonials';
-import { Pricing } from './components/Pricing';
-import { CtaBox } from './components/CtaBox';
-import { Blog } from './components/Blog';
-import { Contact } from './components/Contact';
+import { Clients } from './components/Clients';
+import { Vision } from './components/Vision';
+import { FounderNote } from './components/FounderNote';
+import { FinalCta } from './components/FinalCta';
 import { Footer } from './components/Footer';
-import { CustomCursor } from './components/CustomCursor';
-import { BackToTop } from './components/BackToTop';
 import { ConsultationModal } from './components/ConsultationModal';
-import { SearchModal } from './components/SearchModal';
+import { BackToTop } from './components/BackToTop';
+import { CustomCursor } from './components/CustomCursor';
 
 export const App = () => {
   const [consultationModalOpen, setConsultationModalOpen] = useState(false);
   const [selectedService, setSelectedService] = useState('');
-  const [searchModalOpen, setSearchModalOpen] = useState(false);
 
   const handleOpenConsultation = (serviceName = '') => {
     setSelectedService(typeof serviceName === 'string' ? serviceName : '');
     setConsultationModalOpen(true);
   };
 
-  const handleOpenSearch = () => {
-    setSearchModalOpen(true);
-  };
-
   return (
     <div className="page-wrapper">
-      {/* Custom Cursor Follower */}
+      {/* Interactive trailing cursor */}
       <CustomCursor />
 
-      {/* Header / Navbar */}
-      <Header 
-        onOpenConsultation={() => handleOpenConsultation()} 
-        onOpenSearch={handleOpenSearch} 
-      />
+      {/* Section 1: Header */}
+      <Header onOpenConsultation={() => handleOpenConsultation()} />
 
-      {/* 1. Hero Section */}
-      <Hero onOpenConsultation={() => handleOpenConsultation()} />
+      <main>
+        {/* Section 2: Hero */}
+        <Hero onOpenConsultation={() => handleOpenConsultation()} />
 
-      {/* 2. Client Showcase (Our Esteemed Clients) */}
-      <ClientShowcase />
+        {/* Section 3: About Us */}
+        <About />
 
-      {/* 3. About Section */}
-      <About />
+        {/* Section 4: Core Services */}
+        <Services onOpenConsultation={handleOpenConsultation} />
 
-      {/* 4. Services Section (4 Groups) */}
-      <Services onOpenConsultation={handleOpenConsultation} />
+        {/* Section 5: Why Choose Us */}
+        <WhyChooseUs />
 
-      {/* 5. Entities We Serve (Industries) */}
-      <Industries onOpenConsultation={handleOpenConsultation} />
+        {/* Section 6: Clients */}
+        <Clients />
 
-      {/* 6. Funfact Statistics Bar */}
-      <Funfact />
+        {/* Section 7: Vision */}
+        <Vision />
 
-      {/* 7. Case Studies / How We Helped Clients */}
-      <CaseStudies onOpenConsultation={handleOpenConsultation} />
+        {/* Section 8: Founder's Note */}
+        <FounderNote />
 
-      {/* 8. Why Choose Us / What Sets Us Apart */}
-      <WhyChooseUs />
+        {/* Section 9: Final CTA */}
+        <FinalCta onOpenConsultation={() => handleOpenConsultation()} />
+      </main>
 
-      {/* 9. Leadership Section */}
-      <Leadership />
-
-      {/* 10. Testimonials Slider */}
-      <Testimonials />
-
-      {/* 11. Compliance Retainers / Pricing Plans */}
-      <Pricing onOpenConsultation={handleOpenConsultation} />
-
-      {/* 12. Custom Solution CTA Box */}
-      <CtaBox onOpenConsultation={handleOpenConsultation} />
-
-      {/* 13. Blog / Expert Articles */}
-      <Blog onOpenConsultation={handleOpenConsultation} />
-
-      {/* 14. Contact / Get In Touch Area */}
-      <Contact />
-
-      {/* 15. Footer Area */}
-      <Footer onOpenConsultation={handleOpenConsultation} />
-
-      {/* Interactive Back To Top Progress */}
-      <BackToTop />
+      {/* Section 9: Footer */}
+      <Footer onOpenConsultation={() => handleOpenConsultation()} />
 
       {/* Consultation Booking Modal */}
       <ConsultationModal 
@@ -100,11 +66,8 @@ export const App = () => {
         initialService={selectedService}
       />
 
-      {/* Interactive Search Modal */}
-      <SearchModal 
-        isOpen={searchModalOpen}
-        onClose={() => setSearchModalOpen(false)}
-      />
+      {/* Circular Scroll Progress Back To Top */}
+      <BackToTop />
     </div>
   );
 };
