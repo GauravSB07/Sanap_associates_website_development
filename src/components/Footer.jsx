@@ -1,21 +1,8 @@
-import React, { useState } from 'react';
+import React from 'react';
 import { siteData } from '../data/content';
 
 export const Footer = ({ onOpenConsultation }) => {
   const { brand, contact } = siteData;
-  const [newsletterEmail, setNewsletterEmail] = useState('');
-  const [subscribed, setSubscribed] = useState(false);
-
-  const handleSubscribe = (e) => {
-    e.preventDefault();
-    if (newsletterEmail) {
-      setSubscribed(true);
-      setTimeout(() => {
-        setSubscribed(false);
-        setNewsletterEmail('');
-      }, 4000);
-    }
-  };
 
   const scrollTo = (id) => {
     const el = document.getElementById(id);
@@ -23,145 +10,122 @@ export const Footer = ({ onOpenConsultation }) => {
   };
 
   return (
-    <footer className="footer-area style-one">
+    <footer id="contact" className="site-footer">
       <div className="container">
         
-        {/* Top 3-Column Widgets */}
-        <div className="row pb-40">
+        {/* Main Footer Widgets */}
+        <div className="row g-4">
           
-          {/* Column 1: Brand & Direct Contacts */}
-          <div className="col-lg-4 col-md-6 mb-35">
-            <div className="footer-widget">
-              <div className="d-flex align-items-center gap-12 mb-25">
-                <div className="brand-logo-mark" style={{ width: '48px', height: '48px', fontSize: '20px' }}>S&A</div>
-                <div>
-                  <h4 className="text-white fw-bold mb-0 fs-22">Sanap & Associates</h4>
-                  <span className="text_secondary fs-13 text-uppercase" style={{ letterSpacing: '0.15em' }}>LLP • Non-Profit Advisory</span>
-                </div>
+          {/* Column 1: Brand & Firm Specialisation */}
+          <div className="col-lg-5">
+            <div className="d-flex align-items-center gap-12 mb-20">
+              <div className="brand-badge">S&A</div>
+              <div>
+                <h2 style={{ fontSize: '1.25rem', color: '#FFFFFF', margin: 0 }}>
+                  {brand.name}
+                </h2>
+                <span style={{ fontSize: '0.75rem', color: 'var(--color-accent)', textTransform: 'uppercase', letterSpacing: '0.1em' }}>
+                  {brand.category}
+                </span>
               </div>
-
-              <p className="text-gray fs-16 mb-25">
-                Premier NPO statutory compliance, audit, taxation, and legal advisory firm serving 2,000+ Trusts, Societies & Foundations across India.
-              </p>
-
-              <a href={`tel:${contact.phonePrimary.replace(/[^0-9+]/g, '')}`} className="contact-num d-block fw-bold text_secondary mb-12">
-                {contact.phonePrimary}
-              </a>
-              <a href={`mailto:${contact.email}`} className="contact-mail fs-18 fw-bold text-white">
-                {contact.email}
-              </a>
-              <span className="d-block text-gray fs-14 mt-2">
-                <i className="ri-building-line text_secondary me-2"></i> {brand.llpNo}
-              </span>
             </div>
-          </div>
 
-          {/* Column 2: Quick Links */}
-          <div className="col-lg-4 col-md-6 mb-35">
-            <div className="footer-widget ps-lg-4">
-              <h3 className="footer-widget-title">Quick Links</h3>
-              <ul className="footer-menu style-one list-unstyled mb-0">
-                <li><a href="#hero" onClick={(e) => { e.preventDefault(); scrollTo('hero'); }}>Home</a></li>
-                <li><a href="#about" onClick={(e) => { e.preventDefault(); scrollTo('about'); }}>About Us</a></li>
-                <li><a href="#services" onClick={(e) => { e.preventDefault(); scrollTo('services'); }}>Services</a></li>
-                <li><a href="#entities" onClick={(e) => { e.preventDefault(); scrollTo('entities'); }}>Entities We Serve</a></li>
-                <li><a href="#case-studies" onClick={(e) => { e.preventDefault(); scrollTo('case-studies'); }}>Case Studies</a></li>
-                <li><a href="#why-us" onClick={(e) => { e.preventDefault(); scrollTo('why-us'); }}>Why Choose Us</a></li>
-                <li><a href="#retainers" onClick={(e) => { e.preventDefault(); scrollTo('retainers'); }}>Retainers</a></li>
-                <li><a href="#leadership" onClick={(e) => { e.preventDefault(); scrollTo('leadership'); }}>Our Leadership</a></li>
-                <li><a href="#insights" onClick={(e) => { e.preventDefault(); scrollTo('insights'); }}>Articles & FAQs</a></li>
-                <li><a href="#contact" onClick={(e) => { e.preventDefault(); scrollTo('contact'); }}>Contact Details</a></li>
-              </ul>
-            </div>
-          </div>
-
-          {/* Column 3: Newsletter & Regulatory Alerts */}
-          <div className="col-lg-4 col-md-12 mb-35">
-            <div className="footer-widget">
-              <h3 className="footer-widget-title">Regulatory Alerts</h3>
-              <p className="text-gray fs-16 mb-20">
-                Stay updated with critical compliance deadlines, Form 10B/10BB revisions, FCRA notifications, and Charity Commissioner rules.
-              </p>
-
-              {subscribed ? (
-                <div className="p-16 rounded bg-albastor text_primary fs-15 fw-semibold">
-                  <i className="ri-checkbox-circle-fill text_optional me-2"></i>
-                  Subscribed to statutory compliance alerts!
-                </div>
-              ) : (
-                <form onSubmit={handleSubscribe} className="newsletter-form style-one">
-                  <input 
-                    type="email" 
-                    required
-                    placeholder="Enter official email address"
-                    value={newsletterEmail}
-                    onChange={(e) => setNewsletterEmail(e.target.value)}
-                  />
-                  <button type="submit" aria-label="Subscribe">
-                    <i className="ri-send-plane-fill"></i>
-                  </button>
-                </form>
-              )}
-
-              <p className="fs-13 text-gray opacity-75 mt-2">
-                Strict privacy. No spam. Only vital NPO statutory updates.
-              </p>
-            </div>
-          </div>
-
-        </div>
-
-        {/* Giant Typographic Brand Banner */}
-        <div className="footer-giant-brand">
-          <span className="logo-text">SANAP & ASSOCIATES LLP</span>
-          
-          <div className="footer-social-bar">
-            <p className="text-gray fs-16 mb-0" style={{ maxWidth: '600px' }}>
-              “NPOs work for society. We work for them.” Single-window legal, tax, audit, and governance execution across India.
+            <p className="footer-desc">
+              Dedicated statutory, legal, audit, taxation and governance support for Public Trusts, NGOs, Section-8 Companies, Societies, Religious Institutions, Mandals and Foundations across India.
             </p>
 
-            <ul className="social-profile style-one list-unstyled mb-0">
+            <span className="fs-13 text-muted">
+              {brand.llpNo}
+            </span>
+          </div>
+
+          {/* Column 2: Clean Navigation Links */}
+          <div className="col-md-6 col-lg-3">
+            <h3 className="footer-widget-title">Navigation</h3>
+            <ul className="footer-links">
               <li>
-                <a href={contact.socials.facebook} target="_blank" rel="noopener noreferrer" title="Facebook">
-                  <i className="ri-facebook-fill"></i>
+                <a href="#hero" onClick={(e) => { e.preventDefault(); scrollTo('hero'); }}>
+                  Home
                 </a>
               </li>
               <li>
-                <a href={contact.socials.twitter} target="_blank" rel="noopener noreferrer" title="Twitter / X">
-                  <i className="ri-twitter-x-line"></i>
+                <a href="#about" onClick={(e) => { e.preventDefault(); scrollTo('about'); }}>
+                  About Us
                 </a>
               </li>
               <li>
-                <a href={contact.socials.linkedin} target="_blank" rel="noopener noreferrer" title="LinkedIn">
-                  <i className="ri-linkedin-fill"></i>
+                <a href="#services" onClick={(e) => { e.preventDefault(); scrollTo('services'); }}>
+                  Core Services
                 </a>
               </li>
               <li>
-                <a href={contact.socials.instagram} target="_blank" rel="noopener noreferrer" title="Instagram">
-                  <i className="ri-instagram-line"></i>
+                <a href="#why-us" onClick={(e) => { e.preventDefault(); scrollTo('why-us'); }}>
+                  Why Choose Us
+                </a>
+              </li>
+              <li>
+                <a href="#clients" onClick={(e) => { e.preventDefault(); scrollTo('clients'); }}>
+                  Our Clients
                 </a>
               </li>
             </ul>
           </div>
+
+          {/* Column 3: Contact Channels & Placeholders */}
+          <div className="col-md-6 col-lg-4">
+            <h3 className="footer-widget-title">Consultation Channels</h3>
+            <ul className="footer-contact-list">
+              <li>
+                <i className="ri-phone-line"></i>
+                <div>
+                  <span className="d-block fs-12 text-muted">Phone Placeholder:</span>
+                  <a href={`tel:${contact.phone.replace(/[^0-9+]/g, '')}`} style={{ color: '#FFFFFF' }}>
+                    {contact.phone}
+                  </a>
+                </div>
+              </li>
+
+              <li>
+                <i className="ri-mail-line"></i>
+                <div>
+                  <span className="d-block fs-12 text-muted">Email Placeholder:</span>
+                  <a href={`mailto:${contact.email.split(' ')[0]}`} style={{ color: '#FFFFFF' }}>
+                    {contact.email}
+                  </a>
+                </div>
+              </li>
+
+              <li>
+                <i className="ri-map-pin-line"></i>
+                <div>
+                  <span className="d-block fs-12 text-muted">Office Location Placeholder:</span>
+                  <span>{contact.address}</span>
+                </div>
+              </li>
+            </ul>
+
+            <div className="mt-20">
+              <button 
+                onClick={onOpenConsultation}
+                className="btn btn-outline"
+                style={{ padding: '8px 20px', fontSize: '0.85rem' }}
+              >
+                <span>Request Advisory Callback</span>
+              </button>
+            </div>
+          </div>
+
         </div>
 
-        {/* Bottom Copyright Bar */}
-        <div className="footer-bottom d-flex flex-wrap align-items-center justify-content-between">
-          <p className="text-gray fs-15 mb-10 mb-md-0">
-            <i className="ri-copyright-line me-1"></i> 2026 <span className="text_secondary">{brand.name}</span>. All Rights Reserved. [Client Placeholders Ready]
+        {/* Footer Bottom Bar */}
+        <div className="footer-bottom">
+          <p className="m-0">
+            &copy; {new Date().getFullYear()} {brand.name}. All rights reserved.
           </p>
 
-          <ul className="footer-bottom-menu list-unstyled mb-0">
-            <li>
-              <a href="#contact" onClick={(e) => { e.preventDefault(); scrollTo('contact'); }}>Terms & Conditions</a>
-            </li>
-            <li>
-              <a href="#contact" onClick={(e) => { e.preventDefault(); scrollTo('contact'); }}>Privacy Policy</a>
-            </li>
-            <li>
-              <a href="#contact" onClick={(e) => { e.preventDefault(); onOpenConsultation("Statutory Disclaimer"); }}>Statutory Disclaimer</a>
-            </li>
-          </ul>
+          <p className="m-0 fs-13 text-muted">
+            [Contact channels & address represent editable client placeholders]
+          </p>
         </div>
 
       </div>

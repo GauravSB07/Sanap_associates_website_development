@@ -2,7 +2,7 @@ import React from 'react';
 import { siteData } from '../data/content';
 
 export const Hero = ({ onOpenConsultation }) => {
-  const { hero, contact } = siteData;
+  const { hero, images } = siteData;
 
   const scrollToServices = (e) => {
     e.preventDefault();
@@ -11,145 +11,81 @@ export const Hero = ({ onOpenConsultation }) => {
   };
 
   return (
-    <section id="hero" className="hero-area style-two position-relative z-1 overflow-hidden bg_primary">
-      {/* Decorative SVG floating shape */}
-      <svg 
-        className="hero-shape-one position-absolute start-0 z-n1" 
-        width="450" 
-        height="450" 
-        viewBox="0 0 450 450" 
-        fill="none" 
-        xmlns="http://www.w3.org/2000/svg"
-      >
-        <circle cx="225" cy="225" r="224.5" stroke="#B9F8B1" strokeDasharray="12 12" />
-        <circle cx="225" cy="225" r="169.5" stroke="#B9F8B1" strokeOpacity="0.5" />
-        <circle cx="225" cy="225" r="109.5" stroke="#B9F8B1" strokeOpacity="0.25" />
-      </svg>
-
-      <div className="container style-two">
-        <div className="row align-items-end">
+    <section id="hero" className="hero-section">
+      <div className="container">
+        <div className="row align-items-center g-4">
           
-          {/* Left Column: Heading, Stats & CTAs */}
-          <div className="col-xxl-6 col-xl-7 col-lg-7">
+          {/* Left Column: Heading, Supporting Text, CTAs, 2 Trust Indicators */}
+          <div className="col-lg-7">
             <div className="hero-content">
               
-              <div className="hero-badge-pill">
-                <i className="ri-shield-check-line"></i> {hero.badge}
+              <div className="section-tag section-tag-dark">
+                Specialised Indian NPO Advisory & Governance
               </div>
 
-              <h1 className="fw-bold text-white">
-                {hero.headlinePart1} <b className="fw-bold text_secondary">{hero.headlineHighlight}</b> {hero.headlinePart2}
+              <h1 className="hero-headline">
+                NPO Compliance. <span className="text_secondary">Simplified.</span>
               </h1>
 
-              <div className="hero-stat-wrapper">
-                {/* Polygon clipped Stat Card */}
-                <div className="stat-card style-one position-relative z-1 round-20">
-                  <h3 className="text-white fw-semibold mb-0">{hero.statNumber}</h3>
-                  <span className="text-gray d-block">{hero.statLabel}</span>
+              <p className="hero-copy">
+                {hero.supportingCopy}
+              </p>
 
-                  <ul className="client-list list-unstyled">
-                    {hero.avatars.map((imgUrl, idx) => (
-                      <li key={idx} className="rounded-circle">
-                        <img src={imgUrl} alt={`Trust Representative ${idx + 1}`} />
-                      </li>
-                    ))}
-                  </ul>
+              <div className="hero-actions">
+                <button 
+                  onClick={onOpenConsultation}
+                  className="btn btn-primary"
+                  id="hero-book-consultation"
+                >
+                  <span className="btn-icon-one">
+                    <i className="ri-arrow-right-line"></i>
+                  </span>
+                  <span>{hero.primaryCta}</span>
+                </button>
 
-                  <p className="text-gray fs-15 mb-0">{hero.statSubtext}</p>
-                </div>
-
-                {/* Hero Description & CTA */}
-                <div className="hero-para position-relative">
-                  <p>{hero.paragraph}</p>
-
-                  <div className="d-flex flex-wrap gap-15 align-items-center">
-                    <a 
-                      href="#services" 
-                      onClick={scrollToServices}
-                      className="btn style-two d-inline-flex align-items-center"
-                    >
-                      <span className="btn-icon-one">
-                        <i className="ri-arrow-right-line"></i>
-                      </span>
-                      <span className="btn-text">{hero.ctaPrimary}</span>
-                      <span className="btn-icon-two">
-                        <i className="ri-arrow-right-line"></i>
-                      </span>
-                    </a>
-
-                    <button 
-                      onClick={onOpenConsultation}
-                      className="btn style-three d-inline-flex align-items-center"
-                    >
-                      <span className="btn-icon-one">
-                        <i className="ri-calendar-check-line"></i>
-                      </span>
-                      <span className="btn-text">Consultation</span>
-                      <span className="btn-icon-two">
-                        <i className="ri-calendar-check-line"></i>
-                      </span>
-                    </button>
-                  </div>
-                </div>
-
+                <a 
+                  href="#services" 
+                  onClick={scrollToServices}
+                  className="btn btn-outline"
+                  id="hero-explore-services"
+                >
+                  <span className="btn-icon-one">
+                    <i className="ri-file-list-3-line"></i>
+                  </span>
+                  <span>{hero.secondaryCta}</span>
+                </a>
               </div>
+
+              {/* Two Trust Indicators Only */}
+              <div className="hero-trust-indicators">
+                {hero.trustIndicators.map((stat, idx) => (
+                  <div key={idx} className="trust-indicator-card">
+                    <div className="trust-indicator-val">{stat.value}</div>
+                    <div className="trust-indicator-label">{stat.label}</div>
+                  </div>
+                ))}
+              </div>
+
             </div>
           </div>
 
-          {/* Right Column: Contact details and Social channels */}
-          <div className="col-xxl-5 offset-xxl-1 col-xl-5 col-lg-5 ps-xxl-0 mt-40 mt-lg-0">
-            <div className="row align-items-end">
-              <div className="col-xl-8 col-md-8 mb-20 mb-md-0">
-                <ul className="contact-info list-unstyled d-flex flex-column mb-0">
-                  <li className="fs-24">
-                    <a href={`tel:${contact.phonePrimary.replace(/[^0-9+]/g, '')}`} className="contact-num">
-                      {contact.phonePrimary}
-                    </a>
-                  </li>
-                  <li className="fs-18">
-                    <a href={`mailto:${contact.email}`} className="contact-mail">
-                      {contact.email}
-                    </a>
-                  </li>
-                  <li className="text-gray fs-16">
-                    <i className="ri-time-line text_secondary me-2"></i> {contact.hours}
-                  </li>
-                  <li className="text-gray fs-14 mt-1">
-                    <span className="badge bg-albastor text-title px-2 py-1 rounded" style={{ fontSize: '11px', letterSpacing: '0.05em' }}>
-                      {siteData.brand.llpNo}
-                    </span>
-                  </li>
-                </ul>
-              </div>
-
-              <div className="col-xl-4 col-md-4">
-                <ul className="social-profile style-five list-unstyled mb-0">
-                  <li>
-                    <a href={contact.socials.facebook} target="_blank" rel="noopener noreferrer">Facebook</a>
-                  </li>
-                  <li>
-                    <a href={contact.socials.twitter} target="_blank" rel="noopener noreferrer">Twitter / X</a>
-                  </li>
-                  <li>
-                    <a href={contact.socials.linkedin} target="_blank" rel="noopener noreferrer">LinkedIn</a>
-                  </li>
-                  <li>
-                    <a href={contact.socials.instagram} target="_blank" rel="noopener noreferrer">Instagram</a>
-                  </li>
-                </ul>
+          {/* Right Column: Balanced One Main Hero Image Area (16:10 ratio) */}
+          <div className="col-lg-5">
+            <div className="hero-image-wrapper">
+              <div className="image-placeholder-frame">
+                <img 
+                  src={images.hero.url} 
+                  alt={images.hero.alt} 
+                  loading="eager"
+                />
+                <span className="image-placeholder-tag">
+                  {images.hero.placeholderLabel}
+                </span>
               </div>
             </div>
           </div>
 
         </div>
-      </div>
-
-      {/* Hero background image on right with gradient blend */}
-      <div className="hero-bg d-none d-lg-block">
-        <img 
-          src={hero.bgImage} 
-          alt="Sanap & Associates LLP Non-Profit Advisory" 
-        />
       </div>
     </section>
   );
