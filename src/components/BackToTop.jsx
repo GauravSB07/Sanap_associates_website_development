@@ -14,14 +14,14 @@ export const BackToTop = () => {
         setScrollProgress(progress);
       }
 
-      if (currentScroll > 150) {
+      if (currentScroll > 180) {
         setIsVisible(true);
       } else {
         setIsVisible(false);
       }
     };
 
-    window.addEventListener('scroll', handleScroll);
+    window.addEventListener('scroll', handleScroll, { passive: true });
     return () => window.removeEventListener('scroll', handleScroll);
   }, []);
 
@@ -39,61 +39,29 @@ export const BackToTop = () => {
       onClick={scrollToTop}
       title="Back to Top"
       aria-label="Back to Top"
-      style={{
-        position: 'fixed',
-        bottom: '30px',
-        right: '30px',
-        width: '48px',
-        height: '48px',
-        borderRadius: '50%',
-        backgroundColor: '#FFFFFF',
-        boxShadow: '0 4px 15px rgba(0, 37, 44, 0.15)',
-        cursor: 'pointer',
-        zIndex: 9999,
-        display: isVisible ? 'flex' : 'none',
-        alignItems: 'center',
-        justifyContent: 'center',
-        opacity: isVisible ? 1 : 0,
-        visibility: isVisible ? 'visible' : 'hidden',
-        transition: 'all 0.3s ease'
-      }}
+      data-cursor-text="Top"
     >
-      <i 
-        className="ri-arrow-up-line"
-        style={{
-          fontSize: '20px',
-          color: 'var(--color-primary, #00252C)',
-          position: 'absolute',
-          zIndex: 2,
-          pointerEvents: 'none'
-        }}
-      ></i>
+      <i className="ri-arrow-up-line progress-arrow-icon"></i>
       <svg 
         className="progress-circle svg-content" 
         width="48" 
         height="48" 
         viewBox="-1 -1 102 102"
-        style={{
-          position: 'absolute',
-          top: 0,
-          left: 0,
-          width: '48px',
-          height: '48px',
-          pointerEvents: 'none'
-        }}
       >
         <path 
           d="M50,1 a49,49 0 0,1 0,98 a49,49 0 0,1 0,-98"
           fill="none"
-          stroke="var(--color-primary, #00252C)"
-          strokeWidth="5"
+          stroke="var(--accent-gold, #C5A467)"
+          strokeWidth="6"
           style={{
             strokeDasharray: `${pathLength} ${pathLength}`,
             strokeDashoffset: strokeDashoffset,
-            transition: 'stroke-dashoffset 100ms linear'
+            transition: 'stroke-dashoffset 80ms linear'
           }}
         />
       </svg>
     </div>
   );
 };
+
+export default BackToTop;
