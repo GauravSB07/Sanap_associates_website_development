@@ -1,50 +1,109 @@
-import React from 'react';
+import React, { useState } from 'react';
 import { siteData } from '../data/content';
+
+const clientIcons = [
+  'ri-hospital-line',
+  'ri-building-4-line',
+  'ri-shield-star-line',
+  'ri-plant-line',
+  'ri-hand-heart-line',
+  'ri-shake-hands-line',
+  'ri-heart-pulse-line',
+  'ri-service-line'
+];
 
 export const Clients = () => {
   const { clients } = siteData;
+  const [activeCategory, setActiveCategory] = useState("All Sectors");
+
+  const filteredClients = activeCategory === "All Sectors"
+    ? clients.list
+    : clients.list.filter(c => c.category === activeCategory);
 
   return (
-    <section id="clients" className="clients-section section-padding">
+    <section 
+      id="clients" 
+      className="clients-section section-padding-sm" 
+      data-theme="light"
+    >
       <div className="container">
         
         {/* Section Header */}
-        <div className="section-header text-center">
-          <div className="section-tag section-tag-primary">
-            Institutional Trust
+        <div className="section-header text-center mb-40">
+          <div className="section-badge-tag reveal-up">
+            <i className="ri-building-line me-1"></i> Institutional Trust &amp; Retainers
           </div>
-          <h2 className="section-title">
+          <h2 className="section-heading-editorial reveal-up">
             {clients.heading}
           </h2>
-          <p className="section-desc">
-            Serving leading trusts, healthcare bodies, community trusts, and CSR foundations across India.
+          <p className="section-subtext reveal-up">
+            Advising esteemed state associations, healthcare councils, corporate CSR foundations, and historical public charitable trusts across India.
           </p>
         </div>
 
-        {/* 8 Client Badges Grid (4x2 on Desktop, 2x4 on Tablet/Mobile) */}
+        {/* Dynamic Sector Filter Navigation */}
+        <div className="client-filter-bar d-flex flex-wrap justify-content-center gap-10 mb-40 reveal-up">
+          {clients.categories.map((cat, idx) => (
+            <button
+              key={idx}
+              className={`category-filter-btn ${activeCategory === cat ? 'active' : ''}`}
+              onClick={() => setActiveCategory(cat)}
+              data-cursor-text="Filter"
+            >
+              {cat}
+            </button>
+          ))}
+        </div>
+
+        {/* Filtered Institutional Cards Grid */}
         <div className="row g-3 mb-32">
-          {clients.list.map((client, idx) => (
-            <div key={idx} className="col-md-6 col-lg-3">
-              <div className="client-badge-card">
-                <div className="client-badge-name">
-                  {client.name}
+          {filteredClients.map((client, idx) => (
+            <div key={client.name} className="col-md-6 col-lg-3 reveal-up">
+              <div 
+                className="brand-logo-card"
+                data-cursor-text="Client"
+              >
+                <div className="brand-card-top d-flex align-items-center justify-content-between mb-16">
+                  <div className="brand-icon-wrapper">
+                    <i className={clientIcons[idx % clientIcons.length]}></i>
+                  </div>
+                  <span className="brand-sector-pill">
+                    {client.category || client.type}
+                  </span>
                 </div>
-                <div className="client-badge-type">
-                  {client.type}
+
+                <div className="brand-content">
+                  <h3 className="brand-title-text">
+                    {client.name}
+                  </h3>
+                  <div className="brand-tag-strip">
+                    <span className="brand-tag-bullet">•</span>
+                    <span className="brand-tag-name">{client.tag || client.type}</span>
+                  </div>
+                </div>
+
+                <div className="brand-card-footer mt-16 pt-12 border-top-subtle d-flex align-items-center justify-content-between">
+                  <span className="verified-badge-text">
+                    <i className="ri-shield-check-fill text-gold me-1"></i> Verified Retainer
+                  </span>
+                  <i className="ri-arrow-right-up-line brand-arrow-hint"></i>
                 </div>
               </div>
             </div>
           ))}
         </div>
 
-        {/* Supporting Note */}
-        <div className="text-center">
-          <span className="fs-14 text-muted" style={{ fontStyle: 'italic' }}>
-            <i className="ri-information-line me-1"></i> {clients.supportingNote}
-          </span>
+        {/* Footnote with institutional verification notice */}
+        <div className="text-center reveal-up">
+          <div className="clients-disclaimer-chip">
+            <i className="ri-information-line text-gold me-2"></i>
+            <span>{clients.supportingNote}</span>
+          </div>
         </div>
 
       </div>
     </section>
   );
 };
+
+export default Clients;

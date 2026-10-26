@@ -1,10 +1,10 @@
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 import { Header } from './components/Header';
 import { Hero } from './components/Hero';
+import { Clients } from './components/Clients';
 import { About } from './components/About';
 import { Services } from './components/Services';
 import { WhyChooseUs } from './components/WhyChooseUs';
-import { Clients } from './components/Clients';
 import { Vision } from './components/Vision';
 import { FounderNote } from './components/FounderNote';
 import { FinalCta } from './components/FinalCta';
@@ -22,29 +22,53 @@ export const App = () => {
     setConsultationModalOpen(true);
   };
 
+  // High-performance scroll reveal observer
+  useEffect(() => {
+    if (typeof window === 'undefined' || !('IntersectionObserver' in window)) return;
+
+    const revealElements = document.querySelectorAll('.reveal-up, .reveal-fade, .reveal-stagger');
+
+    const observer = new IntersectionObserver((entries) => {
+      entries.forEach((entry) => {
+        if (entry.isIntersecting) {
+          entry.target.classList.add('is-revealed');
+          // Once revealed, unobserve to keep performance high
+          observer.unobserve(entry.target);
+        }
+      });
+    }, {
+      root: null,
+      rootMargin: '0px 0px -40px 0px',
+      threshold: 0.12
+    });
+
+    revealElements.forEach((el) => observer.observe(el));
+
+    return () => {
+      revealElements.forEach((el) => observer.unobserve(el));
+    };
+  }, []);
+
   return (
     <div className="page-wrapper">
-      {/* Interactive trailing cursor */}
-      <CustomCursor />
-
-      {/* Section 1: Header */}
+      {/* Section 1: Prestige Sticky Header */}
       <Header onOpenConsultation={() => handleOpenConsultation()} />
 
       <main>
         {/* Section 2: Hero */}
         <Hero onOpenConsultation={() => handleOpenConsultation()} />
 
-        {/* Section 3: About Us */}
+        {/* Section 3: Esteemed Clients / Institutional Trust */}
+        <Clients />
+
+        {/* Section 4: About Us */}
         <About />
 
-        {/* Section 4: Core Services */}
+        {/* Section 5: Core Services */}
         <Services onOpenConsultation={handleOpenConsultation} />
 
-        {/* Section 5: Why Choose Us */}
+        {/* Section 6: Why Choose Us */}
         <WhyChooseUs />
-
-        {/* Section 6: Clients */}
-        <Clients />
 
         {/* Section 7: Vision */}
         <Vision />
@@ -56,7 +80,7 @@ export const App = () => {
         <FinalCta onOpenConsultation={() => handleOpenConsultation()} />
       </main>
 
-      {/* Section 9: Footer */}
+      {/* Section 10: Footer */}
       <Footer onOpenConsultation={() => handleOpenConsultation()} />
 
       {/* Consultation Booking Modal */}
@@ -68,6 +92,9 @@ export const App = () => {
 
       {/* Circular Scroll Progress Back To Top */}
       <BackToTop />
+
+      {/* Surface-Aware Custom Cursor */}
+      <CustomCursor />
     </div>
   );
 };

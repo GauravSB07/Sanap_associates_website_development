@@ -4,33 +4,32 @@ export const siteData = {
     shortName: "S&A LLP",
     tagline: "NPO Compliance. Simplified.",
     category: "Non-Profit Advisory & Legal Compliance Firm",
-    llpNo: "LLP No. AAG-6746 [Placeholder]"
+    llpNo: "LLP No. AAG-6746",
+    logo: "/images/logo.jpg"
   },
   
-  // Centralised image assets & placeholders for seamless client replacement
+  // Curated imagery and institutional assets
   images: {
     hero: {
       url: "https://images.unsplash.com/photo-1486406146926-c627a92ad1ab?w=1200&auto=format&fit=crop&q=80",
-      alt: "Sanap & Associates LLP - Professional Consulting & Advisory Office",
-      placeholderLabel: "Temporary Hero Image (16:10 Ratio) • Replaceable with Client Office / Architecture Asset"
+      alt: "Sanap & Associates LLP - Premier Non-Profit Advisory & Governance Office"
     },
     about: {
-      url: "https://images.unsplash.com/photo-1450133064473-71024230f91b?w=1000&auto=format&fit=crop&q=80",
-      alt: "NPO Statutory Compliance & Governance Advisory Consultation",
-      placeholderLabel: "Temporary About Image (4:3 Ratio) • Replaceable with Client Advisory Team Asset"
+      url: "/images/founder.png",
+      alt: "Rtn. Nishant Sanap - Founder & CEO, Sanap & Associates LLP"
     },
     founder: {
-      url: null, // Client has not yet provided approved photo; rendered via dignified neutral placeholder
-      alt: "Rtn. Nishant Sanap - CEO & Founder, Sanap & Associates LLP",
-      placeholderLabel: "Founder Photograph Placeholder (4:5 Portrait Ratio)"
+      url: "/images/founder.png",
+      alt: "Rtn. Nishant Sanap - CEO & Founder, Sanap & Associates LLP"
     }
   },
 
   contact: {
-    phone: "+91 95940 02606 [Placeholder]",
-    email: "support@sanapassociates.com [Placeholder]",
-    address: "Plot No. 72, Omkar Smruti, Office No. 101-102, Borivali East, Mumbai, Maharashtra 400066 [Editable Client Placeholder]",
-    hours: "Monday – Saturday: 9:30 AM – 7:30 PM",
+    phone: "+91 95940 02606",
+    phoneDisplay: "+91 95940 02606",
+    email: "advisory@sanapassociates.com",
+    address: "Plot No. 72, Omkar Smruti, Office No. 101-102, Borivali East, Mumbai, Maharashtra 400066",
+    hours: "Monday – Saturday: 9:30 AM – 7:30 PM IST",
     socials: {
       facebook: "https://www.facebook.com/Sanap-Associates-LLP-339510096471608/",
       linkedin: "https://www.linkedin.com/",
@@ -158,16 +157,17 @@ export const siteData = {
 
   clients: {
     heading: "Trusted Across the NPO & CSR Sector",
-    supportingNote: "Full list available on request.",
+    supportingNote: "Representative engagement portfolio. Complete institutional register available on verified request.",
+    categories: ["All Sectors", "Healthcare & Medicine", "Corporate CSR", "Public Foundations", "Community & Ecology"],
     list: [
-      { name: "Indian Medical Association – Maharashtra Division", type: "State Medical Association" },
-      { name: "Glenmark Foundation", type: "Corporate CSR Foundation" },
-      { name: "Vilasrao Deshmukh Centre Trust", type: "Public Charitable Trust" },
-      { name: "Sanjay Gandhi National Park", type: "Protected Wildlife & Public Trust" },
-      { name: "Desh Foundation (Actor Ritesh Deshmukh)", type: "Philanthropic Foundation" },
-      { name: "Saturday Club Trustees & Members", type: "Entrepreneurial & Community Trust" },
-      { name: "Ajay Ashok Piramal Foundation", type: "Social Welfare & Healthcare Foundation" },
-      { name: "10+ Rotary Clubs & Charitable Trusts", type: "Legal + Accounting Compliance" }
+      { name: "Indian Medical Association – Maharashtra Division", type: "State Medical Association", category: "Healthcare & Medicine", tag: "Statutory Governance" },
+      { name: "Glenmark Foundation", type: "Corporate CSR Foundation", category: "Corporate CSR", tag: "CSR-1 & MCA Filings" },
+      { name: "Vilasrao Deshmukh Centre Trust", type: "Public Charitable Trust", category: "Public Foundations", tag: "Charity Commissioner" },
+      { name: "Sanjay Gandhi National Park", type: "Protected Wildlife & Public Trust", category: "Community & Ecology", tag: "Public Trust Advisory" },
+      { name: "Desh Foundation (Actor Ritesh Deshmukh)", type: "Philanthropic Foundation", category: "Public Foundations", tag: "12A & 80G Advisory" },
+      { name: "Saturday Club Trustees & Members", type: "Entrepreneurial & Community Trust", category: "Community & Ecology", tag: "Governance Framework" },
+      { name: "Ajay Ashok Piramal Foundation", type: "Social Welfare & Healthcare Foundation", category: "Corporate CSR", tag: "Audit & Compliance" },
+      { name: "10+ Rotary Clubs & Charitable Trusts", type: "Legal + Accounting Compliance", category: "Community & Ecology", tag: "Full-Cycle Retainer" }
     ]
   },
 
@@ -180,7 +180,8 @@ export const siteData = {
     heading: "A Message from Our Founder",
     quote: "“NPOs work for society. We work for them.”",
     author: "Rtn. Nishant Sanap",
-    role: "CEO & Founder, Sanap & Associates LLP"
+    role: "CEO & Founder, Sanap & Associates LLP",
+    image: "/images/founder.png"
   },
 
   cta: {
