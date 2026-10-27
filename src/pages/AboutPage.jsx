@@ -1,8 +1,27 @@
 import React from 'react';
+import { useEffect } from "react";
 
 export const AboutPage = ({ onOpenConsultation, onNavigate }) => {
+  useEffect(() => {
+    const elements = document.querySelectorAll(".about-page .sentence-reveal");
+    const observer = new IntersectionObserver(
+      (entries) => {
+        entries.forEach((entry) => {
+          if (entry.isIntersecting) {
+            entry.target.classList.add("is-visible");
+            observer.unobserve(entry.target);
+          }
+        });
+      },
+      { threshold: 0.15, rootMargin: "0px 0px -30px 0px" }
+    );
+
+    elements.forEach((element) => observer.observe(element));
+    return () => observer.disconnect();
+  }, []);
+
   return (
-    <div className="subpage-wrapper">
+    <div className="subpage-wrapper about-page">
       {/* Editorial Page Header Banner */}
       <section className="page-header-banner" data-theme="dark">
         <div className="container">
@@ -12,7 +31,9 @@ export const AboutPage = ({ onOpenConsultation, onNavigate }) => {
               <span className="crumb-separator">/</span>
               <span className="crumb-current">About Us</span>
             </div>
-            <h1 className="page-banner-title">About Us</h1>
+            <h1 className="page-banner-title">
+              About <span className="title-accent-gold">Us.</span>
+            </h1>
             <p className="page-banner-desc">
               Established in India in December 2010. Dedicated to statutory precision, legal governance, and client trust.
             </p>
@@ -23,7 +44,7 @@ export const AboutPage = ({ onOpenConsultation, onNavigate }) => {
       {/* Main Content Area */}
       <section className="page-content-section section-padding bg-white" data-theme="light">
         <div className="container">
-          
+
           {/* Firm Overview Card with Image Grid */}
           <div className="editorial-overview-card p-32 rounded-md bg-alabaster border-card mb-48 reveal-up">
             <div className="row g-4 align-items-center">
@@ -33,10 +54,11 @@ export const AboutPage = ({ onOpenConsultation, onNavigate }) => {
                 </span>
                 <h2 className="fs-24 fw-bold text-title mb-14">Institutional Background</h2>
                 <p className="fs-15 text-body line-height-relaxed mb-16">
-                  Sanap &amp; Associates is a specialized advisory practice established in India in December 2010 as a partnership firm, later converted into an LLP. Operating across India and overseas, the firm provides end-to-end Legal, Financial &amp; Business Advisory, Tax &amp; Regulatory Services, RERA consultancy, GST, Corporate Governance, and statutory facilitation.
+                  <span className="sentence-reveal" style={{ "--sentence-delay": "0ms" }}>Sanap &amp; Associates is a specialized advisory practice established in India in December 2010 as a partnership firm, later converted into an LLP.</span>{" "}
+                  <span className="sentence-reveal" style={{ "--sentence-delay": "160ms" }}>Operating across India and overseas, the firm provides end-to-end Legal, Financial &amp; Business Advisory, Tax &amp; Regulatory Services, RERA consultancy, GST, Corporate Governance, and statutory facilitation.</span>
                 </p>
                 <p className="fs-15 text-body line-height-relaxed m-0">
-                  Our practice is guided by senior Advocates, Chartered Accountants, Company Secretaries, and MBAs who bring direct partner-level accountability to every engagement.
+                  <span className="sentence-reveal" style={{ "--sentence-delay": "0ms" }}>Our practice is guided by senior Advocates, Chartered Accountants, Company Secretaries, and MBAs who bring direct partner-level accountability to every engagement.</span>
                 </p>
 
                 {/* Quantitative Stats Row */}
@@ -59,10 +81,10 @@ export const AboutPage = ({ onOpenConsultation, onNavigate }) => {
               <div className="col-lg-5">
                 <div className="about-credentials-panel p-24 rounded-md bg-white border-card text-center">
                   <div className="about-emblem-wrap mb-16">
-                    <img 
-                      src="/images/logo.jpg" 
-                      alt="Sanap & Associates LLP" 
-                      className="about-official-logo" 
+                    <img
+                      src="/images/logo.jpg"
+                      alt="Sanap & Associates LLP"
+                      className="about-official-logo"
                       style={{ maxHeight: '72px', width: 'auto', objectFit: 'contain' }}
                     />
                   </div>
@@ -91,15 +113,15 @@ export const AboutPage = ({ onOpenConsultation, onNavigate }) => {
           <div className="p-32 rounded-md bg-white border-card mb-48 reveal-up">
             <div className="row g-4 align-items-center">
               <div className="col-md-3 text-center">
-                <div className="founder-portrait-frame mx-auto">
-                  <img 
-                    src="/images/founder.png" 
-                    alt="Mr. Nishant Sanap - Managing Director" 
-                    className="founder-portrait-img" 
+                <div className="founder-portrait-frame">
+                  <img
+                    src="/images/founder.png"
+                    alt="Mr. Nishant Sanap - Managing Director"
+                    className="founder-portrait-img"
                   />
                 </div>
-                <h4 className="fs-16 fw-bold text-title mt-12 mb-2">Mr. Nishant Sanap</h4>
-                <span className="fs-12 text-gold fw-bold">Managing Director</span>
+                <h2 className="fs-16 fw-bold text-title mt-12 mb-2">Mr. Nishant Sanap</h2>
+                <span className="fs-16 text-gold fw-bold">Managing Director</span>
               </div>
               <div className="col-md-9">
                 <div className="ps-md-3">
@@ -107,7 +129,9 @@ export const AboutPage = ({ onOpenConsultation, onNavigate }) => {
                     <i className="ri-double-quotes-l"></i>
                   </div>
                   <blockquote className="fs-16 text-body line-height-relaxed fst-italic mb-16">
-                    "We at Sanap &amp; Associates believe that protection of your fund and rigorous statutory adherence is a prime responsibility. It needs to be addressed with lots of knowledge, absolute sincerity, and proper planning. We produce the right results at the right time for the right cost!"
+                    <span className="sentence-reveal" style={{ "--sentence-delay": "0ms" }}>"We at Sanap &amp; Associates believe that protection of your fund and rigorous statutory adherence is a prime responsibility.</span>{" "}
+                    <span className="sentence-reveal" style={{ "--sentence-delay": "160ms" }}>It needs to be addressed with lots of knowledge, absolute sincerity, and proper planning.</span>{" "}
+                    <span className="sentence-reveal" style={{ "--sentence-delay": "320ms" }}>We produce the right results at the right time for the right cost!"</span>
                   </blockquote>
                   <span className="fs-13 text-muted fw-bold">
                     — Executive Note, Sanap &amp; Associates
@@ -131,25 +155,25 @@ export const AboutPage = ({ onOpenConsultation, onNavigate }) => {
                 <ul className="editorial-bullets-list list-unstyled m-0 p-0 d-flex flex-column gap-14">
                   <li className="d-flex align-items-start gap-12">
                     <i className="ri-arrow-right-s-line text-gold fs-18 flex-shrink-0 mt-2"></i>
-                    <span className="fs-14 text-body">
+                    <span className="fs-14 text-body sentence-reveal" style={{ "--sentence-delay": "0ms" }}>
                       To be amongst the most admired KPO Company delivering reliable and quality products and services to all customers at competitive cost.
                     </span>
                   </li>
                   <li className="d-flex align-items-start gap-12">
                     <i className="ri-arrow-right-s-line text-gold fs-18 flex-shrink-0 mt-2"></i>
-                    <span className="fs-14 text-body">
+                    <span className="fs-14 text-body sentence-reveal" style={{ "--sentence-delay": "100ms" }}>
                       We envision a client relationship that is based on trust and confidence and mutual success.
                     </span>
                   </li>
                   <li className="d-flex align-items-start gap-12">
                     <i className="ri-arrow-right-s-line text-gold fs-18 flex-shrink-0 mt-2"></i>
-                    <span className="fs-14 text-body">
+                    <span className="fs-14 text-body sentence-reveal" style={{ "--sentence-delay": "200ms" }}>
                       Sanap &amp; Associates will produce the right results at the right time for the right cost!
                     </span>
                   </li>
                   <li className="d-flex align-items-start gap-12">
                     <i className="ri-arrow-right-s-line text-gold fs-18 flex-shrink-0 mt-2"></i>
-                    <span className="fs-14 text-body">
+                    <span className="fs-14 text-body sentence-reveal" style={{ "--sentence-delay": "300ms" }}>
                       We are foreseeing for the happiness of the client with our best delivered services.
                     </span>
                   </li>
@@ -169,43 +193,43 @@ export const AboutPage = ({ onOpenConsultation, onNavigate }) => {
                 <ul className="editorial-bullets-list list-unstyled m-0 p-0 d-flex flex-column gap-12">
                   <li className="d-flex align-items-start gap-12">
                     <i className="ri-arrow-right-s-line text-gold fs-18 flex-shrink-0 mt-2"></i>
-                    <span className="fs-14 text-body">To encourage ideas, talent and value systems.</span>
+                    <span className="fs-14 text-body sentence-reveal" style={{ "--sentence-delay": "400ms" }}>To encourage ideas, talent and value systems.</span>
                   </li>
                   <li className="d-flex align-items-start gap-12">
                     <i className="ri-arrow-right-s-line text-gold fs-18 flex-shrink-0 mt-2"></i>
-                    <span className="fs-14 text-body">To expand and diversify our earnings across business and geographies.</span>
+                    <span className="fs-14 text-body sentence-reveal" style={{ "--sentence-delay": "500ms" }}>To expand and diversify our earnings across business and geographies.</span>
                   </li>
                   <li className="d-flex align-items-start gap-12">
                     <i className="ri-arrow-right-s-line text-gold fs-18 flex-shrink-0 mt-2"></i>
-                    <span className="fs-14 text-body">
+                    <span className="fs-14 text-body sentence-reveal" style={{ "--sentence-delay": "600ms" }}>
                       To leverage our people, technology and capital to achieve excellence in service, quality, reliability, safety and work with vigor, dedication and innovation with total customer satisfaction as the ultimate goal.
                     </span>
                   </li>
                   <li className="d-flex align-items-start gap-12">
                     <i className="ri-arrow-right-s-line text-gold fs-18 flex-shrink-0 mt-2"></i>
-                    <span className="fs-14 text-body">
+                    <span className="fs-14 text-body sentence-reveal" style={{ "--sentence-delay": "700ms" }}>
                       To uphold the guiding principles of trust, integrity and transparency in all aspects of interactions and dealings.
                     </span>
                   </li>
                   <li className="d-flex align-items-start gap-12">
                     <i className="ri-arrow-right-s-line text-gold fs-18 flex-shrink-0 mt-2"></i>
-                    <span className="fs-14 text-body">
+                    <span className="fs-14 text-body sentence-reveal" style={{ "--sentence-delay": "0ms" }}>
                       To promote work culture that fosters individual growth, team spirit and creativity to overcome challenges and attain goals.
                     </span>
                   </li>
                   <li className="d-flex align-items-start gap-12">
                     <i className="ri-arrow-right-s-line text-gold fs-18 flex-shrink-0 mt-2"></i>
-                    <span className="fs-14 text-body">To Create Value for Customers, Clients, Shareholders, Business Associates.</span>
+                    <span className="fs-14 text-body sentence-reveal" style={{ "--sentence-delay": "100ms" }}>To Create Value for Customers, Clients, Shareholders, Business Associates.</span>
                   </li>
                   <li className="d-flex align-items-start gap-12">
                     <i className="ri-arrow-right-s-line text-gold fs-18 flex-shrink-0 mt-2"></i>
-                    <span className="fs-14 text-body">
+                    <span className="fs-14 text-body sentence-reveal" style={{ "--sentence-delay": "200ms" }}>
                       We strive to offer high quality data processing services at most competitive rates and ensure security and confidentiality.
                     </span>
                   </li>
                   <li className="d-flex align-items-start gap-12">
                     <i className="ri-arrow-right-s-line text-gold fs-18 flex-shrink-0 mt-2"></i>
-                    <span className="fs-14 text-body">
+                    <span className="fs-14 text-body sentence-reveal" style={{ "--sentence-delay": "300ms" }}>
                       We are confident that we would leave no stone unturned in our endeavor to become one of the most preferred KPO companies in the industry.
                     </span>
                   </li>
@@ -223,7 +247,7 @@ export const AboutPage = ({ onOpenConsultation, onNavigate }) => {
                   <div className="value-number text-gold fs-14 fw-bold mb-8">01. PRINCIPLE</div>
                   <h4 className="fs-18 fw-bold text-title mb-10">Quality</h4>
                   <p className="fs-13 text-body m-0 line-height-relaxed">
-                    Quality is an essential ingredient and an integral part of what we do. We ensure that whatever we do and whatever we deliver follows strict quality standards so that you get accurate and error-free solutions all the time.
+                    <span className="sentence-reveal" style={{ "--sentence-delay": "0ms" }}>Quality is an essential ingredient and an integral part of what we do. We ensure that whatever we do and whatever we deliver follows strict quality standards so that you get accurate and error-free solutions all the time.</span>
                   </p>
                 </div>
               </div>
@@ -233,7 +257,7 @@ export const AboutPage = ({ onOpenConsultation, onNavigate }) => {
                   <div className="value-number text-gold fs-14 fw-bold mb-8">02. PRINCIPLE</div>
                   <h4 className="fs-18 fw-bold text-title mb-10">Client Requirements</h4>
                   <p className="fs-13 text-body m-0 line-height-relaxed">
-                    We have a long list of clients to which we pay special attention and provide solutions to their requirements, maintaining rigorous standards for every file.
+                    <span className="sentence-reveal" style={{ "--sentence-delay": "120ms" }}>We have a long list of clients to which we pay special attention and provide solutions to their requirements, maintaining rigorous standards for every file.</span>
                   </p>
                 </div>
               </div>
@@ -243,7 +267,7 @@ export const AboutPage = ({ onOpenConsultation, onNavigate }) => {
                   <div className="value-number text-gold fs-14 fw-bold mb-8">03. PRINCIPLE</div>
                   <h4 className="fs-18 fw-bold text-title mb-10">Value Added Business</h4>
                   <p className="fs-13 text-body m-0 line-height-relaxed">
-                    We value the business of our clients and our esteemed partners. We constantly look out for unique ways to further enhance the business capability of our clients.
+                    <span className="sentence-reveal" style={{ "--sentence-delay": "240ms" }}>We value the business of our clients and our esteemed partners. We constantly look out for unique ways to further enhance the business capability of our clients.</span>
                   </p>
                 </div>
               </div>
@@ -253,7 +277,7 @@ export const AboutPage = ({ onOpenConsultation, onNavigate }) => {
                   <div className="value-number text-gold fs-14 fw-bold mb-8">04. PRINCIPLE</div>
                   <h4 className="fs-18 fw-bold text-title mb-10">Integrity</h4>
                   <p className="fs-13 text-body m-0 line-height-relaxed">
-                    We seek to build long lasting relationships with all our clients, business partners, and employees through open and clear communication. Our team is always ready to help our clients and partners in all possible ways and earn trust and respect by demonstrating absolute sincerity and honesty at work.
+                    <span className="sentence-reveal" style={{ "--sentence-delay": "360ms" }}>We seek to build long lasting relationships with all our clients, business partners, and employees through open and clear communication. Our team is always ready to help our clients and partners in all possible ways and earn trust and respect by demonstrating absolute sincerity and honesty at work.</span>
                   </p>
                 </div>
               </div>
@@ -267,14 +291,14 @@ export const AboutPage = ({ onOpenConsultation, onNavigate }) => {
               Speak directly with our senior partners and legal counsel to assess your organization's legal, tax, or governance requirements.
             </p>
             <div className="d-flex justify-content-center gap-12">
-              <button 
+              <button
                 onClick={onOpenConsultation}
                 className="btn-prestige btn-prestige-gold"
               >
                 <span>Book a Consultation</span>
                 <i className="ri-arrow-right-line ms-1"></i>
               </button>
-              <button 
+              <button
                 onClick={() => onNavigate?.('contact-us')}
                 className="btn-prestige btn-prestige-ghost"
               >

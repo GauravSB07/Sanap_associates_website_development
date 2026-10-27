@@ -407,6 +407,76 @@ input, select, textarea {
 .row > *:nth-child(5) .reveal-up { transition-delay: 0.28s; }
 .row > *:nth-child(6) .reveal-up { transition-delay: 0.34s; }
 
+
+/* ==========================================
+   Shared Inner-Page Animation Enhancements
+   Inspired by the Limpa reference website
+   ========================================== */
+
+/* Smooth entrance for inner-page headers */
+@keyframes inner-page-header-enter {
+  from {
+    opacity: 0;
+    transform: translateY(14px);
+  }
+
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+.inner-page .page-header-banner .container > .d-flex {
+  animation: inner-page-header-enter 650ms
+    cubic-bezier(0.16, 1, 0.3, 1) both;
+}
+
+/* Consistent, subtle hover effects for inner-page cards */
+.inner-page .editorial-overview-card,
+.inner-page .about-credentials-panel,
+.inner-page .content-pillar-card,
+.inner-page .contact-info-panel,
+.inner-page .contact-form-card,
+.inner-page .career-form-card {
+  transition:
+    transform var(--transition-smooth),
+    box-shadow var(--transition-smooth),
+    border-color var(--transition-smooth);
+}
+
+.inner-page .editorial-overview-card:hover,
+.inner-page .about-credentials-panel:hover,
+.inner-page .content-pillar-card:hover,
+.inner-page .contact-info-panel:hover,
+.inner-page .contact-form-card:hover,
+.inner-page .career-form-card:hover {
+  transform: translateY(-3px);
+  border-color: var(--accent-gold-border);
+  box-shadow: 0 12px 30px rgba(0, 37, 44, 0.07);
+}
+
+/* Visible keyboard focus for accessibility */
+.inner-page a:focus-visible,
+.inner-page button:focus-visible,
+.inner-page input:focus-visible,
+.inner-page select:focus-visible,
+.inner-page textarea:focus-visible {
+  outline: 3px solid var(--accent-gold-light);
+  outline-offset: 3px;
+}
+
+/* Respect users who prefer reduced motion */
+@media (prefers-reduced-motion: reduce) {
+  .reveal-up,
+  .reveal-fade,
+  .inner-page .page-header-banner .container > .d-flex {
+    animation: none !important;
+    transition: none !important;
+    transform: none !important;
+    opacity: 1 !important;
+  }
+}
+
 /* ==========================================================================
    Editorial Section Headers & Badges
    ========================================================================== */
@@ -4070,3 +4140,296 @@ input, select, textarea {
   .d-xl-inline-flex { display: inline-flex !important; }
 }
 
+
+/* ==========================================
+   ABOUT US PAGE — DESIGN REFINEMENT
+   Scoped to this page; homepage unchanged
+   ========================================== */
+
+.inner-page .about-page {
+  background: var(--bg-page);
+}
+
+/* Consistent content spacing */
+.inner-page .about-page .page-content-section {
+  padding-top: clamp(36px, 5vw, 64px);
+  padding-bottom: clamp(48px, 6vw, 80px);
+}
+
+/* Main content card */
+.inner-page .about-page .editorial-overview-card {
+  background: #fff;
+  border: 1px solid var(--border-card);
+  border-radius: var(--radius-lg);
+  box-shadow: var(--shadow-card);
+  padding: clamp(22px, 3.5vw, 40px);
+}
+
+/* Consistent section-heading typography */
+.inner-page .about-page h2 {
+  font-family: var(--font-heading);
+  color: var(--title-color);
+  font-size: clamp(1.5rem, 2.4vw, 2rem);
+  font-weight: 800;
+  line-height: 1.25;
+  letter-spacing: -0.025em;
+}
+
+.inner-page .about-page h3 {
+  font-family: var(--font-heading);
+  color: var(--title-color);
+  font-size: clamp(1.2rem, 2vw, 1.5rem);
+  font-weight: 700;
+  line-height: 1.35;
+}
+
+.inner-page .about-page h4 {
+  font-family: var(--font-heading);
+  color: var(--title-color);
+  font-weight: 700;
+  line-height: 1.4;
+}
+
+/* Easier-to-read body copy */
+.inner-page .about-page .text-body {
+  color: var(--body-color);
+  line-height: 1.75;
+}
+
+.inner-page .about-page .editorial-overview-card p,
+.inner-page .about-page .content-pillar-card li,
+.inner-page .about-page .value-box p {
+  font-size: 0.94rem;
+}
+
+/* Consistent cards and subtle movement */
+.inner-page .about-page .about-credentials-panel,
+.inner-page .about-page .content-pillar-card,
+.inner-page .about-page .value-box,
+.inner-page .about-page .founder-portrait-frame {
+  transition:
+    transform var(--transition-smooth),
+    box-shadow var(--transition-smooth),
+    border-color var(--transition-smooth);
+}
+
+.inner-page .about-page .about-credentials-panel,
+.inner-page .about-page .content-pillar-card,
+.inner-page .about-page .value-box {
+  border-radius: var(--radius-md);
+  border-color: var(--border-card);
+}
+
+.inner-page .about-page .about-credentials-panel:hover,
+.inner-page .about-page .content-pillar-card:hover,
+.inner-page .about-page .value-box:hover {
+  transform: translateY(-4px);
+  border-color: var(--accent-gold-border);
+  box-shadow: var(--shadow-hover);
+}
+
+/* Mint accent for numbers and key details */
+.inner-page .about-page .about-stat-number,
+.inner-page .about-page .value-number {
+  color: var(--accent-emerald);
+  font-family: var(--font-heading);
+}
+
+
+/* Founder portrait — balanced corners and centered layout */
+.inner-page .about-page .founder-portrait-frame {
+  width: min(100%, 520px);
+  margin: 0 auto;
+  overflow: hidden;
+  border-radius: 24px;
+  box-shadow: var(--shadow-card);
+  text-align: center;
+}
+
+.inner-page .about-page .founder-portrait-img {
+  display: block;
+  width: 100%;
+  height: auto;
+  object-fit: cover;
+  border-radius: inherit;
+  transition: transform var(--transition-slow);
+}
+
+/* Center the founder's name below the image */
+.inner-page .about-page .founder-portrait-frame + h3,
+.inner-page .about-page .founder-portrait-frame + p {
+  text-align: center;
+}
+
+/* Clear spacing between the major sections */
+.inner-page .about-page .editorial-overview-card,
+.inner-page .about-page .content-pillar-card {
+  margin-bottom: 0;
+}
+
+/* Responsive adjustments */
+@media (max-width: 768px) {
+  .inner-page .about-page .page-header-banner {
+    padding-top: 112px;
+    padding-bottom: 38px;
+  }
+
+  .inner-page .about-page .page-banner-title {
+    font-size: clamp(2rem, 8vw, 2.6rem);
+  }
+
+  .inner-page .about-page .editorial-overview-card {
+    padding: 22px;
+  }
+}
+
+/* Reduced-motion accessibility */
+@media (prefers-reduced-motion: reduce) {
+  .inner-page .about-page *,
+  .inner-page .about-page *::before,
+  .inner-page .about-page *::after {
+    scroll-behavior: auto !important;
+    animation-duration: 0.01ms !important;
+    transition-duration: 0.01ms !important;
+  }
+}
+
+
+/* About Us hero headline — aligned with homepage typography */
+.inner-page .about-page .page-banner-title {
+  font-family: var(--font-heading);
+  font-size: clamp(2.8rem, 5.5vw, 4.8rem);
+  font-weight: 800;
+  line-height: 1.05;
+  letter-spacing: -0.045em;
+  color: #fff;
+  margin-bottom: 20px;
+}
+
+/* Keep the mint accent consistent with the homepage */
+.inner-page .about-page .page-banner-title .title-accent-gold {
+  color: var(--accent-gold);
+  font-style: italic;
+}
+
+@media (max-width: 576px) {
+  .inner-page .about-page .page-banner-title {
+    font-size: clamp(2.5rem, 10vw, 3.5rem);
+    line-height: 1.08;
+  }
+}
+
+
+/* About Us cards — balanced internal spacing */
+.inner-page .about-page .editorial-overview-card,
+.inner-page .about-page .about-credentials-panel,
+.inner-page .about-page .content-pillar-card,
+.inner-page .about-page .value-box {
+  box-sizing: border-box;
+  padding: 28px;
+}
+
+/* Consistent spacing between content elements */
+.inner-page .about-page .editorial-overview-card > * + *,
+.inner-page .about-page .about-credentials-panel > * + *,
+.inner-page .about-page .content-pillar-card > * + *,
+.inner-page .about-page .value-box > * + * {
+  margin-top: 14px;
+}
+
+/* Remove unwanted extra spacing at card edges */
+.inner-page .about-page .editorial-overview-card > :first-child,
+.inner-page .about-page .about-credentials-panel > :first-child,
+.inner-page .about-page .content-pillar-card > :first-child,
+.inner-page .about-page .value-box > :first-child {
+  margin-top: 0;
+}
+
+.inner-page .about-page .editorial-overview-card > :last-child,
+.inner-page .about-page .about-credentials-panel > :last-child,
+.inner-page .about-page .content-pillar-card > :last-child,
+.inner-page .about-page .value-box > :last-child {
+  margin-bottom: 0;
+}
+
+/* More comfortable padding on small screens */
+@media (max-width: 576px) {
+  .inner-page .about-page .editorial-overview-card,
+  .inner-page .about-page .about-credentials-panel,
+  .inner-page .about-page .content-pillar-card,
+  .inner-page .about-page .value-box {
+    padding: 20px;
+  }
+}
+
+
+/* Founder portrait hover zoom */
+.inner-page .about-page .founder-portrait-frame {
+  overflow: hidden;
+}
+
+.inner-page .about-page .founder-portrait-frame .founder-portrait-img {
+  display: block;
+  width: 100%;
+  height: auto;
+  transition: transform 350ms ease;
+}
+
+.inner-page .about-page .founder-portrait-frame:hover .founder-portrait-img {
+  transform: scale(1.05);
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .inner-page .about-page .founder-portrait-frame .founder-portrait-img {
+    transition: none;
+  }
+}
+
+
+/* About Us: sentence-by-sentence reveal */
+.inner-page .about-page .sentence-reveal {
+  opacity: 0;
+  transform: translateY(14px);
+  transition:
+    opacity 0.55s ease,
+    transform 0.55s ease;
+  transition-delay: var(--sentence-delay, 0ms);
+}
+
+.inner-page .about-page .sentence-reveal.is-visible {
+  opacity: 1;
+  transform: translateY(0);
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .inner-page .about-page .sentence-reveal {
+    opacity: 1;
+    transform: none;
+    transition: none;
+  }
+}
+
+
+/* About Us: sentence-by-sentence scroll animation */
+.inner-page .about-page .sentence-reveal {
+  display: inline;
+  opacity: 0;
+  transform: translateY(14px);
+  transition:
+    opacity 0.55s ease,
+    transform 0.55s ease;
+  transition-delay: var(--sentence-delay, 0ms);
+}
+
+.inner-page .about-page .sentence-reveal.is-visible {
+  opacity: 1;
+  transform: translateY(0);
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .inner-page .about-page .sentence-reveal {
+    opacity: 1;
+    transform: none;
+    transition: none;
+  }
+}

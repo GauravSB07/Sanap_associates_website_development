@@ -108,27 +108,36 @@ export const App = () => {
     <div className="page-wrapper">
       {/* Universal Prestige Header (hidden on dedicated admin portal) */}
       {!isAdminPage && (
-        <Header 
+        <Header
           currentPage={currentPage}
           onNavigate={handleNavigate}
-          onOpenConsultation={() => handleOpenConsultation()} 
+          onOpenConsultation={() => handleOpenConsultation()}
         />
       )}
 
-      <main id="main-content">
+      <main
+        id="main-content"
+        className={
+          currentPage === 'home'
+            ? 'home-page'
+            : currentPage === 'admin'
+              ? 'admin-page'
+              : 'inner-page'
+        }
+      >
         {renderCurrentPage()}
       </main>
 
       {/* Universal Footer (hidden on dedicated admin portal) */}
       {!isAdminPage && (
-        <Footer 
-          onOpenConsultation={() => handleOpenConsultation()} 
+        <Footer
+          onOpenConsultation={() => handleOpenConsultation()}
           onNavigate={handleNavigate}
         />
       )}
 
       {/* Consultation Booking Modal */}
-      <ConsultationModal 
+      <ConsultationModal
         isOpen={consultationModalOpen}
         onClose={() => setConsultationModalOpen(false)}
         initialService={selectedService}
