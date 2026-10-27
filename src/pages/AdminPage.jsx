@@ -451,7 +451,6 @@ export const AdminPage = ({ onNavigate }) => {
             <div>
               <div className="d-flex align-items-center gap-10">
                 <span className="fs-16 fw-bold text-white">Sanap &amp; Associates</span>
-                <span className="admin-badge-pill">Managing Console</span>
               </div>
               <span className="fs-11 text-white-muted d-block mt-2">Specialist Non-Profit Advisory Firm &bull; LLP No. AAG-6746</span>
             </div>
@@ -493,7 +492,6 @@ export const AdminPage = ({ onNavigate }) => {
                 <div className="flex-grow-1 overflow-hidden">
                   <div className="d-flex align-items-center justify-content-between">
                     <h4 className="fs-14 fw-bold text-title m-0">Administrator</h4>
-                    <span className="badge-status-pill status-active py-1 px-6 fs-10">Active</span>
                   </div>
                   <span className="fs-11 text-muted text-truncate d-block mt-2">advisory@sanapassociates.com</span>
                 </div>
@@ -547,7 +545,7 @@ export const AdminPage = ({ onNavigate }) => {
                 >
                   <i className="ri-inbox-line"></i>
                   <span>Client Inquiries</span>
-                  <span className="badge-count" style={{ backgroundColor: 'rgba(197, 164, 103, 0.25)', color: '#07151E' }}>{inquiries.length}</span>
+                  <span className="badge-count" style={{ backgroundColor: 'rgba(185, 248, 177, 0.25)', color: 'var(--primary-midnight)' }}>{inquiries.length}</span>
                 </button>
 
                 <button
@@ -600,7 +598,7 @@ export const AdminPage = ({ onNavigate }) => {
                   <div className="col-sm-6 col-xl-3">
                     <div className="kpi-metric-card">
                       <div className="d-flex align-items-center justify-content-between mb-16">
-                        <span className="fs-12 text-muted fw-bold text-uppercase letter-spacing-wider">Active Openings</span>
+                        <span className="fs-12 text-muted fw-bold text-uppercase letter-spacing-wider">Job Openings</span>
                         <div className="kpi-icon-orb bg-gold-soft">
                           <i className="ri-briefcase-line"></i>
                         </div>
@@ -772,9 +770,8 @@ export const AdminPage = ({ onNavigate }) => {
                         <div>
                           <div className="d-flex align-items-center gap-10 mb-8">
                             <h3 className="fs-18 fw-bold text-title m-0">{job.title}</h3>
-                            <span className={`badge-status-pill ${job.isActive ? 'status-active' : 'status-draft'}`}>
-                              <i className={job.isActive ? 'ri-checkbox-circle-fill' : 'ri-pause-circle-line'}></i>
-                              {job.isActive ? 'Live on Site' : 'Archived / Hidden'}
+                            <span className="fs-12 text-muted fw-semibold">
+                              ({job.isActive ? 'Active' : 'Archived'})
                             </span>
                           </div>
 
@@ -802,10 +799,10 @@ export const AdminPage = ({ onNavigate }) => {
                           <button
                             onClick={() => dataService.toggleCareerStatus(job.id)}
                             className="btn-admin-action"
-                            title={job.isActive ? "Hide from public view" : "Publish live"}
+                            title={job.isActive ? "Hide position" : "Show position"}
                           >
                             <i className={job.isActive ? 'ri-eye-off-line' : 'ri-eye-line'}></i>
-                            <span>{job.isActive ? 'Archive' : 'Publish'}</span>
+                            <span>{job.isActive ? 'Hide' : 'Show'}</span>
                           </button>
 
                           <button
@@ -1432,7 +1429,7 @@ export const AdminPage = ({ onNavigate }) => {
                     className="form-check-input"
                   />
                   <label htmlFor="isActiveCheck" className="form-check-label fs-13 text-title fw-bold">
-                    Publish Live (Visible on public Careers page)
+                    Active (Visible on public Careers page)
                   </label>
                 </div>
               </div>

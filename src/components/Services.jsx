@@ -71,19 +71,15 @@ export const Services = ({ onOpenConsultation }) => {
                 </div>
 
                 {/* Card Bottom CTA */}
-                <div className="practice-card-footer mt-auto pt-20 border-top-subtle d-flex align-items-center justify-content-between">
+                <div className="practice-card-footer mt-auto pt-20 border-top-subtle">
                   <button 
                     onClick={() => onOpenConsultation(category.title)}
-                    className="btn-prestige-outline"
+                    className="btn-prestige-outline w-100 justify-content-center"
                     aria-label={`Inquire about ${category.title}`}
                   >
                     <span>Request Filing Scope &amp; Consultation</span>
                     <i className="ri-arrow-right-line ms-2"></i>
                   </button>
-
-                  <span className="compliance-shield-tag">
-                    <i className="ri-verified-badge-fill text-gold me-1"></i> Full Advisory
-                  </span>
                 </div>
 
               </div>

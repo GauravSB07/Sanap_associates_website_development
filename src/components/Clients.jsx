@@ -54,6 +54,14 @@ export const Clients = () => {
 
   const [activeTestimonial, setActiveTestimonial] = useState(0);
 
+  const handlePrevTestimonial = () => {
+    setActiveTestimonial((prev) => (prev === 0 ? testimonials.length - 1 : prev - 1));
+  };
+
+  const handleNextTestimonial = () => {
+    setActiveTestimonial((prev) => (prev === testimonials.length - 1 ? 0 : prev + 1));
+  };
+
   return (
     <section 
       id="clients" 
@@ -71,7 +79,7 @@ export const Clients = () => {
           </div>
           <div className="d-flex flex-wrap justify-content-center align-items-center gap-24 client-partner-logo-row">
             {clientPartnerLogos.map((logo) => (
-              <div key={logo.id} className="partner-logo-box p-12 bg-white rounded-md border-card">
+              <div key={logo.id} className="partner-logo-box">
                 <img 
                   src={logo.src} 
                   alt={logo.alt} 
@@ -87,41 +95,64 @@ export const Clients = () => {
           </div>
         </div>
         
-        {/* Real Testimonials from sanapassociates.com */}
-        <div className="real-testimonials-card p-32 p-lg-36 text-white mb-60 reveal-up">
+        {/* Real Testimonials from sanapassociates.com (One-Liner Horizontal Banner) */}
+        <div className="real-testimonials-card text-white mb-60 reveal-up">
           <div className="row g-4 align-items-center">
             
-            {/* Left Column: Heading & Dots */}
-            <div className="col-lg-4">
-              <span className="fs-12 text-gold fw-bold text-uppercase letter-spacing-wider mb-6 d-block">
-                Client Feedback
-              </span>
-              <h3 className="fs-22 fw-bold text-white mb-16 line-height-tight">
-                Here’s what just some of our clients have said:
-              </h3>
+            {/* Left Column: Heading, Pagination & Controls */}
+            <div className="col-lg-4 d-flex flex-column justify-content-between testimonial-intro-col">
+              <div>
+                <span className="fs-12 text-gold fw-bold text-uppercase letter-spacing-wider mb-8 d-block">
+                  Client Feedback
+                </span>
+                <h3 className="fs-22 fw-bold text-white mb-16 line-height-tight">
+                  Here’s what just some of our clients have said:
+                </h3>
+              </div>
               
-              <div className="d-flex align-items-center gap-8">
-                {testimonials.map((_, idx) => (
+              <div className="d-flex align-items-center justify-content-between pt-12">
+                <div className="d-flex align-items-center gap-8">
+                  {testimonials.map((_, idx) => (
+                    <button
+                      key={idx}
+                      type="button"
+                      className={`testimonial-dot-btn ${activeTestimonial === idx ? 'active' : ''}`}
+                      onClick={() => setActiveTestimonial(idx)}
+                      aria-label={`Testimonial ${idx + 1}`}
+                    />
+                  ))}
+                </div>
+
+                <div className="d-flex align-items-center gap-8">
                   <button
-                    key={idx}
                     type="button"
-                    className={`testimonial-dot-btn ${activeTestimonial === idx ? 'active' : ''}`}
-                    onClick={() => setActiveTestimonial(idx)}
-                    aria-label={`Testimonial ${idx + 1}`}
-                  />
-                ))}
+                    onClick={handlePrevTestimonial}
+                    className="testimonial-nav-arrow"
+                    aria-label="Previous Review"
+                  >
+                    <i className="ri-arrow-left-s-line"></i>
+                  </button>
+                  <button
+                    type="button"
+                    onClick={handleNextTestimonial}
+                    className="testimonial-nav-arrow"
+                    aria-label="Next Review"
+                  >
+                    <i className="ri-arrow-right-s-line"></i>
+                  </button>
+                </div>
               </div>
             </div>
 
-            {/* Right Column: Quote and Author inside a speech box */}
-            <div className="col-lg-8 border-start-lg">
-              <div className="testimonial-speech-box p-24 p-lg-28">
+            {/* Right Column: Clean spacious Quote and Author without nested border clutter */}
+            <div className="col-lg-8 testimonial-quote-col">
+              <div className="testimonial-quote-wrap">
                 <i className="ri-double-quotes-l quote-gold-icon mb-12 d-block"></i>
                 <p className="testimonial-text mb-20">
                   "{testimonials[activeTestimonial].text}"
                 </p>
 
-                <div className="d-flex align-items-center gap-14 pt-14 border-top" style={{ borderColor: 'rgba(255, 255, 255, 0.1)' }}>
+                <div className="d-flex align-items-center gap-14 pt-16 border-top-subtle-dark">
                   <div className="client-logo-frame">
                     <img 
                       src={testimonials[activeTestimonial].photo} 
