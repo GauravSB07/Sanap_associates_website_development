@@ -47,7 +47,6 @@ export const WhyChooseUs = () => {
               <div key={idx} className="col-md-6 col-lg-4 reveal-up">
                 <div 
                   className="hallmark-card"
-                  data-cursor-text="Hallmark"
                 >
                   <div className="hallmark-top d-flex align-items-center justify-content-between mb-16">
                     <div className="hallmark-icon-wrap">
@@ -102,9 +101,6 @@ export const WhyChooseUs = () => {
                   </div>
                   <div className="signature-role text-white-muted fs-13">
                     {founder.role}
-                  </div>
-                  <div className="signature-badge mt-8">
-                    <i className="ri-verified-badge-fill text-gold me-1"></i> Rotarian Leader
                   </div>
                 </div>
               </div>
