@@ -53,7 +53,6 @@ export const FinalCta = ({ onOpenConsultation }) => {
                   onClick={onOpenConsultation}
                   className="btn-prestige btn-prestige-gold btn-prestige-lg w-100-mobile"
                   id="final-cta-book-consultation"
-                  data-cursor-text="Consult"
                 >
                   <span>{cta.buttonText}</span>
                   <i className="ri-arrow-right-line btn-arrow-icon"></i>

@@ -5,12 +5,12 @@ import React, { useEffect, useRef } from 'react';
  * - Surface-aware: automatically detects light/white surfaces vs dark surfaces
  * - Velocity-aware physics: subtle organic squash/stretch along movement angle
  * - Magnetic feel and smooth lerp interpolation
- * - Tactile click shockwave and rich contextual badge animations
+ * - Tactile click shockwave and rich contextual hover animations
+ * - Note: cursor text badge feature removed per design specifications
  */
 export const CustomCursor = () => {
   const cursorRef = useRef(null);
   const innerRef = useRef(null);
-  const textRef = useRef(null);
   const rippleRef = useRef(null);
 
   useEffect(() => {
@@ -21,7 +21,6 @@ export const CustomCursor = () => {
 
     const cursor = cursorRef.current;
     const inner = innerRef.current;
-    const textEl = textRef.current;
     const ripple = rippleRef.current;
 
     if (!cursor || !inner) return;
@@ -56,7 +55,7 @@ export const CustomCursor = () => {
       const targetElem = document.elementFromPoint(mouseX, mouseY);
       if (targetElem) {
         const isDark = !!targetElem.closest(
-          '[data-theme="dark"], .bg_primary, .hero-area, .founder-section, .site-footer, .wh-box, .cta-banner-box'
+          '[data-theme="dark"], .bg_primary, .hero-section, .founder-section, .site-master-footer, .why-us-enclosure, .cta-master-banner, .prestige-header'
         );
         
         if (isDark) {
@@ -140,38 +139,25 @@ export const CustomCursor = () => {
     // Hover detection on interactive elements
     const handleMouseOver = (e) => {
       const interactiveTarget = e.target.closest(
-        'a, button, .btn, .brand-logo-card, .service-card, .wh-card, .founder-profile-card, .about-card, input, select, textarea, .stat-card, .pillar-item, .category-filter-btn'
+        'a, button, .btn, .brand-logo-card, .service-practice-card, .hallmark-card, .statutory-pillar-card, .hero-visual-card, .about-portrait-card, .founder-insignia-card, input, select, textarea, .category-filter-btn, .progress-wrap, .suggestion-chip'
       );
 
       if (interactiveTarget) {
         isHovering = true;
         cursor.classList.add('cursor--hover');
         inner.classList.add('cursor--hover');
-
-        // Check if element has special cursor badge text
-        const textTarget = interactiveTarget.closest('[data-cursor-text]') || interactiveTarget.getAttribute('data-cursor-text') ? interactiveTarget : null;
-        if (textTarget && textEl) {
-          const badgeText = textTarget.getAttribute('data-cursor-text') || 'View';
-          textEl.textContent = badgeText;
-          cursor.classList.add('cursor--has-text');
-        }
       }
     };
 
     const handleMouseOut = (e) => {
       const interactiveTarget = e.target.closest(
-        'a, button, .btn, .brand-logo-card, .service-card, .wh-card, .founder-profile-card, .about-card, input, select, textarea, .stat-card, .pillar-item, .category-filter-btn'
+        'a, button, .btn, .brand-logo-card, .service-practice-card, .hallmark-card, .statutory-pillar-card, .hero-visual-card, .about-portrait-card, .founder-insignia-card, input, select, textarea, .category-filter-btn, .progress-wrap, .suggestion-chip'
       );
 
       if (interactiveTarget) {
         isHovering = false;
         cursor.classList.remove('cursor--hover');
         inner.classList.remove('cursor--hover');
-
-        if (textEl) {
-          cursor.classList.remove('cursor--has-text');
-          textEl.textContent = '';
-        }
       }
     };
 
@@ -193,9 +179,7 @@ export const CustomCursor = () => {
   return (
     <>
       {/* Outer interactive ring with dynamic surface adaptation */}
-      <div className="custom-cursor-ring cursor--light-area" ref={cursorRef}>
-        <span className="cursor-badge-text" ref={textRef}></span>
-      </div>
+      <div className="custom-cursor-ring cursor--light-area" ref={cursorRef}></div>
 
       {/* Immediate tactile inner point */}
       <div className="custom-cursor-dot cursor--light-area" ref={innerRef}></div>

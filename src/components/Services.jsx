@@ -34,7 +34,6 @@ export const Services = ({ onOpenConsultation }) => {
                 className={`service-practice-card ${hoveredCard === idx ? 'is-focused' : ''}`}
                 onMouseEnter={() => setHoveredCard(idx)}
                 onMouseLeave={() => setHoveredCard(null)}
-                data-cursor-text="Practice"
               >
                 
                 {/* Card Top: Practice Header & Icon */}
@@ -77,7 +76,6 @@ export const Services = ({ onOpenConsultation }) => {
                     onClick={() => onOpenConsultation(category.title)}
                     className="btn-prestige-outline"
                     aria-label={`Inquire about ${category.title}`}
-                    data-cursor-text="Inquire"
                   >
                     <span>Request Filing Scope &amp; Consultation</span>
                     <i className="ri-arrow-right-line ms-2"></i>

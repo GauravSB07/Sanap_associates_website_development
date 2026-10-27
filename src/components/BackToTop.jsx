@@ -39,7 +39,6 @@ export const BackToTop = () => {
       onClick={scrollToTop}
       title="Back to Top"
       aria-label="Back to Top"
-      data-cursor-text="Top"
     >
       <i className="ri-arrow-up-line progress-arrow-icon"></i>
       <svg 

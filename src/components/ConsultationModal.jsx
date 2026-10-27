@@ -1,5 +1,6 @@
 import React, { useState, useEffect } from 'react';
 import { siteData } from '../data/content';
+import { dataService } from '../services/dataService';
 
 export const ConsultationModal = ({ isOpen, onClose, initialService }) => {
   const [formData, setFormData] = useState({
@@ -22,6 +23,15 @@ export const ConsultationModal = ({ isOpen, onClose, initialService }) => {
 
   const handleSubmit = (e) => {
     e.preventDefault();
+    dataService.addInquiry({
+      name: formData.name,
+      trustName: formData.trustName,
+      email: formData.email,
+      phone: formData.phone,
+      service: formData.service,
+      message: formData.message,
+      type: 'Consultation Booking'
+    });
     setSubmitted(true);
     setTimeout(() => {
       setSubmitted(false);
@@ -160,7 +170,6 @@ export const ConsultationModal = ({ isOpen, onClose, initialService }) => {
               <button 
                 type="submit" 
                 className="btn-prestige btn-prestige-gold w-100"
-                data-cursor-text="Submit"
               >
                 <span>Confirm Advisory Consultation</span>
                 <i className="ri-arrow-right-line ms-2"></i>

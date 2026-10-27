@@ -109,7 +109,7 @@ export const About = () => {
                   <div className="nameplate-name">{founder.author}</div>
                   <div className="nameplate-role">{founder.role}</div>
                   <div className="nameplate-accreditation">
-                    <i className="ri-verified-badge-fill text-gold me-1"></i> Rotarian &amp; NPO Jurisprudence Advisor
+                    Rotarian &amp; NPO Jurisprudence Advisor
                   </div>
                 </div>
               </div>
@@ -136,7 +136,6 @@ export const About = () => {
             <div key={idx} className="col-md-6 col-lg-3 reveal-up">
               <div 
                 className="statutory-pillar-card"
-                data-cursor-text="Statute"
               >
                 <div className="pillar-icon-box mb-16">
                   <i className={pillar.icon}></i>

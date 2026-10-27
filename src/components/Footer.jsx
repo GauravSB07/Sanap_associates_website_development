@@ -1,12 +1,22 @@
-import React from 'react';
+import React, { useState, useEffect } from 'react';
 import { siteData } from '../data/content';
+import { dataService } from '../services/dataService';
 
-export const Footer = ({ onOpenConsultation }) => {
-  const { brand, contact, services } = siteData;
+export const Footer = ({ onOpenConsultation, onNavigate }) => {
+  const { brand, services } = siteData;
+  const [firmInfo, setFirmInfo] = useState(() => dataService.getFirmInfo());
 
-  const scrollTo = (id) => {
-    const el = document.getElementById(id);
-    if (el) el.scrollIntoView({ behavior: 'smooth' });
+  useEffect(() => {
+    const handleUpdate = () => {
+      setFirmInfo(dataService.getFirmInfo());
+    };
+    window.addEventListener('sanap_data_updated', handleUpdate);
+    return () => window.removeEventListener('sanap_data_updated', handleUpdate);
+  }, []);
+
+  const handleNav = (pageId) => {
+    onNavigate?.(pageId);
+    window.scrollTo({ top: 0, behavior: 'smooth' });
   };
 
   return (
@@ -33,7 +43,7 @@ export const Footer = ({ onOpenConsultation }) => {
                 </div>
                 <div>
                   <h3 className="footer-firm-title text-white m-0">
-                    {brand.name}
+                    Sanap &amp; Associates
                   </h3>
                   <span className="footer-firm-category text-gold">
                     {brand.category}
@@ -47,43 +57,53 @@ export const Footer = ({ onOpenConsultation }) => {
 
               <div className="footer-statutory-seal">
                 <i className="ri-shield-check-fill text-gold me-2"></i>
-                <span>{brand.llpNo} • Statutory Legal Practice</span>
+                <span>Statutory Practice • Est. 2010</span>
               </div>
             </div>
           </div>
 
-          {/* Column 2: Navigation Links */}
+          {/* Column 2: Navigation Links (Original Site Pages) */}
           <div className="col-lg-2 col-md-6 col-sm-6">
-            <h4 className="footer-column-heading text-white mb-20">Navigation</h4>
+            <h4 className="footer-column-heading text-white mb-20">Pages</h4>
             <ul className="footer-nav-list list-unstyled m-0 p-0">
               <li>
-                <a href="#hero" onClick={(e) => { e.preventDefault(); scrollTo('hero'); }}>
-                  Home Overview
+                <a href="#/" onClick={(e) => { e.preventDefault(); handleNav('home'); }}>
+                  Home
                 </a>
               </li>
               <li>
-                <a href="#clients" onClick={(e) => { e.preventDefault(); scrollTo('clients'); }}>
-                  Esteemed Institutions
+                <a href="#/about-us" onClick={(e) => { e.preventDefault(); handleNav('about-us'); }}>
+                  About Us
                 </a>
               </li>
               <li>
-                <a href="#about" onClick={(e) => { e.preventDefault(); scrollTo('about'); }}>
-                  About Our Practice
+                <a href="#/our-team" onClick={(e) => { e.preventDefault(); handleNav('our-team'); }}>
+                  Our Team
                 </a>
               </li>
               <li>
-                <a href="#services" onClick={(e) => { e.preventDefault(); scrollTo('services'); }}>
-                  Statutory Services
+                <a href="#/services" onClick={(e) => { e.preventDefault(); handleNav('services'); }}>
+                  Services
                 </a>
               </li>
               <li>
-                <a href="#why-us" onClick={(e) => { e.preventDefault(); scrollTo('why-us'); }}>
-                  Why Choose Us
+                <a href="#/news" onClick={(e) => { e.preventDefault(); handleNav('news'); }}>
+                  News
                 </a>
               </li>
               <li>
-                <a href="#founder" onClick={(e) => { e.preventDefault(); scrollTo('founder'); }}>
-                  Founder's Letter
+                <a href="#/careers" onClick={(e) => { e.preventDefault(); handleNav('careers'); }}>
+                  Careers
+                </a>
+              </li>
+              <li>
+                <a href="#/event-sa" onClick={(e) => { e.preventDefault(); handleNav('event-sa'); }}>
+                  Event @ S&amp;A
+                </a>
+              </li>
+              <li>
+                <a href="#/contact-us" onClick={(e) => { e.preventDefault(); handleNav('contact-us'); }}>
+                  Contact Us
                 </a>
               </li>
             </ul>
@@ -123,33 +143,39 @@ export const Footer = ({ onOpenConsultation }) => {
               
               <div className="advisory-row mb-14">
                 <span className="advisory-label">Direct Telephone Hotline</span>
-                <a href={`tel:${contact.phone.replace(/[^0-9+]/g, '')}`} className="advisory-value-tel text-gold">
-                  {contact.phoneDisplay || contact.phone}
+                <a href={`tel:${firmInfo.phonePrimary.replace(/[^0-9+]/g, '')}`} className="advisory-value-tel text-gold">
+                  {firmInfo.phonePrimary}
+                </a>
+              </div>
+
+              <div className="advisory-row mb-14">
+                <span className="advisory-label">Executive Mobile</span>
+                <a href={`tel:${firmInfo.phoneMobile.replace(/[^0-9+]/g, '')}`} className="advisory-value text-white">
+                  {firmInfo.phoneMobile}
                 </a>
               </div>
 
               <div className="advisory-row mb-14">
                 <span className="advisory-label">Official Correspondence</span>
-                <a href={`mailto:${contact.email}`} className="advisory-value text-white">
-                  {contact.email}
+                <a href={`mailto:${firmInfo.emailPrimary}`} className="advisory-value text-white">
+                  {firmInfo.emailPrimary}
                 </a>
               </div>
 
               <div className="advisory-row mb-14">
                 <span className="advisory-label">Operating Schedule</span>
-                <span className="advisory-value text-white-muted">{contact.hours}</span>
+                <span className="advisory-value text-white-muted">{firmInfo.officeHours}</span>
               </div>
 
               <div className="advisory-row mb-20">
                 <span className="advisory-label">Advisory Office</span>
-                <span className="advisory-value text-white-muted fs-13">{contact.address}</span>
+                <span className="advisory-value text-white-muted fs-13">{firmInfo.address}</span>
               </div>
 
               <button 
                 onClick={onOpenConsultation}
                 className="btn-prestige btn-prestige-gold btn-prestige-sm w-100"
                 id="footer-callback-btn"
-                data-cursor-text="Schedule"
               >
                 <span>Schedule Legal Callback</span>
                 <i className="ri-arrow-right-line ms-1"></i>
@@ -163,19 +189,31 @@ export const Footer = ({ onOpenConsultation }) => {
         {/* Footer Bottom Bar */}
         <div className="footer-bottom-bar pt-24 border-top-dark d-flex flex-wrap align-items-center justify-content-between gap-16">
           <p className="copyright-statement m-0 text-white-muted fs-13">
-            &copy; {new Date().getFullYear()} {brand.name}. All statutory non-profit governance rights reserved.
+            &copy; {new Date().getFullYear()} {firmInfo.name || brand.name}. All statutory non-profit governance rights reserved.
           </p>
 
-          <div className="footer-social-deck d-flex align-items-center gap-10">
-            <a href={contact.socials.facebook} target="_blank" rel="noopener noreferrer" aria-label="Facebook" className="social-emblem-btn">
-              <i className="ri-facebook-fill"></i>
+          <div className="d-flex align-items-center gap-20">
+            <a 
+              href="#/admin" 
+              onClick={(e) => { e.preventDefault(); handleNav('admin'); }} 
+              className="admin-portal-link text-white-muted fs-12 d-inline-flex align-items-center gap-6"
+              title="Restricted Staff & Administrator Console"
+            >
+              <i className="ri-lock-line text-gold"></i>
+              <span>Admin Portal</span>
             </a>
-            <a href={contact.socials.linkedin} target="_blank" rel="noopener noreferrer" aria-label="LinkedIn" className="social-emblem-btn">
-              <i className="ri-linkedin-fill"></i>
-            </a>
-            <a href={contact.socials.twitter} target="_blank" rel="noopener noreferrer" aria-label="Twitter" className="social-emblem-btn">
-              <i className="ri-twitter-x-line"></i>
-            </a>
+
+            <div className="footer-social-deck d-flex align-items-center gap-10">
+              <a href="https://www.facebook.com/Sanap-Associates-LLP-339510096471608/" target="_blank" rel="noopener noreferrer" aria-label="Facebook" className="social-emblem-btn">
+                <i className="ri-facebook-fill"></i>
+              </a>
+              <a href="https://www.linkedin.com/" target="_blank" rel="noopener noreferrer" aria-label="LinkedIn" className="social-emblem-btn">
+                <i className="ri-linkedin-fill"></i>
+              </a>
+              <a href="https://twitter.com/" target="_blank" rel="noopener noreferrer" aria-label="Twitter" className="social-emblem-btn">
+                <i className="ri-twitter-x-line"></i>
+              </a>
+            </div>
           </div>
         </div>
 
