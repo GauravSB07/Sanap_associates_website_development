@@ -1,4 +1,5 @@
 import React from 'react';
+import { useEffect } from "react";
 
 export const Team = () => {
   const teamMembers = [
@@ -74,10 +75,35 @@ export const Team = () => {
     }
   ];
 
+  useEffect(() => {
+    const elements = document.querySelectorAll(
+      ".team-page .sentence-reveal"
+    );
+
+    const observer = new IntersectionObserver(
+      (entries) => {
+        entries.forEach((entry) => {
+          if (entry.isIntersecting) {
+            entry.target.classList.add("is-visible");
+            observer.unobserve(entry.target);
+          }
+        });
+      },
+      {
+        threshold: 0.15,
+        rootMargin: "0px 0px -30px 0px",
+      }
+    );
+
+    elements.forEach((element) => observer.observe(element));
+
+    return () => observer.disconnect();
+  }, []);
+
   return (
     <section id="team" className="team-section section-padding bg-alabaster" data-theme="light">
       <div className="container">
-        
+
         {/* Section Heading */}
         <div className="text-center mb-48 reveal-up">
           <div className="section-badge-tag mb-12">
@@ -98,8 +124,8 @@ export const Team = () => {
               <div className="team-member-card reveal-up h-100">
                 <div className="member-card-header d-flex align-items-center gap-14 mb-16">
                   <div className="member-photo-frame">
-                    <img 
-                      src={member.photo} 
+                    <img
+                      src={member.photo}
                       alt={member.name}
                       className="member-real-photo"
                       loading="lazy"

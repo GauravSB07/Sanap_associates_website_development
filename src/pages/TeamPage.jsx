@@ -1,149 +1,290 @@
-import React from 'react';
+
+import React, { useEffect } from "react";
+
+const teamMembers = [
+  {
+    name: "Mr. Nishant Sanap",
+    role: "Managing Director",
+    qualification: "Senior NPO Counsel & Founder",
+    photo: "/images/team/nishant-sanap.jpg",
+    linkedin: "https://www.linkedin.com/",
+    bio: "Spearheading Bombay Public Trust Act advisory, statutory audits, and national non-profit governance over 15+ years.",
+  },
+  {
+    name: "Adv. Tanaji Londhe",
+    role: "Chief Legal Officer",
+    qualification: "High Court Advocate",
+    photo: "/images/team/tanaji-londhe.jpg",
+    linkedin: "https://www.linkedin.com/",
+    bio: "Expert in charity commissioner disputes, scheme framing under Section 50A, and non-profit civil litigation.",
+  },
+  {
+    name: "Adv. Purva Shah",
+    role: "Senior Advocate",
+    qualification: "Legal Counsel",
+    photo: "/images/team/purva-shah.jpg",
+    linkedin: "https://www.linkedin.com/",
+    bio: "Specializing in trust deed drafting, governance restructuring, trustee succession, and statutory compliance.",
+  },
+  {
+    name: "Ms. Gauri Jadhav",
+    role: "Research Head",
+    qualification: "Jurisprudence & Research",
+    photo: "/images/team/gauri-jadhav.jpg",
+    linkedin: "https://www.linkedin.com/",
+    bio: "Leading legal intelligence on evolving statutory mandates, judicial precedents, and regulatory exemptions.",
+  },
+  {
+    name: "CA Satish Dhotre",
+    role: "Head – Indirect Tax",
+    qualification: "Chartered Accountant",
+    photo: "/images/team/satish-dhotre.jpg",
+    linkedin: "https://www.linkedin.com/",
+    bio: "Heading institutional GST assessments, trust audits, input tax reconciliations, and indirect tax compliance.",
+  },
+  {
+    name: "Vartika Keshri",
+    role: "Tax & Financial Consultant",
+    qualification: "Chartered Accountant & MBA Finance",
+    photo: "/images/team/vartika-keshri.jpg",
+    linkedin: "https://www.linkedin.com/",
+    bio: "Focusing on 12A/80G re-registrations, Form 10B/10BB audits, and financial governance for foundations.",
+  },
+  {
+    name: "CS Sarika More",
+    role: "Chief Compliance Officer",
+    qualification: "Company Secretary",
+    photo: "/images/team/sarika-more.jpg",
+    linkedin: "https://www.linkedin.com/",
+    bio: "Leading Section-8 MCA filings, CSR-1 donor verifications, secretarial audits, and statutory corporate filings.",
+  },
+  {
+    name: "Mr. Vijendra Kumar Roy",
+    role: "President – Corporate Advisory",
+    qualification: "Corporate Affairs",
+    photo: "/images/team/vijendra-roy.jpg",
+    linkedin: "https://www.linkedin.com/",
+    bio: "Managing institutional bank relations, project financing documentation, and large-scale trust endowments.",
+  },
+  {
+    name: "Ms. Sheetal Gupta",
+    role: "Chief Operations Manager",
+    qualification: "Operations & Client Liaison",
+    photo: "/images/team/sheetal-gupta.jpg",
+    linkedin: "https://www.linkedin.com/",
+    bio: "Overseeing day-to-day statutory filings, client correspondence, documentation workflow, and trustee desk support.",
+  },
+  {
+    name: "Mr. Deepak Phatak",
+    role: "President – Client Relations",
+    qualification: "Institutional Relations",
+    photo: "/images/team/deepak-phatak.jpg",
+    linkedin: "https://www.linkedin.com/",
+    bio: "Coordinating strategic advisory engagements for charitable trusts, educational societies, and religious bodies.",
+  },
+];
+
+const splitIntoSentences = (text) => {
+  return (
+    text.match(/[^.!?]+[.!?]+|[^.!?]+$/g)?.map((sentence) => sentence.trim()) || [
+      text,
+    ]
+  );
+};
 
 export const TeamPage = ({ onOpenConsultation, onNavigate }) => {
-  const teamMembers = [
-    {
-      name: "Mr. Nishant Sanap",
-      role: "Managing Director",
-      photo: "/images/team/nishant-sanap.jpg",
-      linkedin: "https://www.linkedin.com/"
-    },
-    {
-      name: "Adv. Tanaji londhe",
-      role: "Chief Legal Officer",
-      photo: "/images/team/tanaji-londhe.jpg",
-      linkedin: "https://www.linkedin.com/"
-    },
-    {
-      name: "Adv. Purva shah",
-      role: "Senior Advocate",
-      photo: "/images/team/purva-shah.jpg",
-      linkedin: "https://www.linkedin.com/"
-    },
-    {
-      name: "MS Gauri Jadhav",
-      role: "Research head",
-      photo: "/images/team/gauri-jadhav.jpg",
-      linkedin: "https://www.linkedin.com/"
-    },
-    {
-      name: "Mr Vijendra Kumar Roy",
-      role: "President- Corporate Loan",
-      photo: "/images/team/vijendra-roy.jpg",
-      linkedin: "https://www.linkedin.com/"
-    },
-    {
-      name: "CA Satish Dhotre",
-      role: "Head – Indirect Tax",
-      photo: "/images/team/satish-dhotre.jpg",
-      linkedin: "https://www.linkedin.com/"
-    },
-    {
-      name: "Vartika Keshri",
-      role: "Chartered Accountant & MBA Finance",
-      photo: "/images/team/vartika-keshri.jpg",
-      linkedin: "https://www.linkedin.com/"
-    },
-    {
-      name: "CS Sarika More",
-      role: "Chief Compliance Officer",
-      photo: "/images/team/sarika-more.jpg",
-      linkedin: "https://www.linkedin.com/"
-    },
-    {
-      name: "Ms.Sheetal Gupta",
-      role: "Chief Operation manager",
-      photo: "/images/team/sheetal-gupta.jpg",
-      linkedin: "https://www.linkedin.com/"
-    },
-    {
-      name: "Mr Deepak Phatak",
-      role: "President -Retail Loan",
-      photo: "/images/team/deepak-phatak.jpg",
-      linkedin: "https://www.linkedin.com/"
-    }
-  ];
+  useEffect(() => {
+    const elements = document.querySelectorAll(
+      ".team-page .sentence-reveal"
+    );
+
+    const observer = new IntersectionObserver(
+      (entries) => {
+        entries.forEach((entry) => {
+          if (entry.isIntersecting) {
+            entry.target.classList.add("is-visible");
+            observer.unobserve(entry.target);
+          }
+        });
+      },
+      {
+        threshold: 0.15,
+        rootMargin: "0px 0px -30px 0px",
+      }
+    );
+
+    elements.forEach((element) => observer.observe(element));
+
+    return () => observer.disconnect();
+  }, []);
 
   return (
-    <div className="subpage-wrapper">
-      {/* Editorial Page Header Banner */}
+    <div className="subpage-wrapper team-page">
       <section className="page-header-banner" data-theme="dark">
         <div className="container">
           <div className="d-flex flex-column align-items-start">
             <div className="page-breadcrumbs mb-12">
-              <a href="#/" onClick={(e) => { e.preventDefault(); onNavigate?.('home'); }} className="crumb-link">Home</a>
+              <a
+                href="#/"
+                onClick={(e) => {
+                  e.preventDefault();
+                  onNavigate?.("home");
+                }}
+                className="crumb-link"
+              >
+                Home
+              </a>
+
               <span className="crumb-separator">/</span>
               <span className="crumb-current">Our Team</span>
             </div>
-            <h1 className="page-banner-title">Our Team</h1>
+
+            <h1 className="page-banner-title">
+              Our <span className="title-accent-gold">Team.</span>
+            </h1>
+
             <p className="page-banner-desc">
-              We have a team of professionals like Chartered Accountants, Company Secretaries, Advocates, Architects &amp; MBA.
+              Meet the professionals behind Sanap &amp; Associates. Our
+              multidisciplinary team brings together legal, financial, tax,
+              and governance expertise to support our clients with care and
+              accountability.
             </p>
           </div>
         </div>
       </section>
 
-      {/* Main Content Area */}
-      <section className="page-content-section section-padding bg-alabaster" data-theme="light">
+      <section
+        className="page-content-section section-padding bg-alabaster"
+        data-theme="light"
+      >
         <div className="container">
-          
           <div className="text-center mb-48 reveal-up">
             <div className="section-badge-tag mb-12">
-              <i className="ri-team-line me-1"></i> Multidisciplinary Team
+              <i className="ri-team-line me-1"></i>
+              Multidisciplinary Team
             </div>
+
             <h2 className="section-heading-editorial mb-16">
               Our Professional Team
             </h2>
+
             <p className="section-subtext">
-              Committed to providing comprehensive Legal, Financial, Tax &amp; Business Advisory solutions.
+              Committed to providing comprehensive Legal, Financial, Tax &amp;
+              Business Advisory solutions.
             </p>
           </div>
 
-          {/* Team Grid */}
-          <div className="row g-4 mb-50">
-            {teamMembers.map((member, idx) => (
-              <div key={idx} className="col-lg-4 col-md-6">
-                <div className="team-member-card bg-white border-card rounded-md p-24 h-100 reveal-up d-flex flex-column">
-                  <div className="d-flex align-items-center gap-16 mb-16">
-                    <div className="member-photo-frame">
-                      <img 
-                        src={member.photo} 
-                        alt={member.name}
-                        className="member-real-photo"
-                        referrerPolicy="no-referrer"
-                        onError={(e) => {
-                          e.target.style.display = 'none';
-                          e.target.nextElementSibling.style.display = 'flex';
-                        }}
-                      />
-                      <div className="member-avatar-orb" style={{ display: 'none' }}>
-                        <span>{member.name.split(' ').filter(n => !n.includes('.')).map(n => n[0]).slice(0, 2).join('')}</span>
+          <div className="row g-4 mb-50 team-grid">
+            {teamMembers.map((member) => {
+              const bioSentences = splitIntoSentences(member.bio);
+
+              return (
+                <div
+                  key={member.name}
+                  className="col-lg-4 col-md-6 team-card-column"
+                >
+                  <div className="team-member-card bg-white border-card rounded-md p-24 h-100 reveal-up d-flex flex-column">
+                    <div className="d-flex align-items-center gap-16 mb-16">
+                      <div className="member-photo-frame">
+                        <img
+                          src={member.photo}
+                          alt={member.name}
+                          className="member-real-photo"
+                          loading="lazy"
+                          onError={(e) => {
+                            e.currentTarget.style.display = "none";
+
+                            const avatar =
+                              e.currentTarget.nextElementSibling;
+
+                            if (avatar) {
+                              avatar.style.display = "flex";
+                            }
+                          }}
+                        />
+
+                        <div
+                          className="member-avatar-orb"
+                          style={{ display: "none" }}
+                        >
+                          <span>
+                            {member.name
+                              .split(" ")
+                              .filter((part) => !part.endsWith("."))
+                              .map((part) => part[0])
+                              .slice(0, 2)
+                              .join("")}
+                          </span>
+                        </div>
+                      </div>
+
+                      <div className="flex-grow-1">
+                        <h3 className="member-name fs-17 fw-bold text-title m-0">
+                          <span
+                            className="sentence-reveal"
+                            style={{ "--sentence-delay": "0ms" }}
+                          >
+                            {member.name}
+                          </span>
+                        </h3>
+
+                        <div className="member-role text-gold fs-13 fw-semibold mt-2">
+                          <span
+                            className="sentence-reveal"
+                            style={{ "--sentence-delay": "140ms" }}
+                          >
+                            {member.role}
+                          </span>
+                        </div>
+
+                        <div className="member-qualification fs-12 text-muted mt-2">
+                          <span
+                            className="sentence-reveal"
+                            style={{ "--sentence-delay": "280ms" }}
+                          >
+                            {member.qualification}
+                          </span>
+                        </div>
                       </div>
                     </div>
-                    <div className="flex-grow-1">
-                      <h3 className="member-name fs-17 fw-bold text-title m-0">{member.name}</h3>
-                      <div className="member-role text-gold fs-13 fw-semibold mt-2">{member.role}</div>
+
+                    <p className="member-bio fs-14 text-body mt-16 mb-20">
+                      {bioSentences.map((sentence, index) => (
+                        <span
+                          key={`${member.name}-bio-${index}`}
+                          className="sentence-reveal team-bio-sentence"
+                          style={{
+                            "--sentence-delay": `${420 + index * 180}ms`,
+                          }}
+                        >
+                          {sentence}{" "}
+                        </span>
+                      ))}
+                    </p>
+
+                    <div className="mt-auto pt-14 border-top-subtle d-flex align-items-center justify-content-between">
+                      <span className="fs-12 text-muted">
+                        Sanap &amp; Associates
+                      </span>
+
+                      <a
+                        href={member.linkedin}
+                        target="_blank"
+                        rel="noopener noreferrer"
+                        className="team-linkedin-link"
+                        aria-label={`Open LinkedIn for ${member.name}`}
+                        title="Visit LinkedIn"
+                      >
+                        <i className="ri-linkedin-fill"></i>
+                        <span>LinkedIn</span>
+                      </a>
                     </div>
                   </div>
-                  
-                  <div className="mt-auto pt-14 border-top-subtle d-flex align-items-center justify-content-between">
-                    <span className="fs-12 text-muted">Sanap &amp; Associates</span>
-                    <a 
-                      href={member.linkedin} 
-                      target="_blank" 
-                      rel="noopener noreferrer" 
-                      className="team-social-link text-muted"
-                      aria-label={`${member.name} LinkedIn Profile`}
-                    >
-                      <i className="ri-linkedin-box-line fs-18"></i>
-                    </a>
-                  </div>
                 </div>
-              </div>
-            ))}
+              );
+            })}
           </div>
 
-          {/* Professional Standards Strip */}
           <div className="p-24 bg-white border-card rounded-md text-center reveal-up">
             <div className="row g-3 justify-content-center">
               <div className="col-md-4">
@@ -152,12 +293,14 @@ export const TeamPage = ({ onOpenConsultation, onNavigate }) => {
                   <span>Direct Partner-Led Accountability</span>
                 </div>
               </div>
+
               <div className="col-md-4">
                 <div className="d-flex align-items-center justify-content-center gap-8 text-title fs-14 fw-bold">
                   <i className="ri-scales-3-line text-gold fs-18"></i>
                   <span>High Court &amp; Regulatory Liaison</span>
                 </div>
               </div>
+
               <div className="col-md-4">
                 <div className="d-flex align-items-center justify-content-center gap-8 text-title fs-14 fw-bold">
                   <i className="ri-lock-password-line text-gold fs-18"></i>
@@ -166,7 +309,6 @@ export const TeamPage = ({ onOpenConsultation, onNavigate }) => {
               </div>
             </div>
           </div>
-
         </div>
       </section>
     </div>

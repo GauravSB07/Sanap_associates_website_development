@@ -4433,3 +4433,173 @@ input, select, textarea {
     transition: none;
   }
 }
+
+
+/* =========================================
+   OUR TEAM PAGE
+   Hero banner matching About Us
+   ========================================= */
+
+.inner-page .team-page .page-banner-title {
+  font-family: var(--font-heading);
+  font-size: clamp(2.8rem, 5.5vw, 4.8rem);
+  font-weight: 800;
+  line-height: 1.05;
+  letter-spacing: -0.045em;
+  color: #fff;
+  margin-bottom: 20px;
+}
+
+.inner-page .team-page .page-banner-title .title-accent-gold {
+  color: var(--accent-gold);
+  -webkit-text-fill-color: var(--accent-gold);
+  background: none;
+  font-style: italic;
+}
+
+.inner-page .team-page .page-banner-desc {
+  max-width: 760px;
+  line-height: 1.75;
+}
+
+/* Card layout and animation */
+
+.inner-page .team-page .team-member-card {
+  box-sizing: border-box;
+  height: 100%;
+  transition:
+    opacity 0.6s cubic-bezier(0.16, 1, 0.3, 1),
+    transform 0.6s cubic-bezier(0.16, 1, 0.3, 1),
+    box-shadow var(--transition-smooth),
+    border-color var(--transition-smooth);
+}
+
+/* Stagger cards from left to right */
+
+.inner-page .team-page .team-grid
+.team-card-column:nth-child(3n + 1) .team-member-card {
+  transition-delay: 0.05s;
+}
+
+.inner-page .team-page .team-grid
+.team-card-column:nth-child(3n + 2) .team-member-card {
+  transition-delay: 0.18s;
+}
+
+.inner-page .team-page .team-grid
+.team-card-column:nth-child(3n) .team-member-card {
+  transition-delay: 0.31s;
+}
+
+.inner-page .team-page .member-qualification {
+  line-height: 1.45;
+}
+
+.inner-page .team-page .member-bio {
+  line-height: 1.7;
+}
+
+/* Portrait zoom on hover */
+
+.inner-page .team-page .member-real-photo {
+  transition: transform 0.35s ease;
+}
+
+.inner-page .team-page .team-member-card:hover .member-real-photo {
+  transform: scale(1.07);
+}
+
+/* Mobile adjustments */
+
+@media (max-width: 576px) {
+  .inner-page .team-page .page-banner-title {
+    font-size: clamp(2.5rem, 10vw, 3.5rem);
+    line-height: 1.08;
+  }
+
+  .inner-page .team-page .team-grid
+  .team-card-column .team-member-card {
+    transition-delay: 0.05s;
+  }
+}
+
+/* Respect reduced-motion preferences */
+
+@media (prefers-reduced-motion: reduce) {
+  .inner-page .team-page .team-member-card,
+  .inner-page .team-page .member-real-photo {
+    transition: none !important;
+  }
+}
+
+/* Sentence-by-sentence scroll animation */
+.sentence-reveal {
+  display: inline;
+  opacity: 0;
+  transform: translateY(12px);
+  transition:
+    opacity 650ms ease,
+    transform 650ms ease;
+  transition-delay: var(--sentence-delay, 0ms);
+}
+
+.sentence-reveal.is-visible {
+  opacity: 1;
+  transform: translateY(0);
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .sentence-reveal {
+    opacity: 1;
+    transform: none;
+    transition: none;
+  }
+}
+
+/* Team card: reveal each biography sentence separately */
+.team-page .team-bio-sentence {
+  display: block;
+}
+
+
+/* Team card biography sentence animation */
+.team-page .team-bio-sentence {
+  display: block;
+}
+
+/* LinkedIn link inside team cards */
+.team-page .team-linkedin-link {
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+  color: #0a66c2;
+  font-size: 12px;
+  font-weight: 600;
+  text-decoration: none;
+  transition: color 0.2s ease, transform 0.2s ease;
+}
+
+.team-page .team-linkedin-link i {
+  font-size: 16px;
+}
+
+.team-page .team-linkedin-link:hover {
+  color: #004182;
+  transform: translateY(-1px);
+  text-decoration: underline;
+}
+
+/* Fallback LinkedIn logo if Remix Icon is unavailable */
+.team-page .team-linkedin-link .linkedin-icon-letter {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  width: 18px;
+  height: 18px;
+  border-radius: 3px;
+  background: #0a66c2;
+  color: #fff;
+  font-size: 12px;
+  font-weight: 800;
+  line-height: 1;
+}
