@@ -249,7 +249,7 @@ export const ServicesPage = ({ onOpenConsultation, onNavigate }) => {
                       <span className="text-gold fw-bold">92%</span>
                     </div>
                     <div className="progress-track-bg rounded-pill" style={{ height: '8px', background: 'rgba(255,255,255,0.1)' }}>
-                      <div className="progress-bar-fill rounded-pill" style={{ width: '92%', height: '100%', background: 'linear-gradient(90deg, #C5A467, #DFC188)' }}></div>
+                      <div className="progress-bar-fill rounded-pill" style={{ width: '92%', height: '100%', background: 'linear-gradient(90deg, var(--accent-gold), var(--accent-gold-light))' }}></div>
                     </div>
                   </div>
 
@@ -259,7 +259,7 @@ export const ServicesPage = ({ onOpenConsultation, onNavigate }) => {
                       <span className="text-gold fw-bold">87%</span>
                     </div>
                     <div className="progress-track-bg rounded-pill" style={{ height: '8px', background: 'rgba(255,255,255,0.1)' }}>
-                      <div className="progress-bar-fill rounded-pill" style={{ width: '87%', height: '100%', background: 'linear-gradient(90deg, #C5A467, #DFC188)' }}></div>
+                      <div className="progress-bar-fill rounded-pill" style={{ width: '87%', height: '100%', background: 'linear-gradient(90deg, var(--accent-gold), var(--accent-gold-light))' }}></div>
                     </div>
                   </div>
 
@@ -269,7 +269,7 @@ export const ServicesPage = ({ onOpenConsultation, onNavigate }) => {
                       <span className="text-gold fw-bold">76%</span>
                     </div>
                     <div className="progress-track-bg rounded-pill" style={{ height: '8px', background: 'rgba(255,255,255,0.1)' }}>
-                      <div className="progress-bar-fill rounded-pill" style={{ width: '76%', height: '100%', background: 'linear-gradient(90deg, #C5A467, #DFC188)' }}></div>
+                      <div className="progress-bar-fill rounded-pill" style={{ width: '76%', height: '100%', background: 'linear-gradient(90deg, var(--accent-gold), var(--accent-gold-light))' }}></div>
                     </div>
                   </div>
                 </div>
@@ -283,7 +283,7 @@ export const ServicesPage = ({ onOpenConsultation, onNavigate }) => {
                       <span className="text-gold fw-bold">69%</span>
                     </div>
                     <div className="progress-track-bg rounded-pill" style={{ height: '8px', background: 'rgba(255,255,255,0.1)' }}>
-                      <div className="progress-bar-fill rounded-pill" style={{ width: '69%', height: '100%', background: 'linear-gradient(90deg, #C5A467, #DFC188)' }}></div>
+                      <div className="progress-bar-fill rounded-pill" style={{ width: '69%', height: '100%', background: 'linear-gradient(90deg, var(--accent-gold), var(--accent-gold-light))' }}></div>
                     </div>
                   </div>
 
@@ -293,7 +293,7 @@ export const ServicesPage = ({ onOpenConsultation, onNavigate }) => {
                       <span className="text-gold fw-bold">50%</span>
                     </div>
                     <div className="progress-track-bg rounded-pill" style={{ height: '8px', background: 'rgba(255,255,255,0.1)' }}>
-                      <div className="progress-bar-fill rounded-pill" style={{ width: '50%', height: '100%', background: 'linear-gradient(90deg, #C5A467, #DFC188)' }}></div>
+                      <div className="progress-bar-fill rounded-pill" style={{ width: '50%', height: '100%', background: 'linear-gradient(90deg, var(--accent-gold), var(--accent-gold-light))' }}></div>
                     </div>
                   </div>
 
@@ -303,7 +303,7 @@ export const ServicesPage = ({ onOpenConsultation, onNavigate }) => {
                       <span className="text-gold fw-bold">41%</span>
                     </div>
                     <div className="progress-track-bg rounded-pill" style={{ height: '8px', background: 'rgba(255,255,255,0.1)' }}>
-                      <div className="progress-bar-fill rounded-pill" style={{ width: '41%', height: '100%', background: 'linear-gradient(90deg, #C5A467, #DFC188)' }}></div>
+                      <div className="progress-bar-fill rounded-pill" style={{ width: '41%', height: '100%', background: 'linear-gradient(90deg, var(--accent-gold), var(--accent-gold-light))' }}></div>
                     </div>
                   </div>
                 </div>

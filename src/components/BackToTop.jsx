@@ -50,7 +50,7 @@ export const BackToTop = () => {
         <path 
           d="M50,1 a49,49 0 0,1 0,98 a49,49 0 0,1 0,-98"
           fill="none"
-          stroke="var(--accent-gold, #C5A467)"
+          stroke="var(--accent-gold, #B9F8B1)"
           strokeWidth="6"
           style={{
             strokeDasharray: `${pathLength} ${pathLength}`,
