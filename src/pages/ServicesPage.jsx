@@ -187,50 +187,89 @@ export const ServicesPage = ({ onOpenConsultation, onNavigate }) => {
             ))}
           </div>
 
+
           {/* Services Grid */}
-          <div className="row g-4 mb-50">
-            {filteredServices.map((service, idx) => (
-              <div key={service.id} className="col-lg-6">
-                <div className="service-detail-card p-32 bg-white border-card rounded-md h-100 reveal-up d-flex flex-column">
-                  <div className="d-flex align-items-center justify-content-between mb-16">
-                    <span className="service-index-number text-gold fs-12 fw-bold text-uppercase">
-                      0{idx + 1}. Practice Area
-                    </span>
-                    <span className="service-cat-pill fs-11 text-muted text-uppercase fw-bold">
-                      {service.category}
-                    </span>
+          <div className="services-results" aria-live="polite">
+            {filteredServices.length > 0 ? (
+              <div className="row g-4 mb-50">
+                {filteredServices.map((service, idx) => (
+                  <div key={service.id} className="col-lg-6">
+                    <div className="service-detail-card p-32 bg-white border-card rounded-md h-100 d-flex flex-column">
+                      <div className="d-flex align-items-center justify-content-between mb-16">
+                        <span className="service-index-number text-gold fs-12 fw-bold text-uppercase">
+                          {String(idx + 1).padStart(2, '0')}. Practice Area
+                        </span>
+
+                        <span className="service-cat-pill fs-11 text-muted text-uppercase fw-bold">
+                          {service.category}
+                        </span>
+                      </div>
+
+                      <h3 className="fs-20 fw-bold text-title mb-12">
+                        {service.title}
+                      </h3>
+
+                      <p className="fs-14 text-body line-height-relaxed mb-20">
+                        {service.desc}
+                      </p>
+
+                      <div className="service-scope-box p-16 bg-alabaster rounded-sm border-subtle mt-auto mb-20">
+                        <span className="fs-12 text-uppercase fw-bold text-muted d-block mb-10">
+                          Key Offerings:
+                        </span>
+
+                        <ul className="list-unstyled m-0 p-0 d-flex flex-column gap-8">
+                          {service.items.map((item, iIdx) => (
+                            <li
+                              key={iIdx}
+                              className="d-flex align-items-center gap-8 fs-13 text-title"
+                            >
+                              <i className="ri-check-line text-gold fs-15 flex-shrink-0"></i>
+                              <span>{item}</span>
+                            </li>
+                          ))}
+                        </ul>
+                      </div>
+
+                      <button
+                        type="button"
+                        onClick={() => onOpenConsultation?.(service.title)}
+                        className="btn-link text-gold fw-bold fs-13 d-inline-flex align-items-center gap-4 text-start border-0 bg-transparent p-0"
+                      >
+                        <span>Inquire About {service.title}</span>
+                        <i className="ri-arrow-right-line"></i>
+                      </button>
+                    </div>
                   </div>
-
-                  <h3 className="fs-20 fw-bold text-title mb-12">{service.title}</h3>
-                  <p className="fs-14 text-body line-height-relaxed mb-20">
-                    {service.desc}
-                  </p>
-
-                  <div className="service-scope-box p-16 bg-alabaster rounded-sm border-subtle mt-auto mb-20">
-                    <span className="fs-12 text-uppercase fw-bold text-muted d-block mb-10">Key Offerings:</span>
-                    <ul className="list-unstyled m-0 p-0 d-flex flex-column gap-8">
-                      {service.items.map((item, iIdx) => (
-                        <li key={iIdx} className="d-flex align-items-center gap-8 fs-13 text-title">
-                          <i className="ri-check-line text-gold fs-15 flex-shrink-0"></i>
-                          <span>{item}</span>
-                        </li>
-                      ))}
-                    </ul>
-                  </div>
-
-                  <button
-                    type="button"
-                    onClick={() => onOpenConsultation?.(service.title)}
-                    className="btn-link text-gold fw-bold fs-13 d-inline-flex align-items-center gap-4 text-start border-0 bg-transparent p-0"
-                  >
-                    <span>Inquire About {service.title}</span>
-                    <i className="ri-arrow-right-line"></i>
-                  </button>
-                </div>
+                ))}
               </div>
-            ))}
-          </div>
+            ) : (
+              <div className="services-empty-state text-center bg-white border-card rounded-md p-32 mb-50">
+                <div className="services-empty-icon mb-16">
+                  <i className="ri-folder-search-line"></i>
+                </div>
 
+                <h3 className="fs-20 fw-bold text-title mb-12">
+                  No Services Found
+                </h3>
+
+                <p className="fs-14 text-muted mb-20">
+                  We couldn't find any services in this category at the moment.
+                  Please explore all our services or choose another category.
+                </p>
+
+                <button
+                  type="button"
+                  className="btn-prestige btn-prestige-gold"
+                  onClick={() => setActiveCategory('all')}
+                >
+                  <span>Go Back to All Services</span>
+                  <i className="ri-arrow-right-line ms-1"></i>
+                </button>
+              </div>
+            )}
+          </div>
+          
           {/* Authentic Practice Breakdown from sanapassociates.com */}
           <div className="practice-breakdown-card p-36 rounded-md bg-midnight text-white mb-50 reveal-up">
             <div className="text-center mb-32">
@@ -317,7 +356,7 @@ export const ServicesPage = ({ onOpenConsultation, onNavigate }) => {
             <p className="text-muted fs-14 max-w-620 mx-auto mb-20">
               Our team manages both routine monthly filings and critical judicial matters across Maharashtra and Central authorities.
             </p>
-            <button 
+            <button
               onClick={() => onOpenConsultation?.()}
               className="btn-prestige btn-prestige-gold"
             >
