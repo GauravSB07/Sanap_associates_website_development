@@ -1,5 +1,6 @@
 import React from 'react';
 import { siteData } from '../data/content';
+import { useEffect } from "react";
 
 export const About = () => {
   const { about, images, founder } = siteData;
@@ -27,14 +28,40 @@ export const About = () => {
     }
   ];
 
+
+  useEffect(() => {
+    const elements = document.querySelectorAll(
+      ".about-page .sentence-reveal"
+    );
+
+    const observer = new IntersectionObserver(
+      (entries) => {
+        entries.forEach((entry) => {
+          if (entry.isIntersecting) {
+            entry.target.classList.add("is-visible");
+            observer.unobserve(entry.target);
+          }
+        });
+      },
+      {
+        threshold: 0.15,
+        rootMargin: "0px 0px -30px 0px",
+      }
+    );
+
+    elements.forEach((element) => observer.observe(element));
+
+    return () => observer.disconnect();
+  }, []);
+
   return (
-    <section 
-      id="about" 
-      className="about-section section-padding" 
+    <section
+      id="about"
+      className="about-section section-padding"
       data-theme="light"
     >
       <div className="container">
-        
+
         {/* Section Header */}
         <div className="section-header text-center mb-50">
           <div className="section-badge-tag reveal-up">
@@ -50,14 +77,14 @@ export const About = () => {
 
         {/* Executive Overview & Highlights */}
         <div className="row g-4 align-items-center mb-50">
-          
+
           {/* Narrative Box */}
           <div className="col-lg-7">
             <div className="about-narrative-card reveal-up">
               <div className="narrative-tag mb-16">
                 <span>Domain Leadership Since 2011</span>
               </div>
-              
+
               <h3 className="narrative-title mb-20">
                 A Decade and a Half of Uncompromising Non-Profit Jurisprudence.
               </h3>
@@ -96,9 +123,9 @@ export const About = () => {
           <div className="col-lg-5">
             <div className="about-portrait-card reveal-up">
               <div className="portrait-image-wrapper">
-                <img 
-                  src={images.about.url} 
-                  alt={images.about.alt} 
+                <img
+                  src={images.about.url}
+                  alt={images.about.alt}
                   loading="lazy"
                   className="founder-portrait-image"
                 />
@@ -134,7 +161,7 @@ export const About = () => {
         <div className="row g-4">
           {statutoryHighlights.map((pillar, idx) => (
             <div key={idx} className="col-md-6 col-lg-3 reveal-up">
-              <div 
+              <div
                 className="statutory-pillar-card"
               >
                 <div className="pillar-icon-box mb-16">
