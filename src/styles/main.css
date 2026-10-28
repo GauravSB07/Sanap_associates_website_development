@@ -6182,3 +6182,319 @@ input, select, textarea {
     transform: none;
   }
 }
+
+
+/* ==========================================================
+   CONTACT US PAGE
+   Scoped styles — do not affect other pages or the cursor.
+   ========================================================== */
+
+.contact-page {
+  --contact-mint: #78cbb7;
+  --contact-gold: #b99454;
+  --contact-ink: #171b1d;
+  --contact-card-shadow: 0 8px 26px rgba(20, 26, 36, 0.055);
+}
+
+/* -------------------- HERO BANNER -------------------- */
+
+.contact-page .page-header-banner {
+  padding: 130px 0 50px !important;
+  min-height: 0;
+  box-sizing: border-box;
+}
+
+.contact-page .page-header-banner .page-breadcrumbs {
+  margin-bottom: 24px;
+}
+
+.contact-page .page-header-banner .page-banner-title {
+  max-width: 1150px;
+  font-size: clamp(3.5rem, 5.5vw, 6rem) !important;
+  font-weight: 800;
+  line-height: 1.05;
+  letter-spacing: -0.045em;
+  margin-bottom: 24px;
+}
+
+.contact-page .page-header-banner .page-banner-desc {
+  max-width: 1050px;
+  font-size: clamp(1rem, 1.3vw, 1.25rem);
+  line-height: 1.7;
+}
+
+@media (max-width: 768px) {
+  .contact-page .page-header-banner {
+    padding: 110px 0 40px !important;
+  }
+
+  .contact-page .page-header-banner .page-banner-title {
+    font-size: clamp(2.8rem, 8vw, 4rem) !important;
+  }
+}
+
+@media (max-width: 480px) {
+  .contact-page .page-header-banner {
+    padding: 100px 0 36px !important;
+  }
+
+  .contact-page .page-header-banner .page-banner-title {
+    font-size: clamp(2.4rem, 10vw, 3rem) !important;
+    line-height: 1.1;
+  }
+}
+
+/* -------------------- MAIN LAYOUT -------------------- */
+
+.contact-page .contact-layout {
+  align-items: stretch;
+}
+
+.contact-page .contact-info-panel,
+.contact-page .contact-form-card {
+  width: 100%;
+  min-width: 0;
+  border-radius: 12px;
+  box-shadow: var(--contact-card-shadow);
+}
+
+.contact-page .contact-info-panel {
+  overflow: hidden;
+}
+
+.contact-page .contact-form-card {
+  overflow: hidden;
+}
+
+.contact-page .contact-detail-content {
+  min-width: 0;
+  flex: 1;
+}
+
+.contact-page .contact-phone-links {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 8px 14px;
+}
+
+.contact-page .contact-phone-links a,
+.contact-page .contact-email-link {
+  overflow-wrap: anywhere;
+  text-decoration: none;
+  transition: color 200ms ease;
+}
+
+.contact-page .contact-phone-links a:hover,
+.contact-page .contact-email-link:hover {
+  color: var(--contact-mint) !important;
+}
+
+/* -------------------- INFORMATION ICONS -------------------- */
+
+.contact-page .contact-icon-orb {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 46px;
+  height: 46px;
+  border: 1px solid rgba(120, 203, 183, 0.38);
+  border-radius: 50%;
+  background: rgba(120, 203, 183, 0.12);
+  transition:
+    background 250ms ease,
+    transform 250ms ease,
+    border-color 250ms ease;
+}
+
+.contact-page .contact-info-panel > .contact-reveal.is-visible:hover
+  .contact-icon-orb {
+  border-color: var(--contact-mint);
+  background: rgba(120, 203, 183, 0.2);
+}
+
+/* -------------------- SCROLL-TRIGGERED REVEALS -------------------- */
+
+/*
+  Items stay hidden until React adds .is-visible after the user scrolls
+  them into the viewport. This avoids revealing the content on page load.
+*/
+
+.contact-page .contact-reveal {
+  opacity: 0;
+  transform: translateY(18px);
+  transition:
+    opacity 600ms ease,
+    transform 600ms cubic-bezier(0.2, 0.7, 0.25, 1);
+  will-change: opacity, transform;
+}
+
+.contact-page .contact-reveal.is-visible {
+  opacity: 1;
+  transform: translateY(0);
+}
+
+/* Gentle icon entrance */
+
+.contact-page .contact-icon-orb {
+  flex-shrink: 0;
+}
+
+/* -------------------- MAP -------------------- */
+
+.contact-page .contact-map-frame {
+  position: relative;
+  width: 100%;
+  min-height: 190px;
+  background: #ecebe6;
+}
+
+.contact-page .contact-map-frame iframe {
+  display: block;
+  width: 100%;
+  height: 190px;
+  border: 0;
+}
+
+/* -------------------- FORM FIELDS -------------------- */
+
+.contact-page .form-field-group {
+  width: 100%;
+  min-width: 0;
+}
+
+.contact-page .field-label {
+  display: block;
+  margin-bottom: 8px;
+  color: var(--contact-ink);
+  font-size: 13px;
+  font-weight: 700;
+  line-height: 1.5;
+}
+
+.contact-page .field-input,
+.contact-page .field-textarea {
+  display: block;
+  width: 100%;
+  min-width: 0;
+  padding: 12px 14px;
+  border: 1px solid rgba(23, 27, 29, 0.14);
+  border-radius: 6px;
+  outline: none;
+  background: #fff;
+  color: var(--contact-ink);
+  font: inherit;
+  font-size: 14px;
+  line-height: 1.6;
+  transition:
+    border-color 220ms ease,
+    box-shadow 220ms ease,
+    background 220ms ease;
+}
+
+.contact-page .field-input {
+  min-height: 48px;
+}
+
+.contact-page .field-textarea {
+  min-height: 120px;
+  resize: vertical;
+}
+
+.contact-page .field-input::placeholder,
+.contact-page .field-textarea::placeholder {
+  color: #96999c;
+  opacity: 1;
+}
+
+.contact-page .field-input:focus,
+.contact-page .field-textarea:focus {
+  border-color: var(--contact-mint);
+  background: #fff;
+  box-shadow: 0 0 0 3px rgba(120, 203, 183, 0.16);
+}
+
+.contact-page .field-input:focus-visible,
+.contact-page .field-textarea:focus-visible {
+  outline: none;
+}
+
+/* Keep form controls usable even while the reveal animation runs. */
+.contact-page .contact-reveal.is-visible input,
+.contact-page .contact-reveal.is-visible textarea,
+.contact-page .contact-reveal.is-visible button {
+  pointer-events: auto;
+}
+
+/* -------------------- SUBMIT BUTTON -------------------- */
+
+.contact-page .btn-prestige {
+  min-height: 48px;
+  transition:
+    transform 220ms ease,
+    box-shadow 220ms ease;
+}
+
+.contact-page .btn-prestige:hover {
+  transform: translateY(-2px);
+}
+
+/* -------------------- SUCCESS MESSAGE -------------------- */
+
+.contact-page .success-icon-orb {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 68px;
+  height: 68px;
+  border: 1px solid rgba(120, 203, 183, 0.45);
+  border-radius: 50%;
+  background: rgba(120, 203, 183, 0.14);
+  color: #328b77;
+  font-size: 34px;
+}
+
+/* -------------------- RESPONSIVE -------------------- */
+
+@media (max-width: 991px) {
+  .contact-page .contact-info-panel,
+  .contact-page .contact-form-card {
+    height: auto !important;
+  }
+}
+
+@media (max-width: 575px) {
+  .contact-page .contact-info-panel,
+  .contact-page .contact-form-card {
+    padding: 22px !important;
+  }
+
+  .contact-page .contact-phone-links {
+    flex-direction: column;
+    align-items: flex-start;
+    gap: 6px;
+  }
+
+  .contact-page .contact-map-frame,
+  .contact-page .contact-map-frame iframe {
+    min-height: 180px;
+    height: 180px;
+  }
+}
+
+/* -------------------- REDUCED MOTION -------------------- */
+
+@media (prefers-reduced-motion: reduce) {
+  .contact-page .contact-reveal,
+  .contact-page .contact-icon-orb,
+  .contact-page .field-input,
+  .contact-page .field-textarea,
+  .contact-page .btn-prestige {
+    transition: none !important;
+  }
+
+  .contact-page .contact-reveal {
+    opacity: 1;
+    transform: none;
+  }
+}
+
