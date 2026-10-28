@@ -6498,3 +6498,668 @@ input, select, textarea {
   }
 }
 
+
+
+/* =========================================================
+   OUR SERVICES PAGE
+   Scoped styling — preserves other pages and shared cursor
+   ========================================================= */
+
+/* =========================================================
+   HERO BANNER
+   Reuses shared styles from About Us and other subpages.
+   Do not override the shared banner dimensions here.
+   ========================================================= */
+
+
+/* =========================================================
+   CATEGORY FILTERS
+   ========================================================= */
+
+.services-page .services-filter-list {
+  position: relative;
+  z-index: 2;
+}
+
+.services-page .service-filter-chip {
+  transition:
+    color 250ms ease,
+    background-color 250ms ease,
+    border-color 250ms ease,
+    transform 250ms ease;
+}
+
+.services-page .service-filter-chip:hover:not(:disabled) {
+  transform: translateY(-2px);
+}
+
+.services-page .service-filter-chip:disabled {
+  cursor: wait;
+}
+
+
+/* =========================================================
+   CATEGORY CHANGE ANIMATION
+   ========================================================= */
+
+.services-page .services-results {
+  opacity: 1;
+  transform: translateY(0);
+  transition:
+    opacity 220ms ease,
+    transform 220ms ease;
+}
+
+.services-page .services-results.is-changing {
+  opacity: 0;
+  transform: translateY(-12px);
+  pointer-events: none;
+}
+
+.services-page .services-results.is-entering {
+  animation: services-category-rise 550ms
+    cubic-bezier(0.22, 1, 0.36, 1) both;
+}
+
+@keyframes services-category-rise {
+  from {
+    opacity: 0;
+    transform: translateY(22px);
+  }
+
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+
+/* =========================================================
+   SERVICE GRID AND EQUAL-HEIGHT CARDS
+   ========================================================= */
+
+.services-page .services-grid {
+  align-items: stretch;
+}
+
+.services-page .service-card-column {
+  display: flex;
+  align-items: stretch;
+  min-width: 0;
+}
+
+/* Main card styling and scroll reveal */
+.services-page .service-detail-card {
+  display: flex;
+  flex-direction: column;
+  width: 100%;
+  height: 100%;
+  min-width: 0;
+  padding: 32px;
+  overflow: hidden;
+  box-sizing: border-box;
+
+  opacity: 0;
+  transform: translateY(28px);
+
+  transition:
+    opacity 650ms ease calc(var(--card-order, 0) * 100ms),
+    transform 650ms cubic-bezier(0.22, 1, 0.36, 1),
+    box-shadow 300ms ease;
+}
+
+/* Card becomes visible when it enters the viewport */
+.services-page .service-detail-card.is-visible {
+  opacity: 1;
+  transform: translateY(0);
+  transition-delay: 0ms;
+}
+
+/* Hover effect: lift the visible card smoothly */
+.services-page .service-detail-card.is-visible:hover {
+  transform: translateY(-8px);
+  box-shadow: 0 12px 28px rgba(0, 0, 0, 0.10);
+  transition:
+    opacity 650ms ease,
+    transform 300ms ease,
+    box-shadow 300ms ease;
+}
+
+
+/* =========================================================
+   CARD HEADING AND DESCRIPTION
+   ========================================================= */
+
+.services-page .service-detail-card h3 {
+  min-height: 3.2em;
+  line-height: 1.6;
+  overflow-wrap: anywhere;
+}
+
+.services-page .service-detail-card > p {
+  line-height: 1.8;
+  overflow-wrap: anywhere;
+}
+
+.services-page .service-card-top {
+  gap: 12px;
+  min-height: 24px;
+}
+
+.services-page .service-index-number,
+.services-page .service-cat-pill {
+  line-height: 1.5;
+}
+
+.services-page .service-cat-pill {
+  text-align: right;
+}
+
+
+/* =========================================================
+   KEY OFFERINGS
+   ========================================================= */
+
+.services-page .service-scope-box {
+  width: 100%;
+  margin-top: auto;
+  margin-bottom: 20px;
+  overflow-wrap: anywhere;
+}
+
+.services-page .service-scope-box ul {
+  width: 100%;
+}
+
+.services-page .service-scope-box li {
+  line-height: 1.65;
+}
+
+.services-page .service-scope-box li i {
+  margin-top: 2px;
+}
+
+
+/* =========================================================
+   INQUIRY BUTTONS
+   ========================================================= */
+
+.services-page .service-inquiry-button {
+  width: fit-content;
+  max-width: 100%;
+  margin-top: auto;
+  line-height: 1.7;
+  cursor: pointer;
+  overflow-wrap: anywhere;
+}
+
+.services-page .service-inquiry-button span {
+  overflow-wrap: anywhere;
+}
+
+.services-page .service-inquiry-button i {
+  flex-shrink: 0;
+  transition: transform 250ms ease;
+}
+
+.services-page .service-inquiry-button:hover i {
+  transform: translateX(4px);
+}
+
+
+/* =========================================================
+   INDIVIDUAL CONTENT REVEAL
+   ========================================================= */
+
+.services-page .service-reveal {
+  opacity: 0;
+  transform: translateY(15px);
+  transition:
+    opacity 500ms ease,
+    transform 500ms cubic-bezier(0.22, 1, 0.36, 1);
+}
+
+.services-page .service-reveal.is-visible {
+  opacity: 1;
+  transform: translateY(0);
+}
+
+/* Heading appears first */
+.services-page .service-card-reveal.is-visible h3.service-reveal {
+  transition-delay: 100ms;
+}
+
+/* Description appears after the heading */
+.services-page .service-card-reveal.is-visible > p.service-reveal {
+  transition-delay: 180ms;
+}
+
+/* Key offerings box follows the description */
+.services-page
+  .service-card-reveal.is-visible
+  > .service-scope-box.service-reveal {
+  transition-delay: 240ms;
+}
+
+/* Each offering appears one after another */
+.services-page
+  .service-card-reveal
+  .service-scope-box li.service-reveal {
+  transition-delay: calc(280ms + var(--item-order, 0) * 75ms);
+}
+
+/* Inquiry button appears after the service information */
+.services-page
+  .service-card-reveal.is-visible
+  > .service-inquiry-button.service-reveal {
+  transition-delay: 480ms;
+}
+
+
+/* =========================================================
+   EMPTY STATE
+   ========================================================= */
+
+.services-page .services-empty-state {
+  width: 100%;
+  max-width: 760px;
+  margin-right: auto;
+  margin-left: auto;
+  animation: services-category-rise 500ms ease both;
+}
+
+.services-page .services-empty-icon {
+  font-size: 42px;
+  line-height: 1.2;
+  color: var(--accent-gold);
+}
+
+
+/* =========================================================
+   CAPABILITY PROGRESS BARS
+   ========================================================= */
+
+.services-page .services-progress-track {
+  height: 8px;
+  overflow: hidden;
+  background: rgba(255, 255, 255, 0.1);
+}
+
+.services-page .services-progress-fill {
+  height: 100%;
+  background: linear-gradient(
+    90deg,
+    var(--accent-gold),
+    var(--accent-gold-light)
+  );
+  transition: width 700ms ease;
+}
+
+
+/* =========================================================
+   RESPONSIVE ADJUSTMENTS
+   ========================================================= */
+
+@media (max-width: 991.98px) {
+  .services-page .service-detail-card {
+    padding: 26px;
+  }
+}
+
+@media (max-width: 575.98px) {
+  .services-page .service-detail-card {
+    padding: 22px;
+  }
+
+  .services-page .service-detail-card h3 {
+    min-height: 0;
+  }
+
+  .services-page .service-card-top {
+    align-items: flex-start;
+  }
+
+  .services-page .service-index-number,
+  .services-page .service-cat-pill {
+    font-size: 10px;
+  }
+
+  .services-page .service-scope-box {
+    padding: 14px;
+  }
+
+  .services-page .services-empty-state {
+    padding: 24px;
+  }
+}
+
+
+/* =========================================================
+   TOUCH DEVICES
+   Disable hover lift on devices without hover support.
+   ========================================================= */
+
+@media (hover: none) {
+  .services-page .service-detail-card.is-visible:hover {
+    transform: translateY(0);
+    box-shadow: none;
+  }
+}
+
+
+/* =========================================================
+   REDUCED MOTION ACCESSIBILITY
+   ========================================================= */
+
+@media (prefers-reduced-motion: reduce) {
+  .services-page .service-filter-chip,
+  .services-page .service-detail-card,
+  .services-page .service-reveal,
+  .services-page .services-results,
+  .services-page .services-empty-state,
+  .services-page .services-progress-fill {
+    animation: none !important;
+    transition: none !important;
+  }
+
+  .services-page .service-card-reveal,
+  .services-page .service-reveal {
+    opacity: 1 !important;
+    transform: none !important;
+  }
+
+  .services-page .service-detail-card.is-visible:hover {
+    transform: none !important;
+    box-shadow: none !important;
+  }
+}
+
+/* SERVICES: statistics / percentage card */
+.services-page .services-progress-card {
+  box-sizing: border-box;
+  width: 100%;
+  padding: 32px;
+  border-radius: 12px;
+}
+
+.services-page .services-progress-card .services-progress-content {
+  display: grid;
+  grid-template-columns: repeat(3, minmax(0, 1fr));
+  gap: 28px;
+  align-items: stretch;
+  width: 100%;
+}
+
+.services-page .services-progress-item {
+  min-width: 0;
+  padding: 20px;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  text-align: center;
+  box-sizing: border-box;
+}
+
+.services-page .services-progress-number {
+  display: inline-block;
+  font-size: clamp(28px, 3vw, 42px);
+  font-weight: 700;
+  line-height: 1.2;
+  font-variant-numeric: tabular-nums;
+}
+
+.services-page .services-progress-track {
+  width: 100%;
+  height: 8px;
+  margin-top: 16px;
+  overflow: hidden;
+  border-radius: 20px;
+  background: rgba(255, 255, 255, 0.12);
+}
+
+.services-page .services-progress-fill {
+  width: 0;
+  height: 100%;
+  border-radius: inherit;
+  background: linear-gradient(
+    90deg,
+    var(--accent-gold),
+    var(--accent-gold-light)
+  );
+  transition: width 1200ms cubic-bezier(0.22, 1, 0.36, 1);
+}
+
+.services-page .services-progress-fill.is-filled {
+  width: var(--progress-value, 100%);
+}
+
+@media (max-width: 767.98px) {
+  .services-page .services-progress-card {
+    padding: 22px;
+  }
+
+  .services-page .services-progress-content {
+    grid-template-columns: 1fr;
+    gap: 16px;
+  }
+
+  .services-page .services-progress-item {
+    padding: 16px;
+  }
+}
+
+/* =====================================================
+   SERVICES HERO — MATCH ABOUT US
+   Scoped to Services only; About and Home remain unchanged
+   ===================================================== */
+
+.services-page > .page-header-banner {
+  box-sizing: border-box;
+  width: 100%;
+  padding: 80px 0;
+  min-height: 0;
+}
+
+.services-page > .page-header-banner .container > .d-flex {
+  align-items: flex-start;
+}
+
+.services-page > .page-header-banner .page-breadcrumbs {
+  margin-bottom: 12px;
+}
+
+.services-page > .page-header-banner .page-banner-title {
+  margin-top: 0;
+  margin-bottom: 16px;
+  font-size: clamp(36px, 4.2vw, 56px);
+  font-weight: 700;
+  line-height: 1.15;
+  letter-spacing: -0.03em;
+}
+
+.services-page > .page-header-banner .title-accent-gold {
+  color: var(--accent-gold);
+}
+
+.services-page > .page-header-banner .page-banner-desc {
+  max-width: 720px;
+  margin-top: 0;
+  margin-bottom: 0;
+  line-height: 1.8;
+}
+
+@media (max-width: 767.98px) {
+  .services-page > .page-header-banner {
+    padding: 56px 0;
+  }
+
+  .services-page > .page-header-banner .page-banner-title {
+    font-size: clamp(32px, 8vw, 42px);
+  }
+}
+
+/* =========================================
+   SERVICES: CAPABILITY / PERCENTAGE CARD
+   ========================================= */
+
+.services-page .practice-breakdown-card {
+  box-sizing: border-box;
+  width: 100%;
+  padding: 36px;
+  overflow: hidden;
+}
+
+.services-page .practice-breakdown-card > .text-center {
+  margin-bottom: 32px;
+}
+
+.services-page .practice-breakdown-card .capability-progress-grid {
+  align-items: stretch;
+  row-gap: 28px;
+}
+
+.services-page .practice-breakdown-card .capability-progress-grid > [class*="col-"] {
+  display: flex;
+  min-width: 0;
+}
+
+.services-page .practice-breakdown-card .capability-progress-grid > [class*="col-"] > div {
+  width: 100%;
+}
+
+.services-page .practice-breakdown-card .progress-item {
+  width: 100%;
+  min-width: 0;
+  animation: services-progress-item-in 500ms ease both;
+  animation-delay: calc(var(--progress-order, 0) * 80ms);
+}
+
+.services-page .practice-breakdown-card .progress-item > .d-flex {
+  gap: 16px;
+}
+
+.services-page .practice-breakdown-card .progress-item > .d-flex > span:first-child {
+  min-width: 0;
+  overflow-wrap: anywhere;
+}
+
+.services-page .practice-breakdown-card .capability-number {
+  flex: 0 0 48px;
+  min-width: 48px;
+  text-align: right;
+  font-variant-numeric: tabular-nums;
+}
+
+.services-page .services-progress-track {
+  width: 100%;
+  height: 8px;
+  overflow: hidden;
+}
+
+.services-page .services-progress-fill {
+  width: 0;
+  height: 100%;
+  transition: width 1400ms cubic-bezier(0.22, 1, 0.36, 1);
+}
+
+.services-page .services-progress-fill.is-filled {
+  width: var(--progress-value, 0%);
+}
+
+@keyframes services-progress-item-in {
+  from {
+    opacity: 0;
+    transform: translateY(10px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+@media (max-width: 767.98px) {
+  .services-page .practice-breakdown-card {
+    padding: 24px;
+  }
+
+  .services-page .practice-breakdown-card .capability-progress-grid {
+    row-gap: 24px;
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .services-page .practice-breakdown-card .progress-item {
+    animation: none;
+  }
+
+  .services-page .services-progress-fill {
+    transition: none;
+  }
+}
+
+/* ==========================================
+   SERVICES HERO — MATCH ABOUT US
+   Only affects the Services page
+   ========================================== */
+
+/* Same title font, size, weight and spacing as About Us */
+.inner-page .services-page .page-banner-title {
+  font-family: var(--font-heading);
+  font-size: clamp(2.8rem, 5.5vw, 4.8rem);
+  font-weight: 800;
+  line-height: 1.05;
+  letter-spacing: -0.045em;
+  color: #fff;
+  margin-top: 0;
+  margin-bottom: 20px;
+}
+
+/* Same accent styling */
+.inner-page .services-page .page-banner-title .title-accent-gold {
+  color: var(--accent-gold);
+  font-style: italic;
+}
+
+/* Same breadcrumb-to-title spacing */
+.inner-page .services-page .page-header-banner .page-breadcrumbs {
+  margin-bottom: 12px;
+}
+
+/* Remove unexpected title/description spacing */
+.inner-page .services-page .page-header-banner .page-banner-desc {
+  margin-top: 0;
+}
+
+/* Same mobile banner spacing as About Us */
+@media (max-width: 768px) {
+  .inner-page .services-page .page-header-banner {
+    padding-top: 112px;
+    padding-bottom: 38px;
+  }
+
+  .inner-page .services-page .page-banner-title {
+    font-size: clamp(2rem, 8vw, 2.6rem);
+  }
+}
+
+/* Same small-screen title sizing as About Us */
+@media (max-width: 576px) {
+  .inner-page .services-page .page-banner-title {
+    font-size: clamp(2.5rem, 10vw, 3.5rem);
+    line-height: 1.08;
+  }
+}
+
+/* Services hero — adjust top and bottom spacing */
+.services-page .page-header-banner {
+  padding-top: 112px;
+  padding-bottom: 38px;
+}
+
+@media (max-width: 768px) {
+  .services-page .page-header-banner {
+    padding-top: 112px;
+    padding-bottom: 38px;
+  }
+}
