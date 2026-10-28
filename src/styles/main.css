@@ -4603,3 +4603,542 @@ input, select, textarea {
   font-weight: 800;
   line-height: 1;
 }
+
+
+/* =========================================================
+   NEWS PAGE: HERO ACCENT, SENTENCE REVEALS & FILTER MOTION
+   ========================================================= */
+
+/* Match the gold title accent used on the other subpages */
+.news-page .title-accent-gold {
+  color: var(--accent-gold);
+  font-style: italic;
+}
+
+/* Sentence-by-sentence content reveal */
+.news-page .sentence-reveal {
+  opacity: 0;
+  transform: translateY(10px);
+  transition:
+    opacity 0.48s ease,
+    transform 0.48s ease;
+  transition-delay: var(--sentence-delay, 0ms);
+}
+
+.news-page .sentence-reveal.is-visible {
+  opacity: 1;
+  transform: translateY(0);
+}
+
+/* Keep longer article text readable, with each sentence appearing separately */
+.news-page .news-copy-sentence {
+  display: block;
+}
+
+/* Headline spacing */
+.news-page .news-card-title {
+  line-height: 1.5;
+}
+
+/* Subtle card entrance after selecting a category */
+.news-page .news-card-column {
+  animation: newsCardRiseIn 0.48s ease both;
+  animation-delay: var(--news-card-delay, 0ms);
+}
+
+@keyframes newsCardRiseIn {
+  from {
+    opacity: 0;
+    transform: translateY(16px);
+  }
+
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+/* Fade out current results before new category appears */
+.news-page .news-filter-results {
+  opacity: 1;
+  transform: translateY(0);
+  transition:
+    opacity 0.24s ease,
+    transform 0.24s ease;
+}
+
+.news-page .news-filter-results.is-filtering {
+  opacity: 0;
+  transform: translateY(-8px);
+  pointer-events: none;
+}
+
+/* Smooth category button feedback */
+.news-page .service-filter-chip {
+  transition:
+    color 0.22s ease,
+    background-color 0.22s ease,
+    border-color 0.22s ease,
+    box-shadow 0.22s ease,
+    transform 0.22s ease;
+}
+
+.news-page .service-filter-chip:hover:not(:disabled) {
+  transform: translateY(-2px);
+}
+
+.news-page .service-filter-chip:disabled {
+  cursor: wait;
+}
+
+/* Result count row */
+.news-page .news-results-heading {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 12px;
+  border-bottom: 1px solid var(--border-subtle);
+  padding-bottom: 12px;
+}
+
+/* Refined news cards */
+.news-page .news-page-card {
+  height: 100%;
+  box-shadow: 0 4px 20px rgba(0, 37, 44, 0.035);
+  transition:
+    transform 0.28s ease,
+    box-shadow 0.28s ease,
+    border-color 0.28s ease;
+}
+
+.news-page .news-page-card:hover {
+  transform: translateY(-3px);
+  border-color: var(--accent-gold-border);
+  box-shadow: 0 14px 32px rgba(0, 37, 44, 0.075);
+}
+
+.news-page .news-statutory-box {
+  border-left: 3px solid var(--accent-gold);
+}
+
+/* Consultation action */
+.news-page .news-consult-link {
+  cursor: pointer;
+  text-align: left;
+  transition: color 0.22s ease;
+}
+
+.news-page .news-consult-link:hover {
+  color: var(--primary-midnight);
+}
+
+.news-page .news-consult-link i {
+  transition: transform 0.22s ease;
+}
+
+.news-page .news-consult-link:hover i {
+  transform: translateX(4px);
+}
+
+/* Empty category state */
+.news-page .news-empty-state {
+  max-width: 820px;
+  margin-left: auto;
+  margin-right: auto;
+  animation: newsCardRiseIn 0.4s ease both;
+}
+
+.news-page .news-empty-icon {
+  width: 64px;
+  height: 64px;
+  margin-left: auto;
+  margin-right: auto;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  border-radius: 50%;
+  color: var(--accent-gold);
+  background: var(--bg-alabaster);
+  border: 1px solid var(--border-subtle);
+}
+
+.news-page .news-empty-icon i {
+  font-size: 28px;
+}
+
+/* Respect reduced-motion preferences */
+@media (prefers-reduced-motion: reduce) {
+  .news-page .sentence-reveal,
+  .news-page .news-filter-results,
+  .news-page .news-card-column,
+  .news-page .news-empty-state,
+  .news-page .news-page-card,
+  .news-page .service-filter-chip {
+    animation: none !important;
+    transition: none !important;
+    transform: none !important;
+  }
+
+  .news-page .sentence-reveal {
+    opacity: 1 !important;
+  }
+}
+
+
+/* =========================================
+   NEWS PAGE — CONSISTENT HERO BANNER
+   ========================================= */
+
+.news-page .page-header-banner {
+  padding: 130px 0 50px;
+  min-height: auto;
+  display: flex;
+  align-items: center;
+}
+
+.news-page .page-banner-title {
+  font-size: clamp(2.2rem, 3.2vw, 3rem);
+  font-weight: 800;
+  line-height: 1.15;
+  letter-spacing: -0.025em;
+  margin-bottom: 12px;
+}
+
+.news-page .page-banner-desc {
+  max-width: 680px;
+  font-size: clamp(0.95rem, 1.1vw, 1.1rem);
+  line-height: 1.6;
+  margin: 0;
+}
+
+.news-page .page-breadcrumbs {
+  margin-bottom: 12px;
+}
+
+.news-page .title-accent-gold {
+  color: var(--accent-gold);
+  font-style: italic;
+}
+
+/* Keep the headline consistent on smaller screens */
+@media (max-width: 768px) {
+  .news-page .page-header-banner {
+    padding: 110px 0 40px;
+  }
+
+  .news-page .page-banner-title {
+    font-size: clamp(2rem, 7vw, 2.5rem);
+  }
+}
+
+
+/* =========================================
+   NEWS PAGE — BALANCED CARD SPACING
+   ========================================= */
+
+.news-page .news-card-column {
+  display: flex;
+}
+
+.news-page .news-page-card {
+  box-sizing: border-box;
+  width: 100%;
+  height: 100%;
+  padding: 32px;
+  display: flex;
+  flex-direction: column;
+  gap: 0;
+}
+
+/* Balanced spacing between card sections */
+.news-page .news-page-card > * {
+  max-width: 100%;
+}
+
+.news-page .news-page-card .news-card-title {
+  margin-top: 0;
+  margin-bottom: 16px;
+  line-height: 1.5;
+}
+
+.news-page .news-page-card .news-statutory-box {
+  margin-top: 4px;
+  margin-bottom: 20px;
+  padding: 18px;
+}
+
+.news-page .news-page-card .news-card-summary {
+  margin-bottom: 18px;
+  line-height: 1.75;
+}
+
+.news-page .news-page-card .news-card-footer {
+  margin-top: auto;
+  padding-top: 18px;
+}
+
+/* Consistent padding on tablets and mobile */
+@media (max-width: 768px) {
+  .news-page .news-page-card {
+    padding: 24px;
+  }
+
+  .news-page .news-page-card .news-statutory-box {
+    padding: 14px;
+  }
+}
+
+@media (max-width: 480px) {
+  .news-page .news-page-card {
+    padding: 20px;
+  }
+}
+
+/* ==========================================
+   NEWS PAGE — MATCH OTHER SUBPAGE HERO BANNERS
+   ========================================== */
+
+.news-page .page-header-banner {
+  padding: 130px 0 50px;
+  min-height: auto;
+}
+
+.news-page .page-banner-title {
+  font-size: clamp(2.2rem, 3.2vw, 3rem);
+  font-weight: 800;
+  line-height: 1.15;
+  letter-spacing: -0.025em;
+  margin-bottom: 12px;
+}
+
+.news-page .page-banner-desc {
+  max-width: 680px;
+  font-size: clamp(0.95rem, 1.1vw, 1.1rem);
+  line-height: 1.6;
+  margin: 0;
+}
+
+.news-page .title-accent-gold {
+  color: var(--accent-gold);
+  font-style: italic;
+}
+
+
+/* ==========================================
+   NEWS PAGE — BALANCED CARD SPACING
+   ========================================== */
+
+.news-page .news-card-column {
+  display: flex;
+  align-items: stretch;
+  min-width: 0;
+}
+
+.news-page .news-page-card {
+  box-sizing: border-box;
+  width: 100%;
+  height: 100%;
+  padding: 32px !important;
+  display: flex;
+  flex-direction: column;
+}
+
+/* Headline and summary spacing */
+.news-page .news-card-title {
+  margin: 0 0 16px !important;
+  line-height: 1.5;
+}
+
+.news-page .news-card-summary {
+  margin: 0 0 20px !important;
+  line-height: 1.75;
+}
+
+/* Statutory information box */
+.news-page .news-statutory-box {
+  padding: 18px !important;
+  margin: 0 0 20px !important;
+  border-left: 3px solid var(--accent-gold);
+}
+
+.news-page .news-card-details {
+  line-height: 1.75;
+}
+
+/* Bottom row: tags and consultation button */
+.news-page .news-page-card > .border-top-subtle {
+  margin-top: auto;
+  padding-top: 18px !important;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 14px;
+}
+
+/* Keep the consultation link neatly aligned */
+.news-page .news-consult-link {
+  flex-shrink: 0;
+  cursor: pointer;
+  text-align: left;
+}
+
+/* Mobile spacing */
+@media (max-width: 768px) {
+  .news-page .page-header-banner {
+    padding: 110px 0 40px;
+  }
+
+  .news-page .page-banner-title {
+    font-size: clamp(2rem, 7vw, 2.5rem);
+  }
+
+  .news-page .news-page-card {
+    padding: 24px !important;
+  }
+
+  .news-page .news-statutory-box {
+    padding: 14px !important;
+  }
+}
+
+@media (max-width: 480px) {
+  .news-page .news-page-card {
+    padding: 20px !important;
+  }
+
+  .news-page .news-page-card > .border-top-subtle {
+    align-items: flex-start;
+    flex-direction: column;
+  }
+
+  .news-page .news-consult-link {
+    margin-top: 4px;
+  }
+}
+
+/* ==========================================
+   NEWS HERO — MATCH OUR TEAM HEADLINE SCALE
+   ========================================== */
+
+.news-page .page-header-banner .page-banner-title {
+  font-size: clamp(3.5rem, 5.5vw, 6rem) !important;
+  font-weight: 800;
+  line-height: 1.05;
+  letter-spacing: -0.045em;
+  margin-bottom: 24px;
+}
+
+/* Keep the banner height and description balanced */
+.news-page .page-header-banner {
+  padding: 130px 0 76px;
+}
+
+.news-page .page-header-banner .page-banner-desc {
+  max-width: 1050px;
+  font-size: clamp(1rem, 1.3vw, 1.25rem);
+  line-height: 1.7;
+}
+
+/* Breadcrumb spacing */
+.news-page .page-header-banner .page-breadcrumbs {
+  margin-bottom: 24px;
+}
+
+/* Preserve the green gradient accent */
+.news-page .page-banner-title .title-accent-gold {
+  color: var(--accent-gold);
+  font-style: italic;
+}
+
+/* Tablet */
+@media (max-width: 768px) {
+  .news-page .page-header-banner .page-banner-title {
+    font-size: clamp(2.8rem, 8vw, 4rem) !important;
+    line-height: 1.08;
+  }
+
+  .news-page .page-header-banner {
+    padding: 110px 0 48px;
+  }
+
+  .news-page .page-header-banner .page-breadcrumbs {
+    margin-bottom: 18px;
+  }
+}
+
+/* Mobile */
+@media (max-width: 480px) {
+  .news-page .page-header-banner .page-banner-title {
+    font-size: clamp(2.4rem, 10vw, 3rem) !important;
+  }
+}
+
+
+/* Match the Our Team hero banner height */
+.news-page .page-header-banner {
+  padding: 130px 0 50px;
+  min-height: 0;
+  box-sizing: border-box;
+}
+
+/* Tablet */
+@media (max-width: 768px) {
+  .news-page .page-header-banner {
+    padding: 110px 0 40px;
+  }
+}
+
+/* Mobile */
+@media (max-width: 480px) {
+  .news-page .page-header-banner {
+    padding: 100px 0 36px;
+  }
+}
+
+
+/* ==========================================
+   NEWS PAGE — CARD-BY-CARD SENTENCE ANIMATION
+   ========================================== */
+
+/* Keep each card's content hidden until triggered */
+.news-page .news-page-card .sentence-reveal {
+  opacity: 0;
+  transform: translateY(10px);
+  transition:
+    opacity 0.45s ease,
+    transform 0.45s ease;
+  transition-delay: var(--sentence-delay, 0ms);
+  will-change: opacity, transform;
+}
+
+/* Reveal sentences in the active card */
+.news-page .news-page-card .sentence-reveal.is-visible {
+  opacity: 1;
+  transform: translateY(0);
+}
+
+/* Put each sentence on its own line */
+.news-page .news-page-card .news-copy-sentence {
+  display: block;
+}
+
+/* Preserve spacing and readable text */
+.news-page .news-card-title {
+  line-height: 1.5;
+}
+
+.news-page .news-card-summary,
+.news-page .news-card-details {
+  line-height: 1.75;
+}
+
+/* Respect reduced-motion preferences */
+@media (prefers-reduced-motion: reduce) {
+  .news-page .news-page-card .sentence-reveal {
+    opacity: 1;
+    transform: none;
+    transition: none;
+    transition-delay: 0ms;
+    will-change: auto;
+  }
+}
