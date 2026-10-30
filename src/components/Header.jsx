@@ -73,29 +73,96 @@ export const Header = ({
     onNavigate?.('services');
   };
 
-  const navPages = [
-    { id: 'home', label: 'Home', icon: 'ri-home-4-line' },
-    { id: 'about-us', label: 'About Us', icon: 'ri-shield-user-line' },
-    { id: 'our-team', label: 'Our Team', icon: 'ri-team-line' },
-    { id: 'services', label: 'Services', icon: 'ri-folder-shield-2-line' },
-    { id: 'news', label: 'News', icon: 'ri-newspaper-line' },
-    { id: 'careers', label: 'Careers', icon: 'ri-briefcase-line' },
-    { id: 'event-sa', label: 'Event @ S&A', icon: 'ri-calendar-event-line' },
-    { id: 'contact-us', label: 'Contact Us', icon: 'ri-phone-line' }
+  const navItems = [
+    {
+      id: 'home',
+      label: 'Home',
+      hasDropdown: true,
+      children: [
+        { id: 'home', label: 'Home Tax Audit Consulting' }
+      ]
+    },
+    {
+      id: 'pages',
+      label: 'Pages',
+      hasDropdown: true,
+      children: [
+        { id: 'about-us', label: 'About Us' },
+        { id: 'our-team', label: 'Our Team' },
+        { id: 'careers', label: 'Careers' },
+        { id: 'event-sa', label: 'Event @ S&A' }
+      ]
+    },
+    {
+      id: 'services',
+      label: 'Services',
+      hasDropdown: true,
+      children: [
+        { id: 'services', label: 'All Practice Areas' },
+        { id: 'services', label: 'Direct Tax & Accounting' },
+        { id: 'services', label: 'GST Consultation & Returns' },
+        { id: 'services', label: 'Trust & Society Compliance' },
+        { id: 'services', label: 'RERA Consultancy' },
+        { id: 'services', label: 'Corporate ROC Law' }
+      ]
+    },
+    {
+      id: 'case-studies',
+      label: 'Case Studies',
+      hasDropdown: true,
+      children: [
+        { id: 'services', label: 'Statutory Compliance' },
+        { id: 'services', label: 'Trust Governance' },
+        { id: 'services', label: 'FCRA & NGO Advisory' }
+      ]
+    },
+    {
+      id: 'blog',
+      label: 'Blog',
+      hasDropdown: true,
+      children: [
+        { id: 'news', label: 'News & Updates' },
+        { id: 'news', label: 'Circulars & Notifications' }
+      ]
+    },
+    {
+      id: 'contact-us',
+      label: 'Contact',
+      hasDropdown: false
+    }
   ];
+
+  const navPages = [
+    { id: 'home', label: 'Home' },
+    { id: 'about-us', label: 'About Us' },
+    { id: 'services', label: 'Services' },
+    { id: 'our-team', label: 'Our Team' },
+    { id: 'news', label: 'News' },
+    { id: 'careers', label: 'Careers' },
+    { id: 'event-sa', label: 'Event @ S&A' },
+    { id: 'contact-us', label: 'Contact' }
+  ];
+
+  const isItemActive = (item) => {
+    if (item.id === currentPage) return true;
+    if (item.id === 'pages' && ['about-us', 'our-team', 'careers', 'event-sa'].includes(currentPage)) return true;
+    if (item.id === 'services' && currentPage === 'services') return true;
+    if (item.id === 'blog' && currentPage === 'news') return true;
+    return false;
+  };
 
   return (
     <>
-      <header className={`prestige-header ${isScrolled ? 'is-sticky' : ''}`} id="navbar">
-        <div className="header-container">
-          <div className="header-inner d-flex align-items-center justify-content-between">
+      <header className={`navbar-area style-two ${isScrolled ? 'sticky' : ''}`} id="navbar">
+        <div className="container-fluid">
+          <div className="navbar-wrapper d-flex justify-content-between align-items-center flex-nowrap">
             
-            {/* Left Zone: Natural Brand Logo & Name (Human-Coded, No Artificial LLP Badges) */}
-            <div className="header-left-zone">
+            {/* Left Zone: Restored Original Emblem Logo & Brand Title */}
+            <div className="d-flex align-items-center header-left-zone flex-shrink-0">
               <a 
                 href="#/" 
                 onClick={(e) => { e.preventDefault(); handleNavClick('home'); }} 
-                className="header-brand d-flex align-items-center gap-12"
+                className="navbar-brand d-inline-flex align-items-center"
               >
                 <div className="brand-emblem-frame">
                   <img 
@@ -104,53 +171,95 @@ export const Header = ({
                     className="brand-logo-img" 
                   />
                 </div>
-                <div className="brand-text-block">
-                  <span className="brand-primary-name">Sanap &amp; Associates</span>
-                  <span className="brand-tagline">Advocates &amp; Consultants</span>
+                <div className="brand-title-wrap">
+                  <span className="brand-title-main">Sanap &amp; Associates</span>
+                  <span className="brand-title-sub">Advocates &amp; Consultants</span>
                 </div>
               </a>
             </div>
 
-            {/* Middle Zone: Desktop Navigation Links (Strictly the 8 pages from previous site) */}
-            <nav className="header-navigation d-none d-lg-block">
-              <ul className="nav-link-list d-flex align-items-center m-0 p-0 list-unstyled">
-                {navPages.map((page) => {
-                  const isActive = currentPage === page.id;
-                  return (
-                    <li key={page.id}>
-                      <a 
-                        href={`#/${page.id === 'home' ? '' : page.id}`} 
-                        onClick={(e) => { e.preventDefault(); handleNavClick(page.id); }} 
-                        className={`nav-anchor ${isActive ? 'is-active' : ''}`}
-                      >
-                        {page.label}
-                      </a>
-                    </li>
-                  );
-                })}
-              </ul>
-            </nav>
+            {/* Middle Zone: Limpa Centered Pill Navigation Menu matching reference exactly */}
+            <div className="menu-area d-none d-lg-block">
+              <nav className="menu">
+                <ul className="menu-section p-0 mb-0 lh-1 d-flex align-items-center flex-nowrap list-unstyled">
+                  {navItems.map((item) => {
+                    const active = isItemActive(item);
+                    return (
+                      <li key={item.id} className={`menu-item ${item.hasDropdown ? 'menu-item-has-children' : ''} ${active ? 'active' : ''}`}>
+                        <a 
+                          href={item.hasDropdown ? '#/' : `#/${item.id === 'home' ? '' : item.id}`} 
+                          onClick={(e) => {
+                            if (!item.hasDropdown) {
+                              e.preventDefault();
+                              handleNavClick(item.id);
+                            } else if (item.id === 'home') {
+                              e.preventDefault();
+                              handleNavClick('home');
+                            } else if (item.children && item.children.length > 0) {
+                              e.preventDefault();
+                              handleNavClick(item.children[0].id);
+                            }
+                          }} 
+                          className={`menu-link ${active ? 'active' : ''}`}
+                        >
+                          {item.label}
+                          {item.hasDropdown && <i className="ri-arrow-down-s-line ms-1"></i>}
+                        </a>
 
-            {/* Right Zone: Book Consultation CTA, Quick Search & Mobile Toggle */}
-            <div className="header-actions d-flex align-items-center gap-10">
+                        {/* Dropdown Sub-menu */}
+                        {item.hasDropdown && item.children && (
+                          <ul className="sub-menu">
+                            {item.children.map((child, cIdx) => (
+                              <li key={cIdx}>
+                                <a
+                                  href={`#/${child.id === 'home' ? '' : child.id}`}
+                                  onClick={(e) => {
+                                    e.preventDefault();
+                                    handleNavClick(child.id);
+                                  }}
+                                >
+                                  <span>{child.label}</span>
+                                  <i className="ri-arrow-right-s-line fs-14"></i>
+                                </a>
+                              </li>
+                            ))}
+                          </ul>
+                        )}
+                      </li>
+                    );
+                  })}
+                </ul>
+              </nav>
+            </div>
+
+            {/* Right Zone: Limpa Pill Button + Search + Mobile Toggle */}
+            <div className="other-options d-flex align-items-center justify-content-end flex-nowrap gap-12 flex-shrink-0">
               
-              {/* Consultation CTA Button */}
-              <div className="d-none d-lg-block">
+              {/* Consultation CTA Button matching Limpa "Get A Free Consultation" */}
+              <div className="option-item d-none d-lg-block">
                 <button 
                   onClick={onOpenConsultation}
-                  className="btn-prestige btn-prestige-gold btn-prestige-sm"
+                  className="btn style-one d-inline-flex align-items-center"
                   id="header-consultation-btn"
+                  type="button"
                 >
-                  <span>Book Consultation</span>
-                  <i className="ri-arrow-right-line ms-1"></i>
+                  <span className="btn-icon-one d-flex flex-column align-items-center justify-content-center rounded-circle transition">
+                    <i className="ri-arrow-right-line"></i>
+                  </span>
+                  <span className="btn-text fw-bold d-flex flex-column align-items-center justify-content-center transition">
+                    Get A Free Consultation
+                  </span>
+                  <span className="btn-icon-two d-flex flex-column align-items-center justify-content-center rounded-circle transition">
+                    <i className="ri-arrow-right-line"></i>
+                  </span>
                 </button>
               </div>
 
-              {/* Quick Search Trigger */}
-              <div className="position-relative">
+              {/* Quick Search Button (Enlarged Limpa circular search-btn) */}
+              <div className="option-item position-relative d-flex align-items-center">
                 <button 
                   type="button" 
-                  className="header-icon-btn"
+                  className={`search-btn bg_primary border-0 rounded-circle d-flex flex-column align-items-center justify-content-center transition ${searchOpen ? 'show' : ''}`}
                   onClick={() => setSearchOpen(!searchOpen)}
                   aria-label="Toggle search"
                 >
@@ -158,56 +267,53 @@ export const Header = ({
                 </button>
 
                 {/* Search Dropdown with Practice Quick Topics */}
-                {searchOpen && (
-                  <div className="search-flyout-dropdown show">
-                    <form className="search-input-wrap position-relative mb-16" onSubmit={handleSearchSubmit}>
-                      <input 
-                        type="search" 
-                        className="search-input-field" 
-                        placeholder="Search GST, Direct Tax, RERA, Trademark, Loans..."
-                        value={searchQuery}
-                        onChange={(e) => setSearchQuery(e.target.value)}
-                        autoFocus
-                      />
-                      <button type="submit" className="search-action-submit" aria-label="Search">
-                        <i className="ri-arrow-right-line"></i>
-                      </button>
-                    </form>
+                <div className={`search-dropdown dropdown-menu dropdown-menu-right ${searchOpen ? 'show' : ''}`}>
+                  <form className="search-popup position-relative mb-16" onSubmit={handleSearchSubmit}>
+                    <input 
+                      type="search" 
+                      name="s" 
+                      className="form-control text-para" 
+                      placeholder="Search GST, Direct Tax, RERA, Trademark, Loans..."
+                      value={searchQuery}
+                      onChange={(e) => setSearchQuery(e.target.value)}
+                      autoFocus={searchOpen}
+                    />
+                    <button type="submit" className="position-absolute top-0 end-0 h-100 border-0 bg-transparent d-flex flex-column align-items-center justify-content-center px-3" aria-label="Search">
+                      <i className="ri-search-2-line"></i>
+                    </button>
+                  </form>
 
-                    <div className="search-suggestions-block">
-                      <span className="suggestions-label">Explore Practice Areas:</span>
-                      <div className="suggestions-chips-wrap d-flex flex-wrap gap-6 mt-8">
-                        {popularTopics.map((topic, idx) => (
-                          <button
-                            type="button"
-                            key={idx}
-                            className="suggestion-chip"
-                            onClick={() => handleSelectTopic(topic)}
-                          >
-                            {topic}
-                          </button>
-                        ))}
-                      </div>
+                  <div className="search-suggestions-block">
+                    <span className="suggestions-label text-gray fs-13 fw-semibold">Explore Practice Areas:</span>
+                    <div className="suggestions-chips-wrap d-flex flex-wrap gap-6 mt-8">
+                      {popularTopics.map((topic, idx) => (
+                        <button
+                          type="button"
+                          key={idx}
+                          className="suggestion-chip"
+                          onClick={() => handleSelectTopic(topic)}
+                        >
+                          {topic}
+                        </button>
+                      ))}
                     </div>
                   </div>
-                )}
+                </div>
               </div>
 
-              {/* Mobile Hamburger Toggle - Three Bars + Menu Text (Tactile, Accessible) */}
-              <div className="d-lg-none">
+              {/* Mobile Hamburger Toggle */}
+              <div className="option-item d-lg-none">
                 <button 
                   type="button" 
-                  className="mobile-hamburger-btn"
+                  className="menu-mobile-trigger bg-transparent border-0"
                   onClick={() => setMobileMenuOpen(true)}
-                  aria-label="Open mobile navigation menu"
+                  aria-label="Open navigation menu"
                   id="mobile-menu-toggler"
                 >
-                  <div className="ham-bars-wrap">
-                    <span className="ham-line"></span>
-                    <span className="ham-line"></span>
-                    <span className="ham-line"></span>
-                  </div>
-                  <span className="ham-text-label">Menu</span>
+                  <span></span>
+                  <span></span>
+                  <span></span>
+                  <span></span>
                 </button>
               </div>
 
@@ -220,22 +326,27 @@ export const Header = ({
       {/* Mobile Offcanvas Drawer Backdrop */}
       {mobileMenuOpen && (
         <div 
-          className="mobile-drawer-overlay" 
+          className="offcanvas-backdrop show" 
           onClick={() => setMobileMenuOpen(false)}
           aria-hidden="true"
         ></div>
       )}
       
-      {/* Mobile Offcanvas Drawer - Responsive, Scrollable Container */}
+      {/* Mobile Offcanvas Drawer */}
       <div 
-        className={`mobile-nav-drawer ${mobileMenuOpen ? 'is-open' : ''}`}
+        className={`responsive-navbar mobile-navbar offcanvas offcanvas-end ${mobileMenuOpen ? 'show is-open' : ''}`}
         role="dialog"
         aria-modal="true"
         aria-label="Navigation Menu"
+        style={{ visibility: mobileMenuOpen ? 'visible' : 'hidden' }}
       >
         {/* Fixed Header of Drawer */}
-        <div className="mobile-drawer-top d-flex align-items-center justify-content-between">
-          <div className="d-flex align-items-center gap-10">
+        <div className="offcanvas-header d-flex align-items-center justify-content-between">
+          <a 
+            href="#/" 
+            onClick={(e) => { e.preventDefault(); handleNavClick('home'); }} 
+            className="logo d-inline-flex align-items-center gap-12"
+          >
             <div className="brand-emblem-frame">
               <img 
                 src={siteData.brand.logo || "/images/logo.jpg"} 
@@ -244,14 +355,14 @@ export const Header = ({
               />
             </div>
             <div>
-              <span className="brand-primary-name text-white fs-15 fw-bold d-block">Sanap &amp; Associates</span>
-              <span className="brand-tagline text-gold fs-11">Advocates &amp; Consultants</span>
+              <span className="text-white fs-16 fw-bold d-block">Sanap &amp; Associates</span>
+              <span className="text_secondary fs-12">Advocates &amp; Consultants</span>
             </div>
-          </div>
+          </a>
 
           <button 
             type="button" 
-            className="mobile-close-btn"
+            className="close-btn bg-transparent position-relative lh-1 p-0 border-0 text-white fs-28"
             onClick={() => setMobileMenuOpen(false)}
             aria-label="Close navigation menu"
           >
@@ -260,66 +371,68 @@ export const Header = ({
         </div>
 
         {/* Scrollable Inner Body */}
-        <div className="mobile-drawer-scrollable-body">
-          {/* Mobile Navigation Links - Strictly the 8 pages */}
-          <nav className="mobile-menu-links">
+        <div className="offcanvas-body">
+          <ul className="navbar-nav p-0 list-unstyled">
             {navPages.map((page) => {
               const isActive = currentPage === page.id;
               return (
-                <a 
-                  key={page.id}
-                  href={`#/${page.id === 'home' ? '' : page.id}`} 
-                  onClick={(e) => { e.preventDefault(); handleNavClick(page.id); }} 
-                  className={`mobile-nav-item ${isActive ? 'is-active' : ''}`}
-                >
-                  <div className="d-flex align-items-center gap-10">
-                    <i className={`${page.icon} text-gold fs-18`}></i>
+                <li key={page.id} className={`menu-item ${isActive ? 'active' : ''}`}>
+                  <a 
+                    href={`#/${page.id === 'home' ? '' : page.id}`} 
+                    onClick={(e) => { e.preventDefault(); handleNavClick(page.id); }} 
+                    className={`d-flex align-items-center justify-content-between ${isActive ? 'active text_secondary' : 'text-white'}`}
+                  >
                     <span>{page.label}</span>
-                  </div>
-                  <i className="ri-arrow-right-s-line nav-item-arrow"></i>
-                </a>
+                    <i className="ri-arrow-right-s-line fs-18"></i>
+                  </a>
+                </li>
               );
             })}
-          </nav>
+          </ul>
 
           {/* Direct Consultation Booking Action */}
-          <div className="mobile-drawer-cta">
+          <div className="mobile-drawer-cta mt-24 mb-24">
             <button 
               onClick={() => { setMobileMenuOpen(false); onOpenConsultation?.(); }}
-              className="btn-prestige btn-prestige-gold w-100"
+              className="btn style-one w-100 d-inline-flex align-items-center justify-content-center"
               id="mobile-drawer-consult-btn"
+              type="button"
             >
-              <span>Book a Consultation</span>
-              <i className="ri-arrow-right-line ms-2"></i>
+              <span className="btn-icon-one d-flex flex-column align-items-center justify-content-center rounded-circle transition">
+                <i className="ri-arrow-right-line"></i>
+              </span>
+              <span className="btn-text fw-bold d-flex flex-column align-items-center justify-content-center transition">
+                Book Consultation
+              </span>
             </button>
           </div>
 
           {/* Drawer Footer with Verified Contacts & Admin Access */}
-          <div className="mobile-drawer-footer pt-18 border-top-dark">
-            <div className="mobile-contact-row mb-10">
-              <i className="ri-phone-fill text-gold me-2"></i>
+          <div className="mobile-drawer-footer pt-20 border-top border-white-10">
+            <div className="mobile-contact-row mb-12">
+              <i className="ri-phone-fill text_secondary me-2"></i>
               <a href={`tel:${siteData.contact.phone.replace(/[^0-9+]/g, '')}`} className="text-white fw-bold">
                 {siteData.contact.phoneDisplay || siteData.contact.phone}
               </a>
             </div>
-            <div className="mobile-contact-row mb-14">
-              <i className="ri-mail-fill text-gold me-2"></i>
-              <a href={`mailto:${siteData.contact.email}`} className="text-white-muted fs-13">
+            <div className="mobile-contact-row mb-12">
+              <i className="ri-mail-fill text_secondary me-2"></i>
+              <a href={`mailto:${siteData.contact.email}`} className="text-gray fs-13">
                 {siteData.contact.email}
               </a>
             </div>
-            <div className="mobile-contact-row mb-16 fs-12 text-white-muted">
-              <i className="ri-map-pin-line text-gold me-2"></i>
+            <div className="mobile-contact-row mb-16 fs-12 text-gray">
+              <i className="ri-map-pin-line text_secondary me-2"></i>
               <span>{siteData.contact.address}</span>
             </div>
 
-            <div className="border-top-dark pt-12 d-flex align-items-center justify-content-between">
+            <div className="border-top border-white-10 pt-12 d-flex align-items-center justify-content-between">
               <a 
                 href="#/admin" 
                 onClick={(e) => { e.preventDefault(); handleNavClick('admin'); }}
-                className="fs-12 text-white-muted d-inline-flex align-items-center gap-6"
+                className="fs-12 text-gray d-inline-flex align-items-center gap-6"
               >
-                <i className="ri-lock-line text-gold"></i>
+                <i className="ri-lock-line text_secondary"></i>
                 <span>Admin Portal</span>
               </a>
             </div>
