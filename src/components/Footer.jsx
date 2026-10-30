@@ -98,7 +98,7 @@ export const Footer = ({ onOpenConsultation, onNavigate }) => {
               </li>
               <li>
                 <a href="#/event-sa" onClick={(e) => { e.preventDefault(); handleNav('event-sa'); }}>
-                  Event @ S&amp;A
+                  Events
                 </a>
               </li>
               <li>

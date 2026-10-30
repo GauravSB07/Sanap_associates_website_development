@@ -18,6 +18,35 @@
 }
 
 /* ==========================================================================
+   Limpa Strict Universal Typography: DM Sans & Rethink Sans ONLY
+   Strictly matches the exact typography system of the reference website.
+   ========================================================================== */
+body, button, input, select, textarea, p, span, a, label, li, td, th {
+  font-family: var(--primaryFont);
+}
+
+h1, h2, h3, h4, h5, h6,
+.h1, .h2, .h3, .h4, .h5, .h6,
+.stat-number, .stat-card .stat-number,
+.contact-num, .brand-title-main,
+.hero-master-title, .page-banner-title,
+.section-title, .section-heading, .editorial-heading,
+.btn .btn-text,
+.card-title, .feature-title, .service-title {
+  font-family: var(--secondaryFont) !important;
+}
+
+/* Explicitly preserve Icon Fonts (RemixIcon) so arrows and icons never render as tofu boxes */
+[class^="ri-"], [class*=" ri-"],
+[class^="ri-"]::before, [class*=" ri-"]::before,
+i[class*="ri-"], i[class*="ri-"]::before {
+  font-family: 'remixicon' !important;
+  font-style: normal;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+}
+
+/* ==========================================================================
    Global Theme Overrides & Utilities
    ========================================================================== */
 .bg_primary {
@@ -94,18 +123,29 @@
 
 .btn .btn-icon-one,
 .btn .btn-icon-two {
-  width: 48px;
-  height: 48px;
+  width: 54px;
+  height: 54px;
   border-radius: 50%;
-  font-size: 18px;
+  font-size: 19px;
   display: flex;
   align-items: center;
   justify-content: center;
   flex-shrink: 0;
 }
 
+.btn .btn-icon-one i,
+.btn .btn-icon-two i {
+  font-size: 20px;
+  line-height: 1;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  position: relative;
+  top: 1px;
+}
+
 .btn .btn-icon-one {
-  margin-right: -8px;
+  margin-right: -10px;
   transition: all 0.45s cubic-bezier(0.16, 1, 0.3, 1);
 }
 
@@ -113,16 +153,16 @@
   opacity: 0;
   visibility: hidden;
   z-index: 0;
-  margin-left: -48px;
+  margin-left: -54px;
   transition: all 0.45s cubic-bezier(0.16, 1, 0.3, 1);
 }
 
 .btn .btn-text {
   border-radius: 50px;
-  height: 48px;
-  padding: 0 22px;
+  height: 54px;
+  padding: 0 24px;
   font-family: var(--primaryFont);
-  font-size: 14.5px;
+  font-size: 15px;
   font-weight: 700;
   display: flex;
   align-items: center;
@@ -139,11 +179,11 @@
 .btn:hover .btn-icon-two {
   opacity: 1;
   visibility: visible;
-  margin-left: -8px;
+  margin-left: -10px;
 }
 
 .btn:hover .btn-text {
-  margin-left: -48px;
+  margin-left: -54px;
 }
 
 /* Style One: Light Mint Green (#B9F8B1) Pill Button */
@@ -191,7 +231,7 @@
   top: 0;
   left: 0;
   width: 100%;
-  padding: 24px 0 0;
+  padding: 30px 0 0;
   background-color: transparent;
   box-sizing: border-box;
 }
@@ -201,7 +241,7 @@
   top: 0;
   left: 0;
   width: 100%;
-  padding: 12px 0;
+  padding: 15px 0;
   background-color: #00252C !important;
   box-shadow: 0 4px 25px rgba(0, 0, 0, 0.45);
   animation: limpaFadeInDown 0.35s ease-in-out;
@@ -214,9 +254,36 @@
   to { opacity: 1; transform: translateY(0); }
 }
 
-.navbar-area.style-two .container-fluid {
-  padding-left: clamp(16px, 3.2vw, 50px);
-  padding-right: clamp(16px, 3.2vw, 50px);
+.container.style-two {
+  width: 100%;
+  padding-right: var(--bs-gutter-x, 15px);
+  padding-left: var(--bs-gutter-x, 15px);
+  margin-right: auto;
+  margin-left: auto;
+}
+
+@media only screen and (min-width: 1200px) {
+  .container.style-two {
+    max-width: 1170px;
+  }
+}
+
+@media only screen and (min-width: 1400px) {
+  .container.style-two {
+    max-width: 1370px;
+  }
+}
+
+@media only screen and (min-width: 1600px) {
+  .container.style-two {
+    max-width: 1530px;
+  }
+}
+
+@media only screen and (min-width: 1920px) {
+  .container.style-two {
+    max-width: 1630px;
+  }
 }
 
 .navbar-wrapper {
@@ -242,10 +309,10 @@
 
 /* Original Emblem Logo Frame */
 .brand-emblem-frame {
-  height: 44px;
+  height: 50px;
   background-color: #FFFFFF;
   border-radius: 8px;
-  padding: 4px 10px;
+  padding: 4px 11px;
   display: inline-flex;
   align-items: center;
   justify-content: center;
@@ -262,9 +329,9 @@
 }
 
 .brand-logo-img {
-  height: 32px;
+  height: 36px;
   width: auto;
-  max-width: 80px;
+  max-width: 85px;
   object-fit: contain;
   display: block;
 }
@@ -278,7 +345,7 @@
 
 .brand-title-main {
   font-family: var(--secondaryFont);
-  font-size: 18px;
+  font-size: 19px;
   font-weight: 800;
   color: #FFFFFF;
   letter-spacing: -0.015em;
@@ -305,14 +372,35 @@
 
 .navbar-area.style-two .menu {
   background-color: #043138;
-  border-radius: 10px;
-  padding: 0 14px;
-  height: 48px;
-  min-height: 48px;
+  border-radius: 5px;
+  padding: 0 16px;
+  height: 54px;
+  min-height: 54px;
+  margin-left: 24px;
   display: inline-flex !important;
   align-items: center !important;
   border: 1px solid rgba(255, 255, 255, 0.08);
   flex-shrink: 0;
+  box-sizing: border-box;
+}
+
+@media only screen and (min-width: 1400px) {
+  .navbar-area.style-two .menu {
+    margin-left: 45px;
+    padding: 0 20px;
+  }
+}
+
+@media only screen and (min-width: 1600px) {
+  .navbar-area.style-two .menu {
+    margin-left: 60px;
+  }
+}
+
+@media only screen and (min-width: 1920px) {
+  .navbar-area.style-two .menu {
+    margin-left: 80px;
+  }
 }
 
 .navbar-area.style-two .menu ul {
@@ -322,7 +410,7 @@
   list-style: none !important;
   margin: 0 !important;
   padding: 0 !important;
-  gap: 2px;
+  gap: 0;
 }
 
 .navbar-area.style-two .menu ul li {
@@ -337,10 +425,10 @@
 .navbar-area.style-two .menu ul li a {
   color: #FFFFFF;
   font-family: var(--primaryFont);
-  font-size: 15px;
+  font-size: 14px;
   font-weight: 600;
-  padding: 8px 12px;
-  border-radius: 6px;
+  padding: 18.5px 8.5px;
+  border-radius: 4px;
   display: inline-flex;
   align-items: center;
   position: relative;
@@ -350,6 +438,20 @@
   line-height: 1;
 }
 
+@media only screen and (min-width: 1400px) {
+  .navbar-area.style-two .menu ul li a {
+    font-size: 15px;
+    padding: 18.5px 11px;
+  }
+}
+
+@media only screen and (min-width: 1600px) {
+  .navbar-area.style-two .menu ul li a {
+    font-size: 16px;
+    padding: 18.5px 14px;
+  }
+}
+
 .navbar-area.style-two .menu ul li a:hover,
 .navbar-area.style-two .menu ul li a.active,
 .navbar-area.style-two .menu ul li.active > a {
@@ -357,7 +459,7 @@
 }
 
 .navbar-area.style-two .menu ul li a i {
-  font-size: 14px;
+  font-size: 13px;
   margin-left: 3px;
   transition: transform 0.25s ease;
 }
@@ -369,11 +471,11 @@
 /* Limpa Sub-menu Dropdowns */
 .navbar-area.style-two .menu ul li .sub-menu {
   position: absolute;
-  top: calc(100% + 10px);
+  top: calc(100% + 6px);
   left: 0;
-  min-width: 220px;
+  min-width: 240px;
   background-color: #043138;
-  border-radius: 8px;
+  border-radius: 6px;
   padding: 8px 0;
   list-style: none;
   margin: 0;
@@ -392,10 +494,10 @@
 .navbar-area.style-two .menu ul li .sub-menu::before {
   content: "";
   position: absolute;
-  top: -12px;
+  top: -8px;
   left: 0;
   width: 100%;
-  height: 12px;
+  height: 8px;
 }
 
 .navbar-area.style-two .menu ul li:hover .sub-menu {
@@ -414,9 +516,9 @@
   display: flex !important;
   align-items: center;
   justify-content: space-between;
-  padding: 9px 18px !important;
+  padding: 10px 18px !important;
   color: #FFFFFF !important;
-  font-size: 13.5px !important;
+  font-size: 14px !important;
   font-weight: 500 !important;
   text-decoration: none;
   transition: all 0.2s ease;
@@ -432,13 +534,13 @@
 
 /* Right Zone: Circular Search Button & Dropdown */
 .search-btn {
-  width: 48px;
-  height: 48px;
+  width: 54px;
+  height: 54px;
   border-radius: 50%;
   background-color: #043138;
   border: 1px solid rgba(255, 255, 255, 0.08);
   color: #FFFFFF;
-  font-size: 19px;
+  font-size: 20px;
   display: flex;
   align-items: center;
   justify-content: center;
@@ -684,7 +786,7 @@
 
 /* Overlapping Client Avatars Cluster */
 .stat-card.style-one .client-list {
-  margin-left: 18px;
+  margin-left: 0;
   margin-bottom: 12px;
   padding-left: 0;
 }
@@ -694,11 +796,22 @@
   height: 46px;
   border-radius: 50%;
   border: 2px solid #FFFFFF;
-  margin-left: -18px;
+  margin-left: -14px;
   overflow: hidden;
   box-shadow: 0 2px 8px rgba(0, 0, 0, 0.3);
   display: inline-block;
-  background-color: #043138;
+  background-color: #FFFFFF;
+  position: relative;
+  transition: transform 0.25s ease, z-index 0.25s ease;
+}
+
+.stat-card.style-one .client-list li:first-child {
+  margin-left: 0;
+}
+
+.stat-card.style-one .client-list li:hover {
+  transform: translateY(-3px) scale(1.08);
+  z-index: 5;
 }
 
 .stat-card.style-one .client-list li img {
@@ -706,6 +819,12 @@
   height: 100%;
   object-fit: cover;
   display: block;
+}
+
+.stat-card.style-one .client-list li img.client-logo-avatar {
+  object-fit: contain;
+  background-color: #FFFFFF;
+  padding: 4px;
 }
 
 .hero-para-block {
@@ -841,18 +960,19 @@
    ========================================================================== */
 @media (max-width: 1399px) {
   .navbar-area.style-two .menu {
-    padding: 0 10px;
+    padding: 0 12px;
+    margin-left: 20px;
   }
   .navbar-area.style-two .menu ul li a {
-    padding: 7px 8px;
+    padding: 18.5px 7px;
     font-size: 13.5px;
   }
   .brand-title-main {
     font-size: 17px;
   }
   .btn.style-one .btn-text {
-    padding: 0 16px;
-    font-size: 13.5px;
+    padding: 0 18px;
+    font-size: 14px;
   }
   .hero-master-title {
     font-size: 2.75rem;
@@ -868,28 +988,29 @@
 
 @media (max-width: 1199px) {
   .navbar-area.style-two .menu {
-    padding: 0 6px;
+    padding: 0 8px;
+    margin-left: 14px;
   }
   .navbar-area.style-two .menu ul li a {
-    padding: 6px 6px;
-    font-size: 12px;
+    padding: 18.5px 5.5px;
+    font-size: 12.5px;
   }
   .brand-title-main {
-    font-size: 15px;
+    font-size: 16px;
   }
   .brand-title-sub {
-    font-size: 9.5px;
+    font-size: 10px;
   }
   .brand-emblem-frame {
-    height: 38px;
-    padding: 2px 7px;
+    height: 48px;
+    padding: 3px 8px;
   }
   .brand-logo-img {
-    height: 24px;
+    height: 32px;
   }
   .btn.style-one .btn-text {
-    padding: 0 12px;
-    font-size: 12.5px;
+    padding: 0 14px;
+    font-size: 13px;
   }
   .hero-partition-left {
     padding: 140px 30px 80px clamp(20px, 3.5vw, 40px);

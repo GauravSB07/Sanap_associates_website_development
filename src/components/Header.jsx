@@ -1,7 +1,7 @@
 import React, { useState, useEffect } from 'react';
 import { siteData } from '../data/content';
 
-export const Header = ({ 
+export const Header = ({
   currentPage = 'home',
   onNavigate,
   onOpenConsultation
@@ -12,14 +12,14 @@ export const Header = ({
   const [searchQuery, setSearchQuery] = useState('');
 
   const popularTopics = [
-    'Direct Tax & Accounting',
-    'GST Consultation & Returns',
-    'Labour Law (PF / ESIC / PT)',
-    'RERA Consultancy',
-    'Corporate Law & ROC',
-    'Trademark & Patent (IPR)',
-    'Loan Advisory',
-    'Govt Licenses (FSSAI/MSME)'
+    'Trust Registration (BPT)',
+    '12A & 80G Exemptions',
+    'CSR-1 & CSR-2 Filings',
+    'Charity Commissioner Audit',
+    'Change Report Filings',
+    'ITR-7 & 10B/10BB Audit',
+    'FCRA & Foreign Funding',
+    'Darpan NGO Portal'
   ];
 
   useEffect(() => {
@@ -36,7 +36,7 @@ export const Header = ({
 
     const originalOverflow = document.body.style.overflow;
     const originalTouchAction = document.body.style.touchAction;
-    
+
     document.body.style.overflow = 'hidden';
     document.body.style.touchAction = 'none';
 
@@ -77,21 +77,12 @@ export const Header = ({
     {
       id: 'home',
       label: 'Home',
-      hasDropdown: true,
-      children: [
-        { id: 'home', label: 'Home Tax Audit Consulting' }
-      ]
+      hasDropdown: false
     },
     {
-      id: 'pages',
-      label: 'Pages',
-      hasDropdown: true,
-      children: [
-        { id: 'about-us', label: 'About Us' },
-        { id: 'our-team', label: 'Our Team' },
-        { id: 'careers', label: 'Careers' },
-        { id: 'event-sa', label: 'Event @ S&A' }
-      ]
+      id: 'about-us',
+      label: 'About Us',
+      hasDropdown: false
     },
     {
       id: 'services',
@@ -99,35 +90,37 @@ export const Header = ({
       hasDropdown: true,
       children: [
         { id: 'services', label: 'All Practice Areas' },
-        { id: 'services', label: 'Direct Tax & Accounting' },
-        { id: 'services', label: 'GST Consultation & Returns' },
         { id: 'services', label: 'Trust & Society Compliance' },
-        { id: 'services', label: 'RERA Consultancy' },
-        { id: 'services', label: 'Corporate ROC Law' }
+        { id: 'services', label: 'Direct Tax & Statutory Audit' },
+        { id: 'services', label: 'GST Consultation & Returns' },
+        { id: 'services', label: 'Labour Law (PF / ESIC / PT)' },
+        { id: 'services', label: 'RERA & Property Advisory' },
+        { id: 'services', label: 'Corporate Law & ROC Compliance' }
       ]
     },
     {
-      id: 'case-studies',
-      label: 'Case Studies',
-      hasDropdown: true,
-      children: [
-        { id: 'services', label: 'Statutory Compliance' },
-        { id: 'services', label: 'Trust Governance' },
-        { id: 'services', label: 'FCRA & NGO Advisory' }
-      ]
+      id: 'our-team',
+      label: 'Our Team',
+      hasDropdown: false
     },
     {
-      id: 'blog',
-      label: 'Blog',
-      hasDropdown: true,
-      children: [
-        { id: 'news', label: 'News & Updates' },
-        { id: 'news', label: 'Circulars & Notifications' }
-      ]
+      id: 'news',
+      label: 'News',
+      hasDropdown: false
+    },
+    {
+      id: 'careers',
+      label: 'Careers',
+      hasDropdown: false
+    },
+    {
+      id: 'event-sa',
+      label: 'Events',
+      hasDropdown: false
     },
     {
       id: 'contact-us',
-      label: 'Contact',
+      label: 'Contact Us',
       hasDropdown: false
     }
   ];
@@ -139,36 +132,32 @@ export const Header = ({
     { id: 'our-team', label: 'Our Team' },
     { id: 'news', label: 'News' },
     { id: 'careers', label: 'Careers' },
-    { id: 'event-sa', label: 'Event @ S&A' },
-    { id: 'contact-us', label: 'Contact' }
+    { id: 'event-sa', label: 'Events' },
+    { id: 'contact-us', label: 'Contact Us' }
   ];
 
   const isItemActive = (item) => {
-    if (item.id === currentPage) return true;
-    if (item.id === 'pages' && ['about-us', 'our-team', 'careers', 'event-sa'].includes(currentPage)) return true;
-    if (item.id === 'services' && currentPage === 'services') return true;
-    if (item.id === 'blog' && currentPage === 'news') return true;
-    return false;
+    return item.id === currentPage;
   };
 
   return (
     <>
       <header className={`navbar-area style-two ${isScrolled ? 'sticky' : ''}`} id="navbar">
-        <div className="container-fluid">
+        <div className="container style-two">
           <div className="navbar-wrapper d-flex justify-content-between align-items-center flex-nowrap">
-            
+
             {/* Left Zone: Restored Original Emblem Logo & Brand Title */}
             <div className="d-flex align-items-center header-left-zone flex-shrink-0">
-              <a 
-                href="#/" 
-                onClick={(e) => { e.preventDefault(); handleNavClick('home'); }} 
+              <a
+                href="#/"
+                onClick={(e) => { e.preventDefault(); handleNavClick('home'); }}
                 className="navbar-brand d-inline-flex align-items-center"
               >
                 <div className="brand-emblem-frame">
-                  <img 
-                    src={siteData.brand.logo || "/images/logo.jpg"} 
-                    alt="Sanap & Associates" 
-                    className="brand-logo-img" 
+                  <img
+                    src={siteData.brand.logo || "/images/logo.jpg"}
+                    alt="Sanap & Associates"
+                    className="brand-logo-img"
                   />
                 </div>
                 <div className="brand-title-wrap">
@@ -186,8 +175,8 @@ export const Header = ({
                     const active = isItemActive(item);
                     return (
                       <li key={item.id} className={`menu-item ${item.hasDropdown ? 'menu-item-has-children' : ''} ${active ? 'active' : ''}`}>
-                        <a 
-                          href={item.hasDropdown ? '#/' : `#/${item.id === 'home' ? '' : item.id}`} 
+                        <a
+                          href={item.hasDropdown ? '#/' : `#/${item.id === 'home' ? '' : item.id}`}
                           onClick={(e) => {
                             if (!item.hasDropdown) {
                               e.preventDefault();
@@ -199,7 +188,7 @@ export const Header = ({
                               e.preventDefault();
                               handleNavClick(item.children[0].id);
                             }
-                          }} 
+                          }}
                           className={`menu-link ${active ? 'active' : ''}`}
                         >
                           {item.label}
@@ -234,10 +223,10 @@ export const Header = ({
 
             {/* Right Zone: Limpa Pill Button + Search + Mobile Toggle */}
             <div className="other-options d-flex align-items-center justify-content-end flex-nowrap gap-12 flex-shrink-0">
-              
+
               {/* Consultation CTA Button matching Limpa "Get A Free Consultation" */}
               <div className="option-item d-none d-lg-block">
-                <button 
+                <button
                   onClick={onOpenConsultation}
                   className="btn style-one d-inline-flex align-items-center"
                   id="header-consultation-btn"
@@ -257,8 +246,8 @@ export const Header = ({
 
               {/* Quick Search Button (Enlarged Limpa circular search-btn) */}
               <div className="option-item position-relative d-flex align-items-center">
-                <button 
-                  type="button" 
+                <button
+                  type="button"
                   className={`search-btn bg_primary border-0 rounded-circle d-flex flex-column align-items-center justify-content-center transition ${searchOpen ? 'show' : ''}`}
                   onClick={() => setSearchOpen(!searchOpen)}
                   aria-label="Toggle search"
@@ -269,11 +258,11 @@ export const Header = ({
                 {/* Search Dropdown with Practice Quick Topics */}
                 <div className={`search-dropdown dropdown-menu dropdown-menu-right ${searchOpen ? 'show' : ''}`}>
                   <form className="search-popup position-relative mb-16" onSubmit={handleSearchSubmit}>
-                    <input 
-                      type="search" 
-                      name="s" 
-                      className="form-control text-para" 
-                      placeholder="Search GST, Direct Tax, RERA, Trademark, Loans..."
+                    <input
+                      type="search"
+                      name="s"
+                      className="form-control text-para"
+                      placeholder="Search Trust Registration, 12A & 80G, CSR-1, FCRA, Change Reports..."
                       value={searchQuery}
                       onChange={(e) => setSearchQuery(e.target.value)}
                       autoFocus={searchOpen}
@@ -303,8 +292,8 @@ export const Header = ({
 
               {/* Mobile Hamburger Toggle */}
               <div className="option-item d-lg-none">
-                <button 
-                  type="button" 
+                <button
+                  type="button"
                   className="menu-mobile-trigger bg-transparent border-0"
                   onClick={() => setMobileMenuOpen(true)}
                   aria-label="Open navigation menu"
@@ -325,15 +314,15 @@ export const Header = ({
 
       {/* Mobile Offcanvas Drawer Backdrop */}
       {mobileMenuOpen && (
-        <div 
-          className="offcanvas-backdrop show" 
+        <div
+          className="offcanvas-backdrop show"
           onClick={() => setMobileMenuOpen(false)}
           aria-hidden="true"
         ></div>
       )}
-      
+
       {/* Mobile Offcanvas Drawer */}
-      <div 
+      <div
         className={`responsive-navbar mobile-navbar offcanvas offcanvas-end ${mobileMenuOpen ? 'show is-open' : ''}`}
         role="dialog"
         aria-modal="true"
@@ -342,16 +331,16 @@ export const Header = ({
       >
         {/* Fixed Header of Drawer */}
         <div className="offcanvas-header d-flex align-items-center justify-content-between">
-          <a 
-            href="#/" 
-            onClick={(e) => { e.preventDefault(); handleNavClick('home'); }} 
+          <a
+            href="#/"
+            onClick={(e) => { e.preventDefault(); handleNavClick('home'); }}
             className="logo d-inline-flex align-items-center gap-12"
           >
             <div className="brand-emblem-frame">
-              <img 
-                src={siteData.brand.logo || "/images/logo.jpg"} 
-                alt="Sanap & Associates" 
-                className="brand-logo-img" 
+              <img
+                src={siteData.brand.logo || "/images/logo.jpg"}
+                alt="Sanap & Associates"
+                className="brand-logo-img"
               />
             </div>
             <div>
@@ -360,8 +349,8 @@ export const Header = ({
             </div>
           </a>
 
-          <button 
-            type="button" 
+          <button
+            type="button"
             className="close-btn bg-transparent position-relative lh-1 p-0 border-0 text-white fs-28"
             onClick={() => setMobileMenuOpen(false)}
             aria-label="Close navigation menu"
@@ -377,9 +366,9 @@ export const Header = ({
               const isActive = currentPage === page.id;
               return (
                 <li key={page.id} className={`menu-item ${isActive ? 'active' : ''}`}>
-                  <a 
-                    href={`#/${page.id === 'home' ? '' : page.id}`} 
-                    onClick={(e) => { e.preventDefault(); handleNavClick(page.id); }} 
+                  <a
+                    href={`#/${page.id === 'home' ? '' : page.id}`}
+                    onClick={(e) => { e.preventDefault(); handleNavClick(page.id); }}
                     className={`d-flex align-items-center justify-content-between ${isActive ? 'active text_secondary' : 'text-white'}`}
                   >
                     <span>{page.label}</span>
@@ -392,7 +381,7 @@ export const Header = ({
 
           {/* Direct Consultation Booking Action */}
           <div className="mobile-drawer-cta mt-24 mb-24">
-            <button 
+            <button
               onClick={() => { setMobileMenuOpen(false); onOpenConsultation?.(); }}
               className="btn style-one w-100 d-inline-flex align-items-center justify-content-center"
               id="mobile-drawer-consult-btn"
@@ -427,8 +416,8 @@ export const Header = ({
             </div>
 
             <div className="border-top border-white-10 pt-12 d-flex align-items-center justify-content-between">
-              <a 
-                href="#/admin" 
+              <a
+                href="#/admin"
                 onClick={(e) => { e.preventDefault(); handleNavClick('admin'); }}
                 className="fs-12 text-gray d-inline-flex align-items-center gap-6"
               >

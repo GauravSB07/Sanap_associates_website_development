@@ -30,11 +30,11 @@ export const Hero = ({ onOpenConsultation, onNavigate }) => {
         />
 
         <div className="hero-left-content position-relative z-2">
-          {/* Master Headline matching reference layout & styling exactly */}
+          {/* Master Headline matching reference layout & styling with authentic NPO focus */}
           <h1 className="fw-bold text-white hero-master-title">
-            Expert <span className="text_secondary">Accounting &amp;</span><br />
-            <span className="text_secondary">Tax Solutions</span> For Your<br />
-            Business Growth
+            Premier <span className="text_secondary">NPO Compliance &amp;</span><br />
+            <span className="text_secondary">Statutory Advisory</span> For Public<br />
+            Trusts &amp; Foundations
           </h1>
 
           {/* Lower Row: Cut-Corner Stat Card + Supporting Paragraph & White Pill Button */}
@@ -42,32 +42,32 @@ export const Hero = ({ onOpenConsultation, onNavigate }) => {
             
             {/* Cut-Corner Chamfered Stat Box */}
             <div className="stat-card style-one round-20 flex-shrink-0">
-              <h3 className="text-white fw-bold lh-1 mb-0 stat-number">20+</h3>
-              <span className="text-gray fs-16 d-block mb-18 mt-1">Years Of Expertise</span>
+              <h3 className="text-white fw-bold lh-1 mb-0 stat-number">15+</h3>
+              <span className="text-gray fs-16 d-block mb-18 mt-1">Years Of Domain Expertise</span>
               
               {/* Overlapping Client Avatars */}
               <ul className="client-list list-unstyled mb-10 d-flex align-items-center">
-                <li className="rounded-circle">
-                  <img src="/images/limpa/client-2.png" alt="Client 1" className="rounded-circle" />
+                <li className="rounded-circle" title="Ghanashyam Lotlikar - Founder &amp; CEO, Digitometrix">
+                  <img src="/images/testimonials/t1.png" alt="Ghanashyam Lotlikar" className="rounded-circle" />
                 </li>
-                <li className="rounded-circle">
-                  <img src="/images/limpa/client-3.png" alt="Client 2" className="rounded-circle" />
+                <li className="rounded-circle" title="Mr. Rajendra Pawar - Regional Forest Officer">
+                  <img src="/images/testimonials/t2.jpg" alt="Mr. Rajendra Pawar" className="rounded-circle" />
                 </li>
-                <li className="rounded-circle">
-                  <img src="/images/limpa/client-4.png" alt="Client 3" className="rounded-circle" />
+                <li className="rounded-circle" title="Mr. Ashish Patil - Director, Aseem Medical &amp; Education Foundation">
+                  <img src="/images/testimonials/t3.jpg" alt="Mr. Ashish Patil" className="rounded-circle" />
                 </li>
-                <li className="rounded-circle">
-                  <img src="/images/limpa/client-5.png" alt="Client 4" className="rounded-circle" />
+                <li className="rounded-circle" title="Sanjay Gandhi National Park">
+                  <img src="/images/clients/logo1.jpg" alt="Sanjay Gandhi National Park" className="rounded-circle client-logo-avatar" />
                 </li>
               </ul>
 
-              <p className="text-gray fs-15 mb-0">2,250+ businesses are<br />trusting us.</p>
+              <p className="text-gray fs-15 mb-0">2,000+ Trusts &amp; Foundations<br />trust it across India.</p>
             </div>
 
             {/* Supporting Copy & Explore Services Action */}
             <div className="hero-para-block">
               <p className="fs-17 text-gray mb-32 hero-lead-desc">
-                Sanap &amp; Associates provides tailored accounting, tax planning, and audit services to help businesses save money, stay compliant, and achieve financial success.
+                End-to-end statutory, legal, audit, taxation and governance support for Public Trusts, NGOs, Section-8 Companies, Societies, Religious Institutions, Mandals and Foundations across India.
               </p>
 
               <a 
@@ -80,7 +80,7 @@ export const Hero = ({ onOpenConsultation, onNavigate }) => {
                   <i className="ri-arrow-right-line"></i>
                 </span>
                 <span className="btn-text fw-bold d-flex flex-column align-items-center justify-content-center transition">
-                  Explore Services
+                  Explore NPO Services
                 </span>
                 <span className="btn-icon-two d-flex flex-column align-items-center justify-content-center rounded-circle transition">
                   <i className="ri-arrow-right-line"></i>

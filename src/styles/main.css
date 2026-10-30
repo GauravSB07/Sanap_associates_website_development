@@ -42,10 +42,12 @@
   --border-dark: rgba(255, 255, 255, 0.12);
   --border-dark-hover: rgba(185, 248, 177, 0.45);
 
-  /* Typography Families (Limpa exact typography) */
-  --font-body: "DM Sans", "Plus Jakarta Sans", -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif;
-  --font-heading: "Rethink Sans", "DM Sans", sans-serif;
-  --font-serif: "Rethink Sans", "DM Sans", sans-serif;
+  /* Typography Families (Limpa exact typography: DM Sans & Rethink Sans ONLY) */
+  --font-body: "DM Sans", sans-serif;
+  --font-heading: "Rethink Sans", sans-serif;
+  --font-serif: "Rethink Sans", sans-serif;
+  --primaryFont: "DM Sans", sans-serif;
+  --secondaryFont: "Rethink Sans", sans-serif;
 
   /* Border Radii */
   --radius-xs: 6px;

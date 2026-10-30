@@ -74,7 +74,7 @@ export const Clients = () => {
         <div className="client-logos-showcase mb-50 reveal-up">
           <div className="text-center mb-24">
             <span className="fs-12 text-muted fw-bold text-uppercase letter-spacing-wider">
-              Trusted By Reputed Organizations &amp; Commercial Enterprises
+              Trusted Across The Trust, NGO &amp; CSR Sector
             </span>
           </div>
           <div className="d-flex flex-wrap justify-content-center align-items-center gap-24 client-partner-logo-row">
